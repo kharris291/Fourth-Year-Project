@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Day night.
+/// this is attached to the directional light to make it rotate between the daylight and the night
+/// 
+/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+/// Author: Laliberte P. 
+/// Date: 2013 October 24. 
+/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+/// </summary>
 public class DayNight : MonoBehaviour {
 	
 	public enum TimeOfDay{

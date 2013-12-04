@@ -1,4 +1,15 @@
-﻿Shader "RenderFX/Skybox Blended" {
+﻿/// <summary>
+/// Skybox Shader.
+/// code is to hold the textures for a day and night cycle.
+/// _blend is used to determine the skybox that is in view 
+/// and also is used to gradually blend the night to day and day to night.
+/// 
+/// Title: SkyboxBlended - Unify Community Wiki. [Online].
+/// Author: Pranckevicius A. 
+/// date: 2013 October 4. 
+/// Available from: http://wiki.unity3d.com/index.php?title=SkyboxBlended
+/// </summary>
+Shader "RenderFX/Skybox Blended" {
 Properties {
     _Tint ("Tint Color", Color) = (.5, .5, .5, .5)
     _Blend ("Blend", Range(0.0,1.0)) = 0.5

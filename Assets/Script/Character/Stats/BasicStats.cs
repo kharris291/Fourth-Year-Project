@@ -3,8 +3,11 @@
 ///  a class for gereral stats for use on all characters.
 ///  this will house getters and setters for values that will be
 ///  used throughout the project
-/// author : Kevin Harris
-/// 22 october 2013
+/// 
+/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+/// Author: Laliberte P. 
+/// Date: 2013 October 24. 
+/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
 /// </summary>
 using UnityEngine;
 using System.Collections;

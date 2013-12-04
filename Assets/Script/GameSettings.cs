@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Game settings.
+/// </summary>
 public class GameSettings : MonoBehaviour
 {	
 	void Awake(){

@@ -1,9 +1,10 @@
 /// <summary>
-/// Modified stat.cs
-/// 3rd oct
-/// Kevin
+/// Modified stat
 /// 
-/// base class for all stats being modified by attribs
+/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+/// Author: Laliberte P. 
+/// Date: 2013 October 24. 
+/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
 /// </summary>
 using System.Collections.Generic;					// added to use a List<>
 
