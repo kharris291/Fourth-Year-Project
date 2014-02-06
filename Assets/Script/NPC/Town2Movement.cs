@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Movement : MonoBehaviour
+public class Town2Movement : MonoBehaviour
 {
 	
-	private Transform target;
-	private int moveSpeed, rotationSpeed, maxDistance;
+	public Transform target;
+	public int moveSpeed, rotationSpeed, maxDistance;
 	private Transform myTransform;
 	public int counter = 0;
-	public string tagName;
-
+	public bool atWall = false;
+	
 	void Awake ()
 	{
 		myTransform = transform;	
@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
 	void Start ()
 	{
 		
-		movementAllowance = GameObject.FindGameObjectsWithTag (tagName);
+		movementAllowance = GameObject.FindGameObjectsWithTag ("SecondPoint");
 		
 		target = movementAllowance [counter].transform;
 		
@@ -54,12 +54,13 @@ public class Movement : MonoBehaviour
 			//if(atWall){
 			/*changeWalkingDirection = 0;
 			counter = Random.Range (0, movementAllowance.Length);*/
-
+			Debug.Log("her");
 			counter ++;
-			if(counter >9){
+			if(counter >8){
 				counter = 0;
 			}
 			target = movementAllowance [counter].transform;
+			
 			
 		}
 		

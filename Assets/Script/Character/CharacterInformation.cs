@@ -15,7 +15,7 @@ public class CharacterInformation : MonoBehaviour
 	private string _name;
 	private int _level;
 	private uint _experience;
-	private Attributes[] _primaryAttribute;
+	public Attributes[] _primaryAttribute;
 	private Vitals[] _vital;
 	private Mana[] _mana;
 	private Attack[] _attack;
@@ -79,7 +79,7 @@ public class CharacterInformation : MonoBehaviour
 		}
 	}
 
-	private void SetupVitals ()
+	public void SetupVitals ()
 	{
 		for (int cnt = 0; cnt <_vital.Length; cnt++) {
 			_vital [cnt] = new Vitals ();
@@ -140,7 +140,7 @@ public class CharacterInformation : MonoBehaviour
 		return _defence [index];	
 	}
 	
-	private void SetupVitalsModifiers ()
+	public void SetupVitalsModifiers ()
 	{
 		//health
 		GetVitals ((int)VitalName.Health).AddModifier (new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Constitution), .5f));
