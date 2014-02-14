@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIScreen : MonoBehaviour {
-
-	PlayerHealth playerH;
+public class ManaLimit : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerH.OnGUI();
+	
 	}
 	
 	// Update is called once per frame

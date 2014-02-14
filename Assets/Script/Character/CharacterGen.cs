@@ -27,7 +27,8 @@ public class CharacterGen : MonoBehaviour {
 	
 	
 	public GameObject playerPrefab;
-	
+
+
 	// Use this for initialization
 	void Start () {
 		_screenHSize = Screen.height;

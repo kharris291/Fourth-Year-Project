@@ -5,15 +5,16 @@ public class Movement : MonoBehaviour
 {
 	
 	private Transform target;
-	private int moveSpeed, rotationSpeed, maxDistance;
+	private int moveSpeed, rotationSpeed, maxDistance, numberOfPointsInMovementAllowance;
 	private Transform myTransform;
 	public int counter = 0;
 	public string tagName;
-
+	
+	bool playWalk = false;
 	void Awake ()
 	{
 		myTransform = transform;	
-		moveSpeed = 2;
+		moveSpeed = 12;
 		rotationSpeed = 3;
 	}
 	
@@ -23,7 +24,7 @@ public class Movement : MonoBehaviour
 	{
 		
 		movementAllowance = GameObject.FindGameObjectsWithTag (tagName);
-		
+		numberOfPointsInMovementAllowance = movementAllowance.Length - 1;
 		target = movementAllowance [counter].transform;
 		
 		maxDistance = 4;
@@ -34,9 +35,6 @@ public class Movement : MonoBehaviour
 	void Update ()
 	{
 		animation.Play ("walk");
-		Debug.DrawLine (target.position, myTransform.position, Color.red);
-		
-		
 		//look at the target
 		Quaternion rot;
 		
@@ -54,26 +52,31 @@ public class Movement : MonoBehaviour
 			//if(atWall){
 			/*changeWalkingDirection = 0;
 			counter = Random.Range (0, movementAllowance.Length);*/
-
+			//Debug.Log(movementAllowance [counter]);
 			counter ++;
-			if(counter >9){
+			if(counter >numberOfPointsInMovementAllowance){
 				counter = 0;
 			}
 			target = movementAllowance [counter].transform;
 			
 		}
-		
 		//changeWalkingDirection++;
 	}
-	
+
 	void OnTriggerEnter (Collider playerInRange)
 	{
-		
+
+		if(playerInRange ==true){
+			playWalk =true;
+		}
+		Debug.Log(playWalk);
 	}
 	
 	void OnTriggerExit (Collider playerNotInRange)
 	{
-		
+		if(playerNotInRange !=true){
+			playWalk =false;
+		}
 	}
 	
 }

@@ -24,6 +24,9 @@ public class CharacterInformation : MonoBehaviour
 	// Use this for initialization
 	public void Awake ()
 	{
+
+		DontDestroyOnLoad(this);	
+		
 		_name = string.Empty;
 		_level = 0;
 		_experience = 0;
@@ -225,7 +228,7 @@ public class CharacterInformation : MonoBehaviour
 			
 		}
 		
-		Debug.Log (_vital + "|" + _attack + "|" + _defence + "|" + _mana);
+		Debug.Log (_vital.Length + "|" + _attack.Length + "|" + _defence.Length + "|" + _mana.Length);
 	}
 	
 	private void CalculateModifiedBaseValue ()

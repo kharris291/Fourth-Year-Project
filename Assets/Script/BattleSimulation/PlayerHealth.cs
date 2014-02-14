@@ -9,10 +9,16 @@ public class PlayerHealth : MonoBehaviour
 	private Texture3D bgImage;
 	private Texture3D fgImage;
 	private float healthBarLength,healthBarLength1;
-
+	CharacterInformation playerInfo;
 	// Use this for initialization
+
+	void Awake(){
+	//	playerInfo.Awake();
+	}
+
 	void Start ()
 	{   
+		//Debug.Log(playerInfo.GetVitals(0));
 		healthBarLength = Screen.width / 2;
 	}
 	
@@ -22,10 +28,14 @@ public class PlayerHealth : MonoBehaviour
 		AddjustCurrentHealth (0);
 	}
 	
-	void OnGUI ()
+	public void OnGUI ()
 	{
+		GUI.Box(new Rect(Screen.width/2+150,Screen.height-70,healthBarLength,20),"");
+		GUI.Box(new Rect(Screen.width/2+150,Screen.height-70,healthBarLength1,20),curHealth+"/"+maxHealth);
 		GUI.Box(new Rect(Screen.width/2+150,Screen.height-100,healthBarLength,20),"");
 		GUI.Box(new Rect(Screen.width/2+150,Screen.height-100,healthBarLength1,20),curHealth+"/"+maxHealth);
+		GUI.Box(new Rect(Screen.width/2+150,Screen.height-130,healthBarLength,20),"");
+		GUI.Box(new Rect(Screen.width/2+150,Screen.height-130,healthBarLength1,20),curHealth+"/"+maxHealth);
 	}
 	
 	public void AddjustCurrentHealth (int adj)
