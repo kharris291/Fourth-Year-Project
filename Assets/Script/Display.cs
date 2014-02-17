@@ -16,7 +16,7 @@ public class Display : MonoBehaviour
 	{
         _screenHSize = Screen.height;
 		_screenWsize = Screen.width;
-		_center.Set (_screenHSize / 2, _screenWsize / 2, 0);
+		_center.Set (_screenWsize / 2, _screenHSize / 2, 0);
 		GUITexture mainCameraSearch = FindObjectOfType (typeof(GUITexture)) as GUITexture;
 		if (mainCameraSearch.name == "Main Camera") {
 			mainCameraSearch.transform.position = Vector3.zero;
@@ -34,6 +34,8 @@ public class Display : MonoBehaviour
 	
 	void OnGUI ()
 	{
+		StartUP.alignment = TextAnchor.MiddleCenter;
+		Continue.alignment = TextAnchor.MiddleCenter;
 		StartNewGame();
 		
 		ContinueGame();

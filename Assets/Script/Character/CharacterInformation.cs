@@ -16,10 +16,10 @@ public class CharacterInformation : MonoBehaviour
 	private int _level;
 	private uint _experience;
 	public Attributes[] _primaryAttribute;
-	private Vitals[] _vital;
-	private Mana[] _mana;
-	private Attack[] _attack;
-	private Defence[] _defence;
+	public Vitals[] _vital;
+	public Mana[] _mana;
+	public Attack[] _attack;
+	public Defence[] _defence;
 	
 	// Use this for initialization
 	public void Awake ()

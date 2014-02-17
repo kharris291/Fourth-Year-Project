@@ -17,13 +17,13 @@ public class CharacterGen : MonoBehaviour {
 	private const int STARTING_POINTS = 420;
 	private const int MIN_STARTING_ATTRIBUTE_VALUE = 10;
 	private const int STARTING_VALUE = 10;
-	private int pointsLeft;
-	private const int OFFSET = 5;
-	private const int LINE_HEIGHT = 22;
-	private const int STAT_LABEL_WIDTH = 160;
+
+	private const int OFFSET = 35;
+	private const int LINE_HEIGHT = 40;
+	private const int STAT_LABEL_WIDTH = 240;
 	private const int BASEVALUE_LABEL_WIDTH = 30;
 	private const int OFFSET_FROM_BASEVALUE = OFFSET * 2 + STAT_LABEL_WIDTH + BASEVALUE_LABEL_WIDTH * 2 + 32 * 2;
-	private int statStartingPos = 400;
+	private int statStartingPos = 250;
 	
 	
 	public GameObject playerPrefab;
@@ -50,7 +50,6 @@ public class CharacterGen : MonoBehaviour {
 		
 		for (int i = 0; i < Enum.GetValues(typeof(AttributeName)).Length; i++) {
 			_playerInformation.GetPrimaryAttribute (i).BaseValue = STARTING_VALUE;
-			pointsLeft -= (STARTING_VALUE - MIN_STARTING_ATTRIBUTE_VALUE);
 		}	
 		
 		_playerInformation.StatUpdate();
@@ -62,7 +61,7 @@ public class CharacterGen : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-		fontCharGenStyling.fontSize = 20;
+		fontCharGenStyling.fontSize = Screen.width/40;
 		
 		DisplayAttributes();
 		DisplayVitals();
