@@ -1,16 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Character\CharacterGen.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Menus\PauseMenu.cs">
     <Files>
-      <File FileName="Assets\Script\Character\CharacterInformation.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\Stats\Vitals.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\GameSettings.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\NPC\Movement.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\NewGame.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\PlayerInformation.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\Stats\Mana.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\CharacterGen.cs" Line="59" Column="2" />
+      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="4" Column="14" />
+      <File FileName="Assets\Script\Character\CharacterGen.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Character\Stats\ModifiedStats.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Character\Stats\BasicStats.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Menus\PauseMenu.cs" Line="13" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -20,12 +20,6 @@ public class NewGame : MonoBehaviour
 	{
 		
 		storeInfo = GameObject.FindGameObjectWithTag ("Constant");
-		Debug.Log(storeInfo);
-
-
-
-	
-
 
 		_screenHSize = Screen.height;
 		_screenWsize = Screen.width;
@@ -60,22 +54,13 @@ public class NewGame : MonoBehaviour
 		
 		if (_mainCharacter.Name == "") {
 			checkNameFilled ("Enter a Name Please");
-		} else if(_mainCharacter.Name!="") {
+		} else{
 			checkNameFilled ("Continue");
 		}
-		TakeNameInput ();
+		_mainCharacter.Name = GUI.TextField (new Rect (_center.x, 200, 200, 30), _mainCharacter.Name);
 		
 	}
-	
-	private void TakeNameInput ()
-	{
-		_mainCharacter.Name = GUI.TextField (new Rect (_center.x, 200, 200, 30), _mainCharacter.Name);
 
-		int bold=50;
-		StartingLeft=Screen.height/2-300;
-		StartingTop=200;
-
-	}
 
 	void checkNameFilled (string factor)
 	{

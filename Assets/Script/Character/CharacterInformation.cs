@@ -156,7 +156,7 @@ public class CharacterInformation : MonoBehaviour
 		
 	}
 	
-	private void SetupAttackModifier ()
+	public void SetupAttackModifier ()
 	{
 		//	Attack,
 		GetAttack((int)AttackName.Attack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), .5f));
@@ -173,14 +173,14 @@ public class CharacterInformation : MonoBehaviour
 		GetAttack((int)AttackName.LightningAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower), .5f));
 		
 	}
-	/*
-	
+
+
 	public void AddModifier(Attributes attrib, float numb){
-		Debug.Log(attrib + "|" +numb);
-	}*/
+
+	}
 	
 	
-	private void SetupManaModifier ()
+	public void SetupManaModifier ()
 	{
 		GetMana((int)ManaName.Fire).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f));
 		GetMana((int)ManaName.Fire).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f));
@@ -213,7 +213,6 @@ public class CharacterInformation : MonoBehaviour
 	{
 		for (int cnt = 0; cnt < _vital.Length; cnt ++) {
 			_vital [cnt].Update ();
-			
 		}
 		for (int cnt = 0; cnt < _attack.Length; cnt ++) {
 			_attack [cnt].Update ();
@@ -227,8 +226,7 @@ public class CharacterInformation : MonoBehaviour
 			_mana [cnt].Update ();
 			
 		}
-		
-		Debug.Log (_vital.Length + "|" + _attack.Length + "|" + _defence.Length + "|" + _mana.Length);
+
 	}
 	
 	private void CalculateModifiedBaseValue ()

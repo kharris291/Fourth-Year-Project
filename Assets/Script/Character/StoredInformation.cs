@@ -6,59 +6,70 @@ using System;
 public class StoredInformation : MonoBehaviour {
 
 	public string characterName="";
-	public string[] attributes;
-	private string[] _vital;
+	public string[] _primaryAttribute;
+	public int[] _primaryAttributeValues;
+	public string[] _vital;
 	public int[] _vitalValue;
-	private string[] _mana;
+	public string[] _mana;
 	public int[] _manaValue;
-	private string[] _attack;
+	public string[] _attack;
 	public int[] _attackValue;
-	private string[] _defence;
+	public string[] _defence;
 	public int[] _defenceValue;
-	//public string[] Vitals,Mana,Attack,Defence;
 
-	CharacterInformation info;
+	PlayerInformation info;
+	CharacterGen chars;
 	// Use this for initialization
 	void Start () {
 
-		info = new CharacterInformation();
+		info = new PlayerInformation();
 		info.Awake();
-		init();
+		chars = new CharacterGen();
+		
+		for (int i = 0; i < Enum.GetValues(typeof(AttributeName)).Length; i++) {
+			info.GetPrimaryAttribute (i).BaseValue = chars.STARTING_VALUE;
+		}	
+		
+		info.StatUpdate();
 
 	}
 
-	void init(){
+	void initiliseConstantVariables(){
+		_primaryAttribute = new string[info._primaryAttribute.Length];
+		_primaryAttributeValues=new int[info._primaryAttribute.Length];
 		_vital = new string[info._vital.Length];
+		_vitalValue=new int[info._vital.Length];
 		_mana = new string[info._mana.Length];
+		_manaValue=new int[info._mana.Length];
 		_attack = new string[info._attack.Length];
+		_attackValue = new int[info._attack.Length];
 		_defence = new string[info._defence.Length];
+		_defenceValue = new int[info._defence.Length];
 
-		string[][] attributesList = new string[4][]{new string[3],
-			new string[5],
-			new string[4],
-			new string[2]
-		};
+		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++){
+			_primaryAttribute [cnt] = ((AttributeName)cnt).ToString ();
+			_primaryAttributeValues[cnt] = info.GetPrimaryAttribute(cnt).AdjustedBaseValue;
+		}
 
 		for (int i = 0; i < Enum.GetValues(typeof(VitalName)).Length; i++){
 			_vital[i] = ((VitalName)i).ToString ();
-			attributesList[0][i] = ((VitalName)i).ToString ();
+			_vitalValue[i] = info.GetVitals(i).AdjustedBaseValue;
 		}
+
 		for (int i = 0; i < Enum.GetValues(typeof(ManaName)).Length; i++){
 			_mana[i] = ((ManaName)i).ToString ();
-			attributesList[1][i] = ((ManaName)i).ToString ();
+			_manaValue[i] = info.GetMana(i).AdjustedBaseValue;
 		}
+
 		for (int i = 0; i < Enum.GetValues(typeof(AttackName)).Length; i++){
 			_attack[i] = ((AttackName)i).ToString ();
-			attributesList[2][i] = ((AttackName)i).ToString ();
+			_attackValue[i] = info.GetAttack(i).AdjustedBaseValue;
 		}
+
 		for (int i = 0; i < Enum.GetValues(typeof(DefenceName)).Length; i++){
 			_defence[i] = ((DefenceName)i).ToString ();
-			attributesList[3][i] = ((DefenceName)i).ToString ();
+			_defenceValue[i] = info.GetDefence(i).AdjustedBaseValue;
 		}
-		//attributes = attributesList;
-
-
-		Debug.Log (_vital.Length + "|" + _attack.Length + "|" + _defence.Length + "|" + _mana.Length);
 	}
 	
 	// Update is called once per frame
@@ -68,5 +79,7 @@ public class StoredInformation : MonoBehaviour {
 
 	public void CharacterName(string chName){
 		characterName=chName;
+		
+		initiliseConstantVariables();
 	}
 }
