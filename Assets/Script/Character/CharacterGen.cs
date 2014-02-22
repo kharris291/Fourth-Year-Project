@@ -18,11 +18,11 @@ public class CharacterGen : MonoBehaviour {
 
 	public int STARTING_VALUE = 10;
 
-	private const int OFFSET = 15;
-	private const int LINE_HEIGHT = 40;
+	private const int OFFSET = 20;
+	private const int LINE_HEIGHT = 35;
 	private const int STAT_LABEL_WIDTH = 240;
-	private const int BASEVALUE_LABEL_WIDTH = 30;
-	private const int OFFSET_FROM_BASEVALUE = OFFSET * 2 + STAT_LABEL_WIDTH + BASEVALUE_LABEL_WIDTH * 2 + 32 * 2;
+	private const int BASEVALUE_LABEL_WIDTH = 20;
+	private const int OFFSET_FROM_BASEVALUE = OFFSET * 2 + STAT_LABEL_WIDTH + BASEVALUE_LABEL_WIDTH * 2 + 32;
 	private int statStartingPos = 250;
 	
 	

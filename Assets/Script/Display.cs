@@ -9,7 +9,10 @@ public class Display : MonoBehaviour
 	public Vector3 _center;
 	public GUIStyle Continue, StartUP;
 	
-	
+	private int buttonWidth=200,
+	buttonHeight = 50,
+	groupWidth = 200,
+	groupHeight = 120;
 	
 	// Use this for initialization
 	void Start ()
@@ -34,21 +37,31 @@ public class Display : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		StartUP.alignment = TextAnchor.MiddleCenter;
-		Continue.alignment = TextAnchor.MiddleCenter;
-		StartNewGame();
+
+		GUI.BeginGroup(new Rect(((_screenWsize/2)-(groupWidth/2)),
+		                        ((_screenHSize/2)-(groupHeight/2)),
+		                        groupWidth, groupHeight));
 		
-		ContinueGame();
-		
+		if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"New Game")){
+			StartNewGame();
+		}
+		if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Continue")){
+			ContinueGame();
+		}
+		GUI.EndGroup();
+			
 	}
 	
 	private void StartNewGame(){
-		if(GUI.Button (new Rect (_center.x, _center.y, 100, 38), "Start New Game", StartUP))
-			Application.LoadLevel("NewGame");
+		Application.LoadLevel("NewGame");
 	}
 	
-	
+	StoredInformation stIn;
 	private void ContinueGame(){
-		GUI.Button (new Rect (_center.x, _center.y + 50, 100, 38), "Continue", Continue);
+		//stIn = new StoredInformation();
+		//stIn.LoadData();
+		Application.LoadLevel("Game");
+		//stIn.Start();
+
 	}
 }

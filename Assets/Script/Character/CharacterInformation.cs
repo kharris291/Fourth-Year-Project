@@ -30,9 +30,7 @@ public class CharacterInformation : MonoBehaviour
 		_name = string.Empty;
 		_level = 0;
 		_experience = 0;
-		
-		
-		
+
 		_primaryAttribute = new Attributes[Enum.GetValues (typeof(AttributeName)).Length];
 		_vital = new Vitals[Enum.GetValues(typeof(VitalName)).Length];
 		_mana = new Mana[Enum.GetValues(typeof(ManaName)).Length];
@@ -86,6 +84,7 @@ public class CharacterInformation : MonoBehaviour
 	{
 		for (int cnt = 0; cnt <_vital.Length; cnt++) {
 			_vital [cnt] = new Vitals ();
+			_vital[cnt].Name = ((VitalName)cnt).ToString();
 		}
 		
 		SetupVitalsModifiers ();
@@ -95,6 +94,7 @@ public class CharacterInformation : MonoBehaviour
 	{
 		for (int cnt = 0; cnt <_mana.Length; cnt++) {
 			_mana [cnt] = new Mana ();
+			_mana[cnt].Name = ((ManaName)cnt).ToString();
 		}
 		
 		SetupManaModifier ();
@@ -104,6 +104,7 @@ public class CharacterInformation : MonoBehaviour
 	{
 		for (int cnt = 0; cnt <_attack.Length; cnt++) {
 			_attack [cnt] = new Attack ();
+			_attack [cnt].Name = ((AttackName)cnt).ToString();
 		}
 		
 		SetupAttackModifier ();
@@ -113,6 +114,7 @@ public class CharacterInformation : MonoBehaviour
 	{
 		for (int cnt = 0; cnt <_defence.Length; cnt++) {
 			_defence [cnt] = new Defence ();
+			_defence [cnt].Name = ((DefenceName)cnt).ToString();
 		}
 		
 		SetupDefenceModifier ();

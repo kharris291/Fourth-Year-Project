@@ -48,7 +48,6 @@ public class NewGame : MonoBehaviour
 		fontStyling.fontSize = Screen.width/23;
 		fontStyling.alignment = TextAnchor.MiddleCenter;
 
-		
 		GUI.Label (new Rect (_center.x, 40, Screen.height/23, Screen.width/20), welcome, fontStyling);
 		GUI.Label (new Rect (_center.x, 100, 200, Screen.width/20), Name, fontStyling);
 		

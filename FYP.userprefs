@@ -1,13 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Menus\PauseMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Character\PlayerPosition.cs">
     <Files>
+      <File FileName="Assets\Script\Character\PlayerPosition.cs" Line="13" Column="31" />
+      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Menus\PauseMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Display.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\NewGame.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="4" Column="14" />
-      <File FileName="Assets\Script\Character\CharacterGen.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\Stats\ModifiedStats.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Character\Stats\BasicStats.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\Menus\PauseMenu.cs" Line="13" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

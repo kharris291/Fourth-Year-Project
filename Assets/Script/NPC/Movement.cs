@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
 	void Awake ()
 	{
 		myTransform = transform;	
-		moveSpeed = 12;
+		moveSpeed = 2;
 		rotationSpeed = 3;
 	}
 	
