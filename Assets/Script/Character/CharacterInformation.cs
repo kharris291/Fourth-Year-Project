@@ -228,8 +228,55 @@ public class CharacterInformation : MonoBehaviour
 			_mana [cnt].Update ();
 			
 		}
-
+		
 	}
+	
+	public int[] VitalUpdate ()
+	{
+		int[] numb = new int[_vital.Length];
+		for (int cnt = 0; cnt < _vital.Length; cnt ++) {
+			_vital [cnt].Update ();
+			numb[cnt]=_vital [cnt].AdjustedBaseValue;
+			Debug.Log(numb[cnt]);
+		}
+		return numb;
+	}
+	
+	public int[] AttackUpdate ()
+	{
+		int[] numb = new int[_attack.Length];
+		for (int cnt = 0; cnt < _attack.Length; cnt ++) {
+			_attack [cnt].Update ();
+			numb[cnt]=_attack [cnt].AdjustedBaseValue;
+			Debug.Log(numb[cnt]);
+		}
+		return numb;
+	}
+	
+	public int[] DefenceUpdate ()
+	{
+		int[] numb = new int[_defence.Length];
+		for (int cnt = 0; cnt < _defence.Length; cnt ++) {
+			_defence [cnt].Update ();
+			numb[cnt]=_defence [cnt].AdjustedBaseValue;
+			Debug.Log(numb[cnt]);
+		}
+		return numb;
+	}
+	
+	public int[] ManaUpdate ()
+	{
+		int[] numb = new int[_mana.Length];
+		for (int cnt = 0; cnt < _mana.Length; cnt ++) {
+			_mana [cnt].Update ();
+			numb[cnt]=_mana [cnt].AdjustedBaseValue;
+			Debug.Log(numb[cnt]);
+		}
+		return numb;
+		
+	}
+
+
 	
 	private void CalculateModifiedBaseValue ()
 	{

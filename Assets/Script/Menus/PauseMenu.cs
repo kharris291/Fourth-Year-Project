@@ -19,21 +19,32 @@ public class PauseMenu : MonoBehaviour {
 
 	void OnGUI(){
 		if(paused){
+			GameObject con = GameObject.FindGameObjectWithTag("Constant");
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			
 			GUI.BeginGroup(new Rect(((Screen.width/2)-(groupWidth/2)),
 			                         ((Screen.height/2)-(groupHeight/2)),
 			                         groupWidth, groupHeight));
 
 			if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"Main Menu")){
 				Application.LoadLevel("Main Menu");
+				Destroy(con);
+				Destroy(player);
 			}
 			if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Save Game")){
 				info.SaveData();
 			}
 			if(GUI.Button(new Rect(0,120,buttonWidth,buttonHeight),"Load Game")){
+				if(Application.loadedLevelName=="Game"){
+					Destroy(player);
+					//Destroy(this);
+					Application.LoadLevel("Game");
+				}
 				info.LoadData();
+
 			}
 			if(GUI.Button(new Rect(0,180,buttonWidth,buttonHeight),"Quit Game")){
-				
+				Application.Quit();
 			}
 			GUI.EndGroup();
 		}

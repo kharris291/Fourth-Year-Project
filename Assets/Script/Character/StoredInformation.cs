@@ -42,9 +42,7 @@ public class StoredInformation : MonoBehaviour {
 		_defence = new string[info._defence.Length];
 		_defenceValue = new int[info._defence.Length];
 
-		
 		initiliseConstantVariables();
-		info.StatUpdate();
 		playerPos = GameObject.FindGameObjectWithTag("Player");
 		if(playerPos!=null)
 			positionOnScreen= playerPos.transform.position;
@@ -77,6 +75,16 @@ public class StoredInformation : MonoBehaviour {
 			_defence[i] = ((DefenceName)i).ToString ();
 			_defenceValue[i] = info.GetDefence(i).AdjustedBaseValue;
 		}
+		positionOnScreen.x=PlayerPrefs.GetFloat("Position - x");
+		positionOnScreen.y=PlayerPrefs.GetFloat("Position - y");
+		positionOnScreen.z=PlayerPrefs.GetFloat("Position - z");
+		
+		info.StatUpdate();
+		_vitalValue=info.VitalUpdate();
+		_attackValue=info.AttackUpdate();
+		_defenceValue=info.DefenceUpdate();
+		_manaValue=info.ManaUpdate();
+		characterName = PlayerPrefs.GetString ("Player Name");
 	}
 	
 	// Update is called once per frame
