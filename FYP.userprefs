@@ -1,13 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Character\StoredInformation.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\NPC\ShopWorker.cs">
     <Files>
-      <File FileName="Assets\Script\Character\PlayerPosition.cs" Line="14" Column="42" />
-      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="41" Column="18" />
-      <File FileName="Assets\Script\Menus\PauseMenu.cs" Line="44" Column="1" />
-      <File FileName="Assets\Script\Display.cs" Line="62" Column="5" />
-      <File FileName="Assets\Script\NewGame.cs" Line="69" Column="48" />
-      <File FileName="Assets\Script\Character\CharacterInformation.cs" Line="273" Column="24" />
+      <File FileName="Assets\Script\Character\PlayerPosition.cs" Line="23" Column="35" />
+      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="149" Column="1" />
+      <File FileName="Assets\Script\Menus\PauseMenu.cs" Line="55" Column="44" />
+      <File FileName="Assets\Script\Character\CharacterInformation.cs" Line="174" Column="24" />
+      <File FileName="Assets\Script\NPC\ShopWorker.cs" Line="87" Column="17" />
+      <File FileName="Assets\Script\Menus\MagicMenu.cs" Line="20" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -53,7 +53,6 @@ public class PauseMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyUp("joystick button 2")){
-			Debug.Log("hello");
 			paused = TooglePausedScreen();
 		}
 	}
