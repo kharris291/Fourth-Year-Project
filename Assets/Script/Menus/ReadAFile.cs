@@ -23,19 +23,16 @@ public class ReadAFile : MonoBehaviour {
 	public string[] _name,_id,_price;
 	int strsize=4;
 	void Awake(){
-
-	}
-
-	public bool Load(string fileName, string tag)
-	{
-
-		if(fileName=="magic.txt"){
-			strsize=4;
-		}
-
 		_name =  new string[strsize];
 		_id =  new string[strsize];
 		_price = new string[strsize];
+
+	}
+
+
+	public bool Load(string fileName, string tag)
+	{
+		checkedtag(fileName);
 
 		ga = GameObject.FindGameObjectsWithTag(tag);
 		ga2 = GameObject.FindGameObjectWithTag("Player");
@@ -83,10 +80,6 @@ public class ReadAFile : MonoBehaviour {
 			return false;
 		}
 	}
-	
-	void Update(){
-
-	}
 
 	void Additions(string[] arry){
 		ga[counter].GetComponent<ReadAFile>()._name[size] = arry[0].ToString();
@@ -94,26 +87,21 @@ public class ReadAFile : MonoBehaviour {
 		ga[counter].GetComponent<ReadAFile>()._price[size] = arry[2].ToString();
 
 	}
-
-	bool paused = false;
-	void OnGUI(){
-
-		if(ga.Length!=0){
-			paused = ga[counter].GetComponent<ShopWorker>().paused;
-			if(paused){
-				GUI.BeginGroup(new Rect(((Screen.width/3)-(groupWidth/2)),
-				                        ((Screen.height/3)-(groupHeight/2)),
-				                        Screen.width, Screen.height));
-				int startingPosLeft =0;
-				int StartingPosTop =0;
-
-				if(GUI.Button(new Rect(startingPosLeft,0,buttonWidth,buttonHeight),_name[0] +"\r\n" + _id[0] +"\r\n" + _price[0])){
-					
-				}
-				
-				GUI.EndGroup();
-			}
+	
+	void checkedtag(string fileNameCheck){
+		if(fileNameCheck=="items.txt"){
+			strsize=4;
 		}
+		
+		if(fileNameCheck=="magic.txt"){
+			strsize=3;
+		}
+		if(fileNameCheck=="weapons.txt"){
+			strsize=6;
+		}
+		_name =  new string[strsize];
+		_id =  new string[strsize];
+		_price = new string[strsize];
 	}
 
 }

@@ -10,7 +10,7 @@ public class ShopWorker : MonoBehaviour {
 
 	private int buttonWidth=200,
 	buttonHeight = 50,
-	groupWidth = 400,
+	groupWidth = 600,
 	groupHeight = 230;
 	public bool paused = false,
 	checkedOff = false,
@@ -25,7 +25,8 @@ public class ShopWorker : MonoBehaviour {
 	MagicDistance = 1000;
 	int ItemCounter,
 	WeaponCounter,
-	MagicCounter;
+	MagicCounter,
+	counter;
 	
 	bool filereadingCheck = false;
 	// Use this for initialization
@@ -48,7 +49,7 @@ public class ShopWorker : MonoBehaviour {
 			for(int cnt = 0; cnt < item.Length; cnt++){
 				if(Vector3.Distance(item[cnt].transform.position,player.transform.position)<=ItemDistance){
 					ItemDistance = Vector3.Distance(item[cnt].transform.position,player.transform.position);
-					ItemCounter = cnt;
+					counter=ItemCounter = cnt;
 				}
 				if(cnt == item.Length-1){
 					if(Vector3.Distance(item[ItemCounter].transform.position,player.transform.position)<10){
@@ -60,7 +61,7 @@ public class ShopWorker : MonoBehaviour {
 			for(int cnt1 = 0; cnt1 < weapon.Length; cnt1++){
 				if(Vector3.Distance(weapon[cnt1].transform.position,player.transform.position)<=WeaponDistance){
 					WeaponDistance = Vector3.Distance(weapon[cnt1].transform.position,player.transform.position);
-					WeaponCounter = cnt1;
+					counter=WeaponCounter = cnt1;
 				}
 				if(cnt1 == weapon.Length-1){
 					if(Vector3.Distance(weapon[WeaponCounter].transform.position,player.transform.position)<10){
@@ -71,7 +72,7 @@ public class ShopWorker : MonoBehaviour {
 			for(int i = 0; i < magic.Length; i++){
 				if(Vector3.Distance(magic[i].transform.position,player.transform.position)<=MagicDistance){
 					MagicDistance = Vector3.Distance(magic[i].transform.position,player.transform.position);
-					MagicCounter = i;
+					counter=MagicCounter = i;
 				}
 				if(i == magic.Length-1){
 					if(Vector3.Distance(magic[MagicCounter].transform.position,player.transform.position)<10){
@@ -85,6 +86,8 @@ public class ShopWorker : MonoBehaviour {
 		}
 	}
 	bool shopOpen = false;
+	
+	GameObject[] ga;
 	void OnGUI(){
 		if(ShopMenu){
 			shopStatus= "Press O to open";
@@ -92,7 +95,6 @@ public class ShopWorker : MonoBehaviour {
 			shopOpen=true;
 
 		}
-
 		if(paused){
 			shopStatus="";
 			//if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"Buy")){
@@ -113,6 +115,29 @@ public class ShopWorker : MonoBehaviour {
 				
 				GUI.EndGroup();
 */
+
+				GUI.BeginGroup(new Rect(((Screen.width/2)-(groupWidth/2)),
+				                        ((Screen.height/2)-(groupHeight/2)),
+				                        Screen.width, Screen.height));
+				int startingPosLeft =0;
+				int StartingPosTop =0;
+				ga = GameObject.FindGameObjectsWithTag(shopType);
+
+				for(int cnt =0; cnt <= fileReading._name.Length; cnt ++){
+					if(GUI.Button(new Rect(startingPosLeft,StartingPosTop,buttonWidth,buttonHeight),
+					              "Name : "+ ga[counter].GetComponent<ReadAFile>()._name[cnt] +
+					              "\r\n Recovers : " + ga[counter].GetComponent<ReadAFile>()._id[cnt] +
+					              "\r\n Price : " + ga[counter].GetComponent<ReadAFile>()._price[cnt])){
+
+						
+					}
+					startingPosLeft+=buttonWidth;
+					if(startingPosLeft >= groupWidth){
+						startingPosLeft=0;
+						StartingPosTop+=buttonHeight+20;
+					}
+				}
+				GUI.EndGroup();
 			}
 			//if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Sell")){
 			if(shopAssistantType =="sell"){
