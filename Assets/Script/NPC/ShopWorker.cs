@@ -4,27 +4,39 @@ using System.Collections;
 public class ShopWorker : MonoBehaviour {
 	
 	private bool ShopMenu;
-	public GameObject item,weapon,magic,player;
-	public string shopType;
+	public GameObject[] item,weapon,magic;
+	public GameObject player;
+	ReadAFile fileReading;
 
 	private int buttonWidth=200,
 	buttonHeight = 50,
 	groupWidth = 400,
 	groupHeight = 230;
-	bool paused = false;
+	public bool paused = false,
+	checkedOff = false,
+	buying = false;
 	StoredInformation info;
-	bool checkedOff = false;
 
-	string shopStatus;
+	public string shopAssistantType;
+	MagicMenu mMenu;
+	public string shopStatus,shopType;
+	float ItemDistance = 1000,
+	WeaponDistance = 1000,
+	MagicDistance = 1000;
+	int ItemCounter,
+	WeaponCounter,
+	MagicCounter;
+	
+	bool filereadingCheck = false;
 	// Use this for initialization
 	void Start () {
-		
+		mMenu = new MagicMenu();
 		Screen.lockCursor = true;
 		Time.timeScale=1;
 
-		item = GameObject.FindGameObjectWithTag("Item");
-		weapon = GameObject.FindGameObjectWithTag("Weapon");
-		magic = GameObject.FindGameObjectWithTag("Magic");
+		item = GameObject.FindGameObjectsWithTag("Item");
+		weapon = GameObject.FindGameObjectsWithTag("Weapon");
+		magic = GameObject.FindGameObjectsWithTag("Magic");
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	// Update is called once per frame
@@ -33,29 +45,42 @@ public class ShopWorker : MonoBehaviour {
 
 
 		if ((Input.GetKeyUp("joystick button 0"))&&(ShopMenu==true)){
+			for(int cnt = 0; cnt < item.Length; cnt++){
+				if(Vector3.Distance(item[cnt].transform.position,player.transform.position)<=ItemDistance){
+					ItemDistance = Vector3.Distance(item[cnt].transform.position,player.transform.position);
+					ItemCounter = cnt;
+				}
+				if(cnt == item.Length-1){
+					if(Vector3.Distance(item[ItemCounter].transform.position,player.transform.position)<10){
+						
+						shopType = "Item";
+					}
+				}
+			}
+			for(int cnt1 = 0; cnt1 < weapon.Length; cnt1++){
+				if(Vector3.Distance(weapon[cnt1].transform.position,player.transform.position)<=WeaponDistance){
+					WeaponDistance = Vector3.Distance(weapon[cnt1].transform.position,player.transform.position);
+					WeaponCounter = cnt1;
+				}
+				if(cnt1 == weapon.Length-1){
+					if(Vector3.Distance(weapon[WeaponCounter].transform.position,player.transform.position)<10){
+						shopType = "Weapon";
+					}
+				}
+			}
+			for(int i = 0; i < magic.Length; i++){
+				if(Vector3.Distance(magic[i].transform.position,player.transform.position)<=MagicDistance){
+					MagicDistance = Vector3.Distance(magic[i].transform.position,player.transform.position);
+					MagicCounter = i;
+				}
+				if(i == magic.Length-1){
+					if(Vector3.Distance(magic[MagicCounter].transform.position,player.transform.position)<10){
+						shopType = "Magic";
+					}
+				}
+			}
 
 
-			if(Vector3.Distance(item.transform.position,player.transform.position)<3){
-			/*	iMenu = new ItemMenu();
-				iMenu.Check(!trying);
-				iMenu.OnGUI();
-				Debug.Log("item");*/
-				shopType = "item";
-			}
-			if(Vector3.Distance(weapon.transform.position,player.transform.position)<3){
-				/*wMenu = new WeaponMenu();
-				iMenu.Check(!trying);
-
-				Debug.Log("weapon");*/
-				shopType = "weapon";
-			}
-			if(Vector3.Distance(magic.transform.position,player.transform.position)<3){
-				/*mMenu = new MagicMenu();
-				mMenu.Check(!trying);
-				mMenu.OnGUI();
-				Debug.Log("magic");*/
-				shopType = "magic";
-			}
 			paused = TooglePausedScreen();
 		}
 	}
@@ -67,44 +92,58 @@ public class ShopWorker : MonoBehaviour {
 			shopOpen=true;
 
 		}
-		if ((shopOpen) &&(Input.GetKeyUp("joystick button 0"))){
-			shopStatus = "Press O to close";
-			GUI.Label(new Rect(0,0, 300,30), shopStatus);
 
-		}
 		if(paused){
-			GUI.BeginGroup(new Rect(((Screen.width/3)-(groupWidth/2)),
-			                        ((Screen.height/3)-(groupHeight/2)),
-			                        groupWidth, groupHeight));
-			
-			if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"Buy")){
-				buyingStuff(shopType);
-			}
-			if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Sell")){
+			shopStatus="";
+			//if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"Buy")){
+			if(shopAssistantType =="buy"){
+//				buying=true;
+				buyingStuff();
+				/*GUI.BeginGroup(new Rect(((Screen.width/3)-(groupWidth/2)),
+				                        ((Screen.height/3)-(groupHeight/2)),
+				                        Screen.width, Screen.height));
+				if(GUI.Button(new Rect(buttonWidth+10,0,buttonWidth,buttonHeight),"Buying")){
+					//buyingStuff(shopType);
+					
+					
+				}
+				if(GUI.Button(new Rect(buttonWidth+10,60,buttonWidth,buttonHeight),"Sell")){
+					
+				}
 				
+				GUI.EndGroup();
+*/
 			}
-			GUI.EndGroup();
+			//if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Sell")){
+			if(shopAssistantType =="sell"){
+				sellBits();
+			}
+		}
+	}
+	void buyingStuff(){
+
+
+		if(shopType =="Magic"){
+			if(!filereadingCheck){
+				
+				fileReading = new ReadAFile();
+				fileReading.Load("magic.txt", shopType);
+				filereadingCheck = true;
+
+			}
+
 		}
 	}
 
-	void buyingStuff(string shopType){
-		Debug.Log(shopType);
-		if(shopType =="magic"){
+	void sellBits(){
 
-			if(GUI.Button(new Rect(100,0,buttonWidth,buttonHeight),"Buy")){
-				buyingStuff(shopType);
-			}
-			if(GUI.Button(new Rect(100,60,buttonWidth,buttonHeight),"Sell")){
-				
-			}
-
-		}
 	}
 
 	bool TooglePausedScreen(){
 		if(Time.timeScale ==0){
 			Screen.lockCursor = true;
 			Time.timeScale=1;
+			filereadingCheck = false;
 			return false;
 		}else{
 			Screen.lockCursor = false;
