@@ -21,7 +21,7 @@ public class ReadAFile : MonoBehaviour {
 	groupHeight = 230;
 	
 	public string[] _name,_id,_price;
-	int strsize=4;
+	int strsize=6;
 	void Awake(){
 		_name =  new string[strsize];
 		_id =  new string[strsize];

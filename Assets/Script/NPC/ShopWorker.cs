@@ -18,7 +18,6 @@ public class ShopWorker : MonoBehaviour {
 	StoredInformation info;
 
 	public string shopAssistantType;
-	MagicMenu mMenu;
 	public string shopStatus,shopType;
 	float ItemDistance = 1000,
 	WeaponDistance = 1000,
@@ -28,10 +27,11 @@ public class ShopWorker : MonoBehaviour {
 	MagicCounter,
 	counter;
 	
+	private MoneySystem money;
+
 	bool filereadingCheck = false;
 	// Use this for initialization
 	void Start () {
-		mMenu = new MagicMenu();
 		Screen.lockCursor = true;
 		Time.timeScale=1;
 
@@ -39,6 +39,9 @@ public class ShopWorker : MonoBehaviour {
 		weapon = GameObject.FindGameObjectsWithTag("Weapon");
 		magic = GameObject.FindGameObjectsWithTag("Magic");
 		player = GameObject.FindGameObjectWithTag("Player");
+
+		money = new MoneySystem();
+		info = new StoredInformation();
 	}
 	// Update is called once per frame
 	void Update () {
@@ -121,15 +124,39 @@ public class ShopWorker : MonoBehaviour {
 				                        Screen.width, Screen.height));
 				int startingPosLeft =0;
 				int StartingPosTop =0;
+				int itemPrice =0;
 				ga = GameObject.FindGameObjectsWithTag(shopType);
+				string details="";
+				bool buyingAttempt;
+				for(int cnt =0; cnt < fileReading._name.Length; cnt ++){
 
-				for(int cnt =0; cnt <= fileReading._name.Length; cnt ++){
-					if(GUI.Button(new Rect(startingPosLeft,StartingPosTop,buttonWidth,buttonHeight),
-					              "Name : "+ ga[counter].GetComponent<ReadAFile>()._name[cnt] +
-					              "\r\n Recovers : " + ga[counter].GetComponent<ReadAFile>()._id[cnt] +
-					              "\r\n Price : " + ga[counter].GetComponent<ReadAFile>()._price[cnt])){
+					if((ga[counter].GetComponent<ReadAFile>()._name[cnt]!=null)&&(ga[counter].GetComponent<ReadAFile>()._name[cnt]!="")){
+						if(shopType=="Magic"){
+							details = "Ability";
+						}
+						if(shopType=="Weapon"){
+							details = "Power";
+						}
+						if(shopType=="Item"){
+							details = "Recovers";
+						}
+						if(GUI.Button(new Rect(startingPosLeft,StartingPosTop,buttonWidth,buttonHeight),
+						              "Name : "+ ga[counter].GetComponent<ReadAFile>()._name[cnt] +
+						              "\r\n "+ details +" : " + ga[counter].GetComponent<ReadAFile>()._id[cnt] +
+						              "\r\n Price : " + ga[counter].GetComponent<ReadAFile>()._price[cnt])){
+							itemPrice = int.Parse(ga[counter].GetComponent<ReadAFile>()._price[cnt]);
+							//buyingAttempt=money.money("minus",itemPrice);
+							money.processMoney("minus",itemPrice);
+							Debug.Log(money.test);
+							if(money.test){
+								info.addItems(ga[counter].GetComponent<ReadAFile>()._name[cnt],ga[counter].GetComponent<ReadAFile>()._id[cnt]);
+							}else{
+								GUI.Label(new Rect(((Screen.width/2)-(groupWidth/2)),
+								          ((Screen.height/2)-(groupHeight/2))-100,
+								          Screen.width, Screen.height), " Not enough monry to buy");
+							}
 
-						
+						}
 					}
 					startingPosLeft+=buttonWidth;
 					if(startingPosLeft >= groupWidth){
@@ -148,16 +175,28 @@ public class ShopWorker : MonoBehaviour {
 	void buyingStuff(){
 
 
+		if(shopType =="Item"){
+			if(!filereadingCheck){
+				fileReading = new ReadAFile();
+				fileReading.Load("items.txt", shopType);
+				filereadingCheck = true;
+			}
+		}
 		if(shopType =="Magic"){
 			if(!filereadingCheck){
-				
 				fileReading = new ReadAFile();
 				fileReading.Load("magic.txt", shopType);
 				filereadingCheck = true;
-
 			}
-
 		}
+		if(shopType =="Weapon"){
+			if(!filereadingCheck){
+				fileReading = new ReadAFile();
+				fileReading.Load("weapons.txt", shopType);
+				filereadingCheck = true;
+			}
+		}
+
 	}
 
 	void sellBits(){

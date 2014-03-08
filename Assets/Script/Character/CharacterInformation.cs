@@ -237,7 +237,6 @@ public class CharacterInformation : MonoBehaviour
 		for (int cnt = 0; cnt < _vital.Length; cnt ++) {
 			_vital [cnt].Update ();
 			numb[cnt]=_vital [cnt].AdjustedBaseValue;
-			Debug.Log(numb[cnt]);
 		}
 		return numb;
 	}
@@ -248,7 +247,6 @@ public class CharacterInformation : MonoBehaviour
 		for (int cnt = 0; cnt < _attack.Length; cnt ++) {
 			_attack [cnt].Update ();
 			numb[cnt]=_attack [cnt].AdjustedBaseValue;
-			Debug.Log(numb[cnt]);
 		}
 		return numb;
 	}
@@ -259,7 +257,6 @@ public class CharacterInformation : MonoBehaviour
 		for (int cnt = 0; cnt < _defence.Length; cnt ++) {
 			_defence [cnt].Update ();
 			numb[cnt]=_defence [cnt].AdjustedBaseValue;
-			Debug.Log(numb[cnt]);
 		}
 		return numb;
 	}
@@ -270,7 +267,6 @@ public class CharacterInformation : MonoBehaviour
 		for (int cnt = 0; cnt < _mana.Length; cnt ++) {
 			_mana [cnt].Update ();
 			numb[cnt]=_mana [cnt].AdjustedBaseValue;
-			Debug.Log(numb[cnt]);
 		}
 		return numb;
 		
