@@ -146,16 +146,23 @@ public class ShopWorker : MonoBehaviour {
 						              "\r\n Price : " + ga[counter].GetComponent<ReadAFile>()._price[cnt])){
 							itemPrice = int.Parse(ga[counter].GetComponent<ReadAFile>()._price[cnt]);
 							//buyingAttempt=money.money("minus",itemPrice);
-							money.processMoney("minus",itemPrice);
-							Debug.Log(money.test);
-							if(money.test){
-								info.addItems(ga[counter].GetComponent<ReadAFile>()._name[cnt],ga[counter].GetComponent<ReadAFile>()._id[cnt]);
-							}else{
-								GUI.Label(new Rect(((Screen.width/2)-(groupWidth/2)),
-								          ((Screen.height/2)-(groupHeight/2))-100,
-								          Screen.width, Screen.height), " Not enough monry to buy");
-							}
+						
+							GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+							StoredInformation st = objGame.GetComponent<StoredInformation>();
+							if((st.moneyTotal-itemPrice)>-1){
+								money.processMoney("minus",itemPrice);
 
+							
+								if(money.test){
+									
+									st.moneyTotal -= itemPrice;
+									info.addItems(ga[counter].GetComponent<ReadAFile>()._name[cnt],ga[counter].GetComponent<ReadAFile>()._id[cnt]);
+								}else{
+									GUI.Label(new Rect(((Screen.width/2)-(groupWidth/2)),
+									          ((Screen.height/2)-(groupHeight/2))-100,
+									          Screen.width, Screen.height), " Not enough monry to buy");
+								}
+							}
 						}
 					}
 					startingPosLeft+=buttonWidth;

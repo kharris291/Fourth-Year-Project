@@ -22,7 +22,8 @@ public class StoredInformation : MonoBehaviour {
 	public Vector3 positionOnScreen;
 	GameObject playerPos;
 	int itemAmount;
-	string[] tempItems,tempItemsId;
+	//string[] tempItems,tempItemsId;
+	public ArrayList itemsNameArray,itemsContentArray;
 
 	PlayerInformation info;
 	CharacterGen chars;
@@ -47,6 +48,8 @@ public class StoredInformation : MonoBehaviour {
 		_defence = new string[info._defence.Length];
 		_defenceValue = new int[info._defence.Length];
 		money = new MoneySystem();
+		itemsNameArray = new ArrayList();
+		itemsContentArray = new ArrayList();
 
 		initiliseConstantVariables();
 		playerPos = GameObject.FindGameObjectWithTag("Player");
@@ -127,50 +130,26 @@ public class StoredInformation : MonoBehaviour {
 
 		initiliseConstantVariables();
 	}
-	
+
 	public void addItems(string chName, string itemPower){
 		
 		
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation stored = objGame.GetComponent<StoredInformation>();
 
-
-		if(itemAmount !=0){
-			itemAmount = st.items.Length +1;
-			tempItems = new string[items.Length];
-			tempItemsId = new string[itemId.Length];
-
-			tempItems[items.Length-1] = items[items.Length-1];
-			Debug.Log (tempItems[0]);
-			tempItemsId[items.Length-1] = itemId[items.Length-1];
-			Debug.Log (tempItemsId[0]);
-			//itemAmount+=items.Length;
-			Debug.Log(itemAmount);
+		if(itemAmount ==0){
+			itemAmount=1;
+		}else{
+			itemAmount++;
 		}
-		else{
-			itemAmount+=1;
-		}
-		items = new string[itemAmount];
-		st.items = new string[itemAmount];
-		if(itemAmount!=1){
-
-			items = tempItems;
-
-			
-		}
-//		items[itemAmount-1] = chName;
-		st.items[itemAmount-1] = chName;
-		Debug.Log(items.Length);
-		itemId = new string[itemAmount];
-		st.itemId = new string[itemAmount];
-		if(itemAmount!=1){
-			itemId = tempItemsId;
-			//st.itemId = tempItemsId;
-		}
-//		itemId[itemAmount-1] = itemPower;
-		Debug.Log(itemId.Length);
-		st.itemId[itemAmount-1] = itemPower;
+		
+		stored.itemsNameArray.Add(chName);
+		stored.itemsContentArray.Add(itemPower);
+		stored.items = new string[stored.itemsNameArray.Count];
+		stored.itemsNameArray.CopyTo(stored.items);
+		stored.itemId = new string[stored.itemsContentArray.Count];
+		stored.itemsContentArray.CopyTo(stored.itemId);
 	}
 
 	public void SaveData(){
@@ -271,3 +250,4 @@ public class StoredInformation : MonoBehaviour {
 
 	}
 }
+
