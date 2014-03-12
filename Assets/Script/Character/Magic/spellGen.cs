@@ -15,7 +15,7 @@ public class spellGen : MonoBehaviour {
 		//Debug.Log(spell.name);
 		//Debug.Log(spell.spellType);
 		//Debug.Log(spell.description);
-		obj = GameObject.FindGameObjectsWithTag ("Enemy");
+		obj = GameObject.FindGameObjectsWithTag ("EnemyBattle");
 
 		Enemy = obj[counter];
 		/*

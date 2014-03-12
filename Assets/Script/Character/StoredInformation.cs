@@ -22,6 +22,7 @@ public class StoredInformation : MonoBehaviour {
 	public Vector3 positionOnScreen;
 	GameObject playerPos;
 	int itemAmount;
+	public int enemyTypeNumber;
 	//string[] tempItems,tempItemsId;
 	public ArrayList itemsNameArray,itemsContentArray;
 
@@ -32,7 +33,7 @@ public class StoredInformation : MonoBehaviour {
 		info = new PlayerInformation();
 		info.Awake();
 		chars = new CharacterGen();
-		
+		enemyTypeNumber =0;
 		for (int i = 0; i < Enum.GetValues(typeof(AttributeName)).Length; i++) {
 			info.GetPrimaryAttribute (i).BaseValue = chars.STARTING_VALUE;
 		}	
@@ -152,6 +153,14 @@ public class StoredInformation : MonoBehaviour {
 		stored.itemsContentArray.CopyTo(stored.itemId);
 	}
 
+	public void AddEnemyToScene(int fighting){
+		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+		
+		StoredInformation st = objGame.GetComponent<StoredInformation>();
+
+		st.enemyTypeNumber = fighting;
+	}
+
 	public void SaveData(){
 		GameObject playerPrefab = GameObject.FindGameObjectWithTag("Player");
 	
@@ -164,14 +173,10 @@ public class StoredInformation : MonoBehaviour {
 		st.positionOnScreen = playerPrefab.transform.position;
 
 		PlayerPrefs.SetInt("Money",st.moneyTotal);
-		
-		//PlayerInformation player = playerPrefab.GetComponent<PlayerInformation>();
-		//PlayerPrefs.SetString("Player Name", st.characterName);
+
 		PlayerPrefs.SetFloat("Position - x",st.positionOnScreen.x);
 		PlayerPrefs.SetFloat("Position - y",st.positionOnScreen.y);
 		PlayerPrefs.SetFloat("Position - z",st.positionOnScreen.z);
-
-		//characterName = PlayerPrefs.GetString ("Player Name", "Name Me");
 
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
 			PlayerPrefs.SetString("Attribute Name - " + cnt, st._primaryAttribute[cnt]);
