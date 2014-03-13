@@ -32,6 +32,8 @@ public class PauseMenu : MonoBehaviour {
 				Destroy(player);
 			}
 			if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Save Game")){
+				StoredInformation st = con.GetComponent<StoredInformation>();
+
 				info.SaveData();
 			}
 			if(GUI.Button(new Rect(0,120,buttonWidth,buttonHeight),"Load Game")){

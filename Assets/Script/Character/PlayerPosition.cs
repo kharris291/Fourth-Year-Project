@@ -16,7 +16,7 @@ public class PlayerPosition : MonoBehaviour {
 		if(Application.loadedLevelName == "NewGame"){
 			current = Application.loadedLevelName;
 		}
-		Debug.Log(current);
+
 		if(Application.loadedLevelName=="Game"){
 			GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 

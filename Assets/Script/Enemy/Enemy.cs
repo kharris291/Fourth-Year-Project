@@ -32,8 +32,6 @@ public class Enemy : MonoBehaviour {
 			if(Vector3.Distance(player.transform.position,Enemies[cnt].transform.position)<prev){
 				prev = Vector3.Distance(player.transform.position,Enemies[cnt].transform.position);
 				num = cnt;
-				Debug.Log(num);
-				Debug.Log(Enemies[num].name);
 			}
 		}
 		int enemyfight=0;

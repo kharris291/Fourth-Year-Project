@@ -22,9 +22,9 @@ public class StoredInformation : MonoBehaviour {
 	public Vector3 positionOnScreen;
 	GameObject playerPos;
 	int itemAmount;
-	public int enemyTypeNumber;
+	public int enemyTypeNumber,playerNumber;
 	//string[] tempItems,tempItemsId;
-	public ArrayList itemsNameArray,itemsContentArray;
+	private ArrayList itemsNameArray,itemsContentArray;
 
 	PlayerInformation info;
 	CharacterGen chars;
@@ -34,9 +34,11 @@ public class StoredInformation : MonoBehaviour {
 		info.Awake();
 		chars = new CharacterGen();
 		enemyTypeNumber =0;
+		playerNumber =1;
 		for (int i = 0; i < Enum.GetValues(typeof(AttributeName)).Length; i++) {
 			info.GetPrimaryAttribute (i).BaseValue = chars.STARTING_VALUE;
 		}	
+		characterName = String.Empty;
 		itemAmount = 0;
 		_primaryAttribute = new string[info._primaryAttribute.Length];
 		_primaryAttributeValues=new int[info._primaryAttribute.Length];
@@ -112,7 +114,10 @@ public class StoredInformation : MonoBehaviour {
 		_attackValue=info.AttackUpdate();
 		_defenceValue=info.DefenceUpdate();
 		_manaValue=info.ManaUpdate();
-		characterName = st.characterName = PlayerPrefs.GetString ("Player Name");
+		if(characterName==String.Empty){
+			characterName = PlayerPrefs.GetString ("Player Name");
+			st.characterName = PlayerPrefs.GetString ("Player Name");
+		}
 	}
 	
 	// Update is called once per frame
@@ -121,8 +126,6 @@ public class StoredInformation : MonoBehaviour {
 	}
 
 	public void CharacterName(string chName){
-		
-		
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
 		StoredInformation st = objGame.GetComponent<StoredInformation>();
@@ -161,6 +164,14 @@ public class StoredInformation : MonoBehaviour {
 		st.enemyTypeNumber = fighting;
 	}
 
+	public void AddPlayerToScene(int fighting){
+		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+		
+		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		
+		st.playerNumber = fighting;
+	}
+
 	public void SaveData(){
 		GameObject playerPrefab = GameObject.FindGameObjectWithTag("Player");
 	
@@ -168,7 +179,7 @@ public class StoredInformation : MonoBehaviour {
 		
 		StoredInformation st = objGame.GetComponent<StoredInformation>();
 		
-		PlayerPrefs.SetString ("Player Name",characterName);
+		PlayerPrefs.SetString ("Player Name",st.characterName);
 
 		st.positionOnScreen = playerPrefab.transform.position;
 
@@ -211,9 +222,10 @@ public class StoredInformation : MonoBehaviour {
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 
 		StoredInformation st = objGame.GetComponent<StoredInformation>();
-		
+
+		characterName = PlayerPrefs.GetString ("Player Name");
 		st.characterName = PlayerPrefs.GetString ("Player Name");
-		
+
 		moneyTotal = PlayerPrefs.GetInt("Money");
 
 		st.positionOnScreen.x=PlayerPrefs.GetFloat("Position - x");

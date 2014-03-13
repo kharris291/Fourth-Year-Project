@@ -8,37 +8,61 @@ public class PlayerHealth : MonoBehaviour
 	public int curHealth = 100;
 	private Texture3D bgImage;
 	private Texture3D fgImage;
-	private float healthBarLength,healthBarLength1;
+	private float healthBarLength1;
+	private float[] healthBarLength;
+	
+	GameObject constVar;
+	StoredInformation stored;
 	CharacterInformation playerInfo;
 	// Use this for initialization
 
 	void Awake(){
 	//	playerInfo.Awake();
+		
+		constVar= GameObject.FindGameObjectWithTag("Constant");
+		stored = constVar.GetComponent<StoredInformation>();
+		healthBarLength = new float[stored.playerNumber];
+		for(int cnt =0; cnt > stored.playerNumber; cnt++){
+			healthBarLength[cnt] = (Screen.width / 4) * (curHealth / (float)maxHealth);
+
+		}
+		healthBarLength1 = (Screen.width / 4);
 	}
 
 	void Start ()
 	{   
 		//Debug.Log(playerInfo.GetVitals(0));
-		healthBarLength = Screen.width / 2;
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		AddjustCurrentHealth (0);
+		AdjustCurrentHealth (0,0);
 	}
-	
+
 	public void OnGUI ()
 	{
-		GUI.Box(new Rect(Screen.width/2+150,Screen.height-70,healthBarLength,20),"");
-		GUI.Box(new Rect(Screen.width/2+150,Screen.height-70,healthBarLength1,20),curHealth+"/"+maxHealth);
-		GUI.Box(new Rect(Screen.width/2+150,Screen.height-100,healthBarLength,20),"");
-		GUI.Box(new Rect(Screen.width/2+150,Screen.height-100,healthBarLength1,20),curHealth+"/"+maxHealth);
-		GUI.Box(new Rect(Screen.width/2+150,Screen.height-130,healthBarLength,20),"");
-		GUI.Box(new Rect(Screen.width/2+150,Screen.height-130,healthBarLength1,20),curHealth+"/"+maxHealth);
+		
+		if(stored.playerNumber>=1){
+			GUI.Box(new Rect(Screen.width/2+200,Screen.height-70,healthBarLength[0],20),"");
+			GUI.Box(new Rect(Screen.width/2+200,Screen.height-70,healthBarLength1,20),curHealth+"/"+maxHealth);
+		}
+		if(stored.playerNumber>=2){
+			GUI.Box(new Rect(Screen.width/2+200,Screen.height-100,healthBarLength[1],20),"");
+			GUI.Box(new Rect(Screen.width/2+200,Screen.height-100,healthBarLength1,20),curHealth+"/"+maxHealth);
+
+		}
+		if(stored.playerNumber>=3){
+			GUI.Box(new Rect(Screen.width/2+200,Screen.height-130,healthBarLength[2],20),"");
+			GUI.Box(new Rect(Screen.width/2+200,Screen.height-130,healthBarLength1,20),curHealth+"/"+maxHealth);
+
+		}
+
+
 	}
 	
-	public void AddjustCurrentHealth (int adj)
+	public void AdjustCurrentHealth (int adj, int counter)
 	{
 		
 		curHealth += adj;
@@ -52,7 +76,7 @@ public class PlayerHealth : MonoBehaviour
 		if (maxHealth < 1)
 			maxHealth = 1;
 		
-		healthBarLength = (Screen.width / 4) * (curHealth / (float)maxHealth);
+		healthBarLength[counter] = (Screen.width / 4) * (curHealth / (float)maxHealth);
 		healthBarLength1 = (Screen.width / 4);
 	}
 }

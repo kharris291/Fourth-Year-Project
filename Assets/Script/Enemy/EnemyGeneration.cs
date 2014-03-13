@@ -20,9 +20,9 @@ public class EnemyGeneration : MonoBehaviour {
 		int enemyNumb;
 		if(Application.loadedLevelName=="Game"){
 			for( int cnt = 0; cnt < Enmy.Length; cnt ++){
-				enemyNumb = Random.Range(1,3);
+				enemyNumb = Random.Range(0,2);
 
-				Enmy[cnt] = Instantiate(enemylisting[enemyNumb-1],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
+				Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
 			}
 		}
 		if(Application.loadedLevelName=="Battle Simulation"){
@@ -30,12 +30,12 @@ public class EnemyGeneration : MonoBehaviour {
 			GameObject constVar = GameObject.FindGameObjectWithTag("Constant");
 			StoredInformation stored = constVar.GetComponent<StoredInformation>();
 			int EnemyAmount = Random.Range(1,3);
-			Debug.Log(EnemyAmount);
+
 			for( int cnt = 0; cnt < Enmy.Length; cnt ++){
 				enemyNumb = stored.enemyTypeNumber;
 
-				if(cnt < EnemyAmount)
-					Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
+				if(cnt <= EnemyAmount)
+					Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.AngleAxis(210,new Vector3(0,1,0))) as GameObject;
 			}
 		}
 	}
