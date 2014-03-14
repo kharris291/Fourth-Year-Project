@@ -1,0 +1,4 @@
+potion,100,200
+hi-potion,200,500
+revive,50,1000
+super-revive,200,3000

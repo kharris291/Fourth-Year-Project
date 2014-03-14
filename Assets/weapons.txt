@@ -1,0 +1,6 @@
+knife,100,100
+hunting-knife,100,150
+sword,200,500
+ripper,50,1000
+bone-sword,200,3000
+animal-sword,100,3000
