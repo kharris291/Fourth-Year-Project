@@ -40,20 +40,23 @@ public class PlayerHealth : MonoBehaviour
 	{
 		AdjustCurrentHealth (0,0);
 	}
-
+	public GUIStyle textstyle;
 	public void OnGUI ()
 	{
 		
 		if(stored.playerNumber>=1){
+			GUI.Label(new Rect(Screen.width/3-70,Screen.height-70,healthBarLength[0],20),stored.characterName,textstyle);
 			GUI.Box(new Rect(Screen.width/2+200,Screen.height-70,healthBarLength[0],20),"");
 			GUI.Box(new Rect(Screen.width/2+200,Screen.height-70,healthBarLength1,20),curHealth+"/"+maxHealth);
 		}
 		if(stored.playerNumber>=2){
+			GUI.Label(new Rect(Screen.width/3-70,Screen.height-100,healthBarLength[1],20),stored.characterName,textstyle);
 			GUI.Box(new Rect(Screen.width/2+200,Screen.height-100,healthBarLength[1],20),"");
 			GUI.Box(new Rect(Screen.width/2+200,Screen.height-100,healthBarLength1,20),curHealth+"/"+maxHealth);
 
 		}
 		if(stored.playerNumber>=3){
+			GUI.Label(new Rect(Screen.width/3-70,Screen.height-130,healthBarLength[2],20),stored.characterName,textstyle);
 			GUI.Box(new Rect(Screen.width/2+200,Screen.height-130,healthBarLength[2],20),"");
 			GUI.Box(new Rect(Screen.width/2+200,Screen.height-130,healthBarLength1,20),curHealth+"/"+maxHealth);
 

@@ -10,6 +10,7 @@ public class BattleTimeScript : MonoBehaviour {
 	private float attackBarLength1;
 	public float timeToAttack1 = 0f;
 	private float[] attackBarLength;
+	public bool[] check;
 
 	// Use this for initialization
 	GameObject constVar;
@@ -23,7 +24,7 @@ public class BattleTimeScript : MonoBehaviour {
 		constVar= GameObject.FindGameObjectWithTag("Constant");
 		stored = constVar.GetComponent<StoredInformation>();
 		attackBarLength = new float[stored.playerNumber];
-
+		check = new bool[stored.playerNumber];
 		//timeToAttack = Random.Range(0,80);
 		for(int cnt =0; cnt > stored.playerNumber; cnt++){
 			attackBarLength[cnt] = (Screen.width / 4) * (timeToAttack / (float)attackTime);
@@ -84,6 +85,13 @@ public class BattleTimeScript : MonoBehaviour {
 
 		timeToAttack = (int)timeToAttack1;
 		attackBarLength[counter] = (Screen.width / 4) * (timeToAttack / (float)attackTime);
+		if((timeToAttack1>99)&&((check[counter]!= true))){
+			check[counter] =true;
+			Debug.Log ("yup");
+		}
+		else if(timeToAttack1<99){
+			check[counter] =false;
+		}
 		attackBarLength1 = (Screen.width / 4);
 	}
 }

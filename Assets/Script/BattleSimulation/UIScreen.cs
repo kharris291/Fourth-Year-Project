@@ -24,29 +24,6 @@ public class UIScreen : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		
-//		playerH.OnGUI();
-		/*GameObject constVar = GameObject.FindGameObjectWithTag("Constant");
-		StoredInformation stored = constVar.GetComponent<StoredInformation>();
-		
-		if(stored.playerNumber>=1){
-			GUI.Box(new Rect(Screen.width/2+200,Screen.height-70,healthBarLength/2-10,20),"");
-			GUI.Box(new Rect(Screen.width/2+200,Screen.height-70,healthBarLength/2-10,20),curHealth+"/"+maxHealth);
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-70,healthBarLength/2-10,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-70,healthBarLength/2-10,20),"");
-		}
-		if(stored.playerNumber>=2){
-			GUI.Box(new Rect(Screen.width/2+200,Screen.height-100,healthBarLength,20),"");
-			//GUI.Box(new Rect(Screen.width/2+200,Screen.height-100,healthBarLength1,20),curHealth+"/"+maxHealth);
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-100,healthBarLength,20),"");
-			//GUI.Box(new Rect(Screen.width/2-50,Screen.height-100,healthBarLength1,20),curHealth+"/"+maxHealth);
-		}
-		if(stored.playerNumber>=3){
-			GUI.Box(new Rect(Screen.width/2+200,Screen.height-130,healthBarLength,20),"");
-			GUI.Box(new Rect(Screen.width/2+200,Screen.height-130,healthBarLength1,20),curHealth+"/"+maxHealth);
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-130,healthBarLength,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-130,healthBarLength1,20),curHealth+"/"+maxHealth);
-		}*/
-		//script.OnGUI();
+
 	}
 }

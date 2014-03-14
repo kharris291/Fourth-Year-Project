@@ -23,6 +23,8 @@ public class PlayerGeneration : MonoBehaviour {
 			
 			if(cnt < playerAmount-1){
 				Players[cnt] = Instantiate(playerlisting[cnt],Players[cnt].transform.position, Quaternion.AngleAxis(37.47f,new Vector3(0,1,0))) as GameObject;
+				Players[cnt].name = stored.characterName;
+				Players[cnt].tag = "Player2";
 			}
 		}
 
