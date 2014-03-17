@@ -6,17 +6,17 @@ using System;
 public class StoredInformation : MonoBehaviour {
 
 	public string characterName;
-	private string[] _primaryAttribute;
-	private int[] _primaryAttributeValues;
-	private string[] _vital;
-	private int[] _vitalValue;
-	private string[] _mana;
-	private int[] _manaValue;
-	private string[] _attack;
-	private int[] _attackValue;
-	private string[] _defence;
-	private int[] _defenceValue;
-	private MoneySystem money;
+	public string[] _primaryAttribute;
+	public int[] _primaryAttributeValues;
+	public string[] _vital;
+	public int[] _vitalValue;
+	public string[] _mana;
+	public int[] _manaValue;
+	public string[] _attack;
+	public int[] _attackValue;
+	public string[] _defence;
+	public int[] _defenceValue;
+	public MoneySystem money;
 	public string[] items, itemId;
 	public int moneyTotal;
 	public Vector3 positionOnScreen;
@@ -25,6 +25,7 @@ public class StoredInformation : MonoBehaviour {
 	public int enemyTypeNumber,playerNumber;
 	//string[] tempItems,tempItemsId;
 	private ArrayList itemsNameArray,itemsContentArray;
+	public int enemyRemoval;
 
 	PlayerInformation info;
 	CharacterGen chars;
@@ -50,6 +51,7 @@ public class StoredInformation : MonoBehaviour {
 		_attackValue = new int[info._attack.Length];
 		_defence = new string[info._defence.Length];
 		_defenceValue = new int[info._defence.Length];
+		moneyTotal=0;
 		money = new MoneySystem();
 		itemsNameArray = new ArrayList();
 		itemsContentArray = new ArrayList();
@@ -58,6 +60,11 @@ public class StoredInformation : MonoBehaviour {
 		playerPos = GameObject.FindGameObjectWithTag("Player");
 		if(playerPos!=null)
 			positionOnScreen= playerPos.transform.position;
+
+
+		if(PlayerPrefs.GetString ("Player Name")!= ""){
+			LoadData();
+		}
 	}
 
 	public void initiliseConstantVariables(){
@@ -91,7 +98,8 @@ public class StoredInformation : MonoBehaviour {
 
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		StoredInformation st = objGame.GetComponent<StoredInformation>();
-
+		moneyTotal=0;
+		money = new MoneySystem();
 		if(Application.loadedLevelName=="NewGame"){
 			moneyTotal = money.StarterMoney();
 			st.moneyTotal = moneyTotal;
@@ -118,11 +126,23 @@ public class StoredInformation : MonoBehaviour {
 			characterName = PlayerPrefs.GetString ("Player Name");
 			st.characterName = PlayerPrefs.GetString ("Player Name");
 		}
+		itemsNameArray = new ArrayList();
+		itemsContentArray = new ArrayList();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(Application.loadedLevelName=="NewGame"){
+			GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+			
+			StoredInformation st = objGame.GetComponent<StoredInformation>();
+			initiliseConstantVariables();
+			position.x=1133.947f;
+			position.y=377.0055f;
+			position.z=3224.786f;
+			st.positionOnScreen = position;
 
+		}
 	}
 
 	public void CharacterName(string chName){
@@ -133,11 +153,12 @@ public class StoredInformation : MonoBehaviour {
 		st.characterName=chName;
 
 		initiliseConstantVariables();
+
 	}
 
 	public void addItems(string chName, string itemPower){
-		
-		
+
+
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
 		StoredInformation stored = objGame.GetComponent<StoredInformation>();
@@ -172,6 +193,23 @@ public class StoredInformation : MonoBehaviour {
 		st.playerNumber = fighting;
 	}
 
+	public void AddPlayerPositionAfterBattle(Vector3 playerPositionAfterBattle){
+		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+		
+		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		
+		st.positionOnScreen = playerPositionAfterBattle;
+
+	}
+
+	public void AddEnemyNumber(int num){
+		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+		
+		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		
+		st.enemyRemoval = num;
+	}
+	Vector3 position = new Vector3();
 	public void SaveData(){
 		GameObject playerPrefab = GameObject.FindGameObjectWithTag("Player");
 	
@@ -213,6 +251,28 @@ public class StoredInformation : MonoBehaviour {
 			PlayerPrefs.SetString("Defence Name - " + cnt, st._defence[cnt]);
 			PlayerPrefs.SetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt, st._defenceValue[cnt]);
 		}
+		string itemFromSave= string.Empty;
+		int itemCounting =0;
+
+		do{
+			
+			itemFromSave = PlayerPrefs.GetString("Items - " + itemCounting);
+			string ItemPowerFromSave = PlayerPrefs.GetString ("Items Power - " + itemCounting);
+
+			if(itemFromSave!=""){
+				PlayerPrefs.DeleteKey("Items - " + itemCounting);
+				PlayerPrefs.DeleteKey("Items Power - " + itemCounting);
+			}
+			itemCounting++;
+		}while(itemFromSave!="");
+
+
+		for (int cnt = 0; cnt < st.items.Length; cnt++) {
+			if(st.items[cnt]!=""){
+				PlayerPrefs.SetString("Items - " + cnt, st.items[cnt]);
+				PlayerPrefs.SetString ("Items Power - " + cnt, st.itemId[cnt]);
+			}
+		}
 
 		PlayerPrefs.Save();
 	}
@@ -236,7 +296,9 @@ public class StoredInformation : MonoBehaviour {
 
 			pl = new PlayerPosition();
 			pl.Awake();
-			pl.SetPosition(st.positionOnScreen);
+
+
+			pl.SetPosition(st.positionOnScreen,Application.loadedLevelName);
 		}
 
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
@@ -264,6 +326,20 @@ public class StoredInformation : MonoBehaviour {
 			st._defence[cnt]= PlayerPrefs.GetString("Defence Name - " + cnt);
 			st._defenceValue[cnt] = PlayerPrefs.GetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt);
 		}
+
+		string itemFromSave= string.Empty;
+		int itemCounting =0;
+
+		do{
+
+			itemFromSave = PlayerPrefs.GetString("Items - " + itemCounting);
+
+
+			string ItemPowerFromSave = PlayerPrefs.GetString ("Items Power - " + itemCounting);
+			if(itemFromSave!="")
+				st.addItems(itemFromSave,ItemPowerFromSave);
+			itemCounting++;
+		}while(itemFromSave!="");
 
 	}
 }

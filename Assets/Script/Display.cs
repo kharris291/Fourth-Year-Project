@@ -27,9 +27,7 @@ public class Display : MonoBehaviour
 			mainCameraSearch.pixelInset =new Rect(0,0,_screenWsize,_screenHSize);
 		}
 	}
-	
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 	
@@ -58,10 +56,8 @@ public class Display : MonoBehaviour
 	
 	StoredInformation stIn;
 	private void ContinueGame(){
-		//stIn = new StoredInformation();
-		//stIn.LoadData();
+
 		Application.LoadLevel("Game");
-		//stIn.Start();
 
 	}
 }

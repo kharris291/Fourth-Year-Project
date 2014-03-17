@@ -3,12 +3,13 @@ using System.Collections;
 
 public class PlayerGeneration : MonoBehaviour {
 
-	GameObject[] Players;
+	GameObject[] Players, PlayerBattle;
 	public GameObject[] playerlisting;
 	// Use this for initialization
 	void Start () {
 		Players = GameObject.FindGameObjectsWithTag("PlayerBattle");
 		Generate();
+
 	}
 	GameObject ObjPlacement;
 	void Generate(){
@@ -28,11 +29,20 @@ public class PlayerGeneration : MonoBehaviour {
 			}
 		}
 
+		PlayerBattle = GameObject.FindGameObjectsWithTag("Player2");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(PlayerBattle.Length==0){
+			Generate();
+		}
+		/*for( int cnt = 0; cnt < Players.Length; cnt ++){
+			if(cnt){
+
+			}
+		}*/
 	}
 
 }

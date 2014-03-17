@@ -39,7 +39,7 @@ public class BattleTimeScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		AdjustTimeToFight(Time.deltaTime*3,0);
+		AdjustTimeToFight(Time.deltaTime*4,0);
 		/*if(stored.playerNumber>=2){
 			AdjustTimeToFight(Time.deltaTime*3,1);
 		}
@@ -54,16 +54,16 @@ public class BattleTimeScript : MonoBehaviour {
 //		int len = attackBarLength * (attackTime / (float)timeToAttack);
 
 		if(stored.playerNumber>=1){
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-70,attackBarLength1,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-70,attackBarLength[0],20),"");
+			GUI.Box(new Rect(Screen.width/2-50,Screen.height-30,attackBarLength1,20),"");
+			GUI.Box(new Rect(Screen.width/2-50,Screen.height-30,attackBarLength[0],20),"");
 		}
 		if(stored.playerNumber>=2){
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-100,attackBarLength1,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-100,attackBarLength[1],20),"");
+			GUI.Box(new Rect(Screen.width/2-50,Screen.height-60,attackBarLength1,20),"");
+			GUI.Box(new Rect(Screen.width/2-50,Screen.height-60,attackBarLength[1],20),"");
 		}
 		if(stored.playerNumber>=3){
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-130,attackBarLength1,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-130,attackBarLength[2],20),attackTime+"/"+timeToAttack);
+			GUI.Box(new Rect(Screen.width/2-50,Screen.height-90,attackBarLength1,20),"");
+			GUI.Box(new Rect(Screen.width/2-50,Screen.height-90,attackBarLength[2],20),"");
 		}
 	}
 
@@ -87,7 +87,6 @@ public class BattleTimeScript : MonoBehaviour {
 		attackBarLength[counter] = (Screen.width / 4) * (timeToAttack / (float)attackTime);
 		if((timeToAttack1>99)&&((check[counter]!= true))){
 			check[counter] =true;
-			Debug.Log ("yup");
 		}
 		else if(timeToAttack1<99){
 			check[counter] =false;

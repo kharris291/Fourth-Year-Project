@@ -19,10 +19,18 @@ public class EnemyGeneration : MonoBehaviour {
 		positions = new GameObject[Enmy.Length];
 		int enemyNumb;
 		if(Application.loadedLevelName=="Game"){
+			GameObject constVar = GameObject.FindGameObjectWithTag("Constant");
+			StoredInformation stored = constVar.GetComponent<StoredInformation>();
+
 			for( int cnt = 0; cnt < Enmy.Length; cnt ++){
 				enemyNumb = Random.Range(0,2);
+				//if(cnt!= stored.enemyRemoval)
+				if(Vector3.Distance(stored.positionOnScreen,Enmy[cnt].transform.position)>20){
+					Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
 
-				Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
+				}else{
+					Destroy(Enmy[cnt]);
+				}
 			}
 		}
 		if(Application.loadedLevelName=="Battle Simulation"){

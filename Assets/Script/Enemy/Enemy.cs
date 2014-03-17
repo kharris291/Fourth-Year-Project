@@ -51,6 +51,8 @@ public class Enemy : MonoBehaviour {
 		StoredInformation stored = constVar.GetComponent<StoredInformation>();
 		if (playerInRange.gameObject.tag == "Player") {
 			stored.AddEnemyToScene(enemyfight);
+			stored.AddPlayerPositionAfterBattle(player.transform.position);
+			stored.AddEnemyNumber(num);
 			Application.LoadLevel("Battle Simulation");
 
 			Destroy(player);
