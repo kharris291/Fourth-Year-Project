@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Read A file.cs
+/// Author: Harris Kevin 
+/// Date: 2013 October 24. 
+/// Read a file into location. makes sure what Shop keeper is being targeted
+/// </summary>
+using UnityEngine;
 using System.Collections;
 using System.Text;
 using System.IO;
@@ -9,8 +15,8 @@ public class ReadAFile : MonoBehaviour {
 	private string line;
 	private string[] entries;
 
-	GameObject[] ga;
-	GameObject ga2;
+	GameObject[] targetObject;
+	GameObject playerObject;
 
 	private int counter=0, size = 0;
 	private float distance = 10000;
@@ -34,18 +40,18 @@ public class ReadAFile : MonoBehaviour {
 	{
 		checkedtag(fileName);
 
-		ga = GameObject.FindGameObjectsWithTag(tag);
-		ga2 = GameObject.FindGameObjectWithTag("Player");
+		targetObject = GameObject.FindGameObjectsWithTag(tag);
+		playerObject = GameObject.FindGameObjectWithTag("Player");
 		int i = 0;
 
 		do{
-			if(Vector3.Distance(ga[i].transform.position,ga2.transform.position)<distance){
-				distance = Vector3.Distance(ga[i].transform.position,ga2.transform.position);
+			if(Vector3.Distance(targetObject[i].transform.position,playerObject.transform.position)<distance){
+				distance = Vector3.Distance(targetObject[i].transform.position,playerObject.transform.position);
 
 				counter = i;
 			}
 			i++;
-		}while(i < ga.Length);
+		}while(i < targetObject.Length);
 
 		try
 		{
@@ -63,7 +69,6 @@ public class ReadAFile : MonoBehaviour {
 						if (entries.Length > 0){
 
 							Additions(entries);
-							//ga[counter].GetComponent<ReadAFile>().entries =line.Split(',');
 
 							size++;
 						}
@@ -82,9 +87,9 @@ public class ReadAFile : MonoBehaviour {
 	}
 
 	void Additions(string[] arry){
-		ga[counter].GetComponent<ReadAFile>()._name[size] = arry[0].ToString();
-		ga[counter].GetComponent<ReadAFile>()._id[size] = arry[1].ToString();
-		ga[counter].GetComponent<ReadAFile>()._price[size] = arry[2].ToString();
+		targetObject[counter].GetComponent<ReadAFile>()._name[size] = arry[0].ToString();
+		targetObject[counter].GetComponent<ReadAFile>()._id[size] = arry[1].ToString();
+		targetObject[counter].GetComponent<ReadAFile>()._price[size] = arry[2].ToString();
 
 	}
 	

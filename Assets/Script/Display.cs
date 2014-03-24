@@ -1,30 +1,37 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Display.cs
+/// </summary>
+using UnityEngine;
 using System.Collections;
 using System;
 
 public class Display : MonoBehaviour
 {
 	//retrieve the
-	public float _screenHSize, _screenWsize;
 	public Vector3 _center;
 	public GUIStyle Continue, StartUP;
 	
-	private int buttonWidth=200,
-	buttonHeight = 50,
-	groupWidth = 200,
-	groupHeight = 120;
+	private int widthOfButton=200,
+	heightOfButton = 50,
+	buttonGroupWidth = 200,
+	buttonGroupHeight = 120;
 	
 	// Use this for initialization
 	void Start ()
 	{
-        _screenHSize = Screen.height;
-		_screenWsize = Screen.width;
-		_center.Set (_screenWsize / 2, _screenHSize / 2, 0);
+		/// <summary>
+		/// Display.cs
+		/// 
+		/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+		/// Author: Laliberte P. 
+		/// Date: 2013 October 24. 
+		/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+		/// </summary>
 		GUITexture mainCameraSearch = FindObjectOfType (typeof(GUITexture)) as GUITexture;
 		if (mainCameraSearch.name == "Main Camera") {
 			mainCameraSearch.transform.position = Vector3.zero;
         	mainCameraSearch.transform.localScale = Vector3.zero;
-			mainCameraSearch.pixelInset =new Rect(0,0,_screenWsize,_screenHSize);
+			mainCameraSearch.pixelInset =new Rect(0,0,Screen.width,Screen.height);
 		}
 	}
 
@@ -35,29 +42,24 @@ public class Display : MonoBehaviour
 	
 	void OnGUI ()
 	{
-
-		GUI.BeginGroup(new Rect(((_screenWsize/2)-(groupWidth/2)),
-		                        ((_screenHSize/2)-(groupHeight/2)),
-		                        groupWidth, groupHeight));
+		GUI.BeginGroup(new Rect(((Screen.width/2)-(buttonGroupWidth/2)),
+		                        ((Screen.height/2)-(buttonGroupHeight/2)),
+		                        buttonGroupWidth, buttonGroupHeight));
 		
-		if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"New Game")){
+		if(GUI.Button(new Rect(0,0,widthOfButton,heightOfButton),"New Game")){
 			StartNewGame();
 		}
-		if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Continue")){
+		if(GUI.Button(new Rect(0,heightOfButton+10,widthOfButton,heightOfButton),"Continue")){
 			ContinueGame();
 		}
-		GUI.EndGroup();
-			
+		GUI.EndGroup();		
 	}
 	
 	private void StartNewGame(){
 		Application.LoadLevel("NewGame");
 	}
-	
-	StoredInformation stIn;
+
 	private void ContinueGame(){
-
 		Application.LoadLevel("Game");
-
 	}
 }

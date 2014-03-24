@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Pause menu.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
 
-	private int buttonWidth=200,
-	buttonHeight = 50,
-	groupWidth = 200,
-	groupHeight = 230;
+	private int widthOfButton=200,
+	heightOfButton = 50,
+	buttonGroupWidth = 200,
+	buttonGroupHeight = 320;
 	bool paused = false;
 	StoredInformation info;
 
@@ -22,21 +26,25 @@ public class PauseMenu : MonoBehaviour {
 			GameObject con = GameObject.FindGameObjectWithTag("Constant");
 			GameObject player = GameObject.FindGameObjectWithTag("Player");
 			
-			GUI.BeginGroup(new Rect(((Screen.width/2)-(groupWidth/2)),
-			                         ((Screen.height/2)-(groupHeight/2)),
-			                         groupWidth, groupHeight));
-
-			if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"Main Menu")){
+			GUI.BeginGroup(new Rect(((Screen.width/2)-(buttonGroupWidth/2)),
+			                         ((Screen.height/2)-(buttonGroupHeight/2)),
+			                         buttonGroupWidth, buttonGroupHeight));
+			
+			if(GUI.Button(new Rect(0,0,widthOfButton,heightOfButton),"Resume")){
+				paused = TooglePausedScreen();
+			}
+			
+			if(GUI.Button(new Rect(0,60,widthOfButton,heightOfButton),"Main Menu")){
 				Application.LoadLevel("Main Menu");
 				Destroy(con);
 				Destroy(player);
 			}
-			if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Save Game")){
+			if(GUI.Button(new Rect(0,120,widthOfButton,heightOfButton),"Save Game")){
 				StoredInformation st = con.GetComponent<StoredInformation>();
 
 				info.SaveData();
 			}
-			if(GUI.Button(new Rect(0,120,buttonWidth,buttonHeight),"Load Game")){
+			if(GUI.Button(new Rect(0,180,widthOfButton,heightOfButton),"Load Game")){
 				if(Application.loadedLevelName=="Game"){
 					Destroy(player);
 					//Destroy(this);
@@ -45,7 +53,7 @@ public class PauseMenu : MonoBehaviour {
 				info.LoadData();
 
 			}
-			if(GUI.Button(new Rect(0,180,buttonWidth,buttonHeight),"Quit Game")){
+			if(GUI.Button(new Rect(0,240,widthOfButton,heightOfButton),"Quit Game")){
 				Application.Quit();
 			}
 			GUI.EndGroup();
@@ -71,26 +79,3 @@ public class PauseMenu : MonoBehaviour {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

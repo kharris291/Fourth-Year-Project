@@ -13,8 +13,6 @@ public class CharacterGen : MonoBehaviour {
 	private float _screenHSize, _screenWsize;
 	private PlayerInformation _playerInformation;
 	public GUIStyle fontCharGenStyling;
-	
-
 
 	public int STARTING_VALUE = 10;
 

@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Open door.cs
+/// Author: Harris Kevin
+/// Date: 2013 October 24. 
+/// Opens the Gate to the village.
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class OpenDoor : MonoBehaviour
@@ -9,7 +15,6 @@ public class OpenDoor : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
 		this.startingPos = Vector3.zero;
 		this.rotationAngle = new Vector3 (startingPos.x, startingPos.y + 90, startingPos.z);
 		this.doorOpenCheck = 0;

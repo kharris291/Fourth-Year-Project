@@ -5,6 +5,9 @@ public class EnemyGeneration : MonoBehaviour {
 
 	GameObject[] Enmy;
 	public GameObject[] enemylisting;
+	GameObject[] positions;
+	GameObject ObjPlacement;
+
 	// Use this for initialization
 	void Start () {
 		if(Application.loadedLevelName=="Game")
@@ -13,8 +16,7 @@ public class EnemyGeneration : MonoBehaviour {
 			Enmy = GameObject.FindGameObjectsWithTag("EnemyBattle");
 		Generate();
 	}
-	GameObject[] positions;
-	GameObject ObjPlacement;
+
 	void Generate(){
 		positions = new GameObject[Enmy.Length];
 		int enemyNumb;
@@ -23,7 +25,7 @@ public class EnemyGeneration : MonoBehaviour {
 			StoredInformation stored = constVar.GetComponent<StoredInformation>();
 
 			for( int cnt = 0; cnt < Enmy.Length; cnt ++){
-				enemyNumb = Random.Range(0,2);
+				enemyNumb = Random.Range(0,3);
 				//if(cnt!= stored.enemyRemoval)
 				if(Vector3.Distance(stored.positionOnScreen,Enmy[cnt].transform.position)>20){
 					Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;

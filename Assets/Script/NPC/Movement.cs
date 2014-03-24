@@ -10,7 +10,6 @@ public class Movement : MonoBehaviour
 	public int counter = 0;
 	public string tagName;
 	
-	bool playWalk = false;
 	void Awake ()
 	{
 		myTransform = transform;	
@@ -63,20 +62,6 @@ public class Movement : MonoBehaviour
 		//changeWalkingDirection++;
 	}
 
-	void OnTriggerEnter (Collider playerInRange)
-	{
 
-		if(playerInRange ==true){
-			playWalk =true;
-		}
-		Debug.Log(playWalk);
-	}
-	
-	void OnTriggerExit (Collider playerNotInRange)
-	{
-		if(playerNotInRange !=true){
-			playWalk =false;
-		}
-	}
 	
 }

@@ -26,9 +26,15 @@ public class StoredInformation : MonoBehaviour {
 	//string[] tempItems,tempItemsId;
 	private ArrayList itemsNameArray,itemsContentArray;
 	public int enemyRemoval;
-
+	public int BattlePosition,EnemyBattlePosition;
+	public int experience,level,nextLevel;
+	public float nextLevelvalue;
+	Vector3 position = new Vector3();
+	public bool actionBeingTaken = false;
 	PlayerInformation info;
 	CharacterGen chars;
+
+	public bool checkloop =false;
 	// Use this for initialization
 	public void Start () {
 		info = new PlayerInformation();
@@ -55,8 +61,13 @@ public class StoredInformation : MonoBehaviour {
 		money = new MoneySystem();
 		itemsNameArray = new ArrayList();
 		itemsContentArray = new ArrayList();
-
+		experience =100;
+		
+		nextLevelvalue = experience*1.2f;
+		nextLevel = (int)(experience*1.2f);
+		level =1;
 		initiliseConstantVariables();
+
 		playerPos = GameObject.FindGameObjectWithTag("Player");
 		if(playerPos!=null)
 			positionOnScreen= playerPos.transform.position;
@@ -70,7 +81,7 @@ public class StoredInformation : MonoBehaviour {
 	public void initiliseConstantVariables(){
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++){
 			_primaryAttribute [cnt] = ((AttributeName)cnt).ToString ();
-			_primaryAttributeValues[cnt] = info.GetPrimaryAttribute(cnt).AdjustedBaseValue;
+				_primaryAttributeValues[cnt] = info.GetPrimaryAttribute(cnt).AdjustedBaseValue;
 		}
 
 		for (int i = 0; i < Enum.GetValues(typeof(VitalName)).Length; i++){
@@ -97,68 +108,191 @@ public class StoredInformation : MonoBehaviour {
 		positionOnScreen.z=PlayerPrefs.GetFloat("Position - z");
 
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 		moneyTotal=0;
 		money = new MoneySystem();
+
 		if(Application.loadedLevelName=="NewGame"){
+			level =1;
+			experience=100;
+			storedIN.level =1;
+			storedIN.experience=100;
+
+			storedIN.nextLevelvalue = experience*1.2f;
+			storedIN.nextLevel = (int)(experience*1.2f);
+			nextLevelvalue = experience*1.2f;
+			nextLevel = (int)(experience*1.2f);
+
 			moneyTotal = money.StarterMoney();
-			st.moneyTotal = moneyTotal;
+			storedIN.moneyTotal = moneyTotal;
 		}
 		else if((PlayerPrefs.GetInt("Money")!= null)||(PlayerPrefs.GetInt("Money")!= 0)){
 			moneyTotal = PlayerPrefs.GetInt("Money");
-			st.moneyTotal = moneyTotal;
+			storedIN.moneyTotal = moneyTotal;
+			level = PlayerPrefs.GetInt("Level");
+			experience = PlayerPrefs.GetInt("Experience");
+			storedIN.experience = experience;
+
+			storedIN.level = level;
+			if(level==0){
+				level=1;
+				storedIN.level=1;
+				storedIN.experience=100;
+				experience=100;
+			}
+
 		}
 		else if(moneyTotal==0){
 			moneyTotal = money.StarterMoney();
-			st.moneyTotal = moneyTotal;
+			storedIN.moneyTotal = moneyTotal;
 		}
 		else{
 			moneyTotal = PlayerPrefs.GetInt("Money");
-			st.moneyTotal = moneyTotal;
-
+			storedIN.moneyTotal = moneyTotal;
 		}
+
 		info.StatUpdate();
 		_vitalValue=info.VitalUpdate();
 		_attackValue=info.AttackUpdate();
 		_defenceValue=info.DefenceUpdate();
 		_manaValue=info.ManaUpdate();
+
 		if(characterName==String.Empty){
 			characterName = PlayerPrefs.GetString ("Player Name");
-			st.characterName = PlayerPrefs.GetString ("Player Name");
+			storedIN.characterName = PlayerPrefs.GetString ("Player Name");
 		}
+
 		itemsNameArray = new ArrayList();
 		itemsContentArray = new ArrayList();
 	}
-	
+	public int check =0;
 	// Update is called once per frame
 	void Update () {
+		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+		
+		GameObject[] enemiesObject = GameObject.FindGameObjectsWithTag("Enemy2");
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
+		/*if(nextLevel >=storedIN.nextLevel){
+			nextLevel = storedIN.nextLevel;
+		}*/
 		if(Application.loadedLevelName=="NewGame"){
-			GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
-			
-			StoredInformation st = objGame.GetComponent<StoredInformation>();
+
 			initiliseConstantVariables();
+
 			position.x=1133.947f;
 			position.y=377.0055f;
 			position.z=3224.786f;
-			st.positionOnScreen = position;
 
+			storedIN.positionOnScreen = position;
+			level = 1;
+			experience = 100;
+			storedIN.experience= 100;
+		}
+		if((storedIN.nextLevel==0)||(nextLevel==0)){
+			level = 1;
+			experience = 100;
+			storedIN.experience= 100;
+			storedIN.nextLevelvalue = experience* 1.2f;
+			storedIN.nextLevel = (int)(experience* 1.2f);
+			
+			nextLevelvalue = experience* 1.2f;
+			nextLevel = (int)(experience* 1.2f);
+		}
+
+		
+
+		if(Application.loadedLevelName=="Battle Simulation"){
+			GameObject[] google = GameObject.FindGameObjectsWithTag("Player2");
+			BattleEnding battle = google[0].GetComponent<BattleEnding>();
+			if(check <battle.myexp){
+				check = battle.myexp;
+				checkloop=false;
+					
+					Debug.Log(check);
+			}
+			if(//(battle.myexp > battle.oldLevel)&&
+			   //(battle.myexp < storedIN.nextLevel)&&
+			   (enemiesObject.Length==0)
+			   &&(!checkloop)
+			   &&(!battle.addFlag)){
+
+				checkloop=true;
+				//level+=1;
+				experience = battle.myexp;
+				storedIN.experience = battle.myexp;
+				if(experience ==0){
+					experience = check;
+				}
+				Debug.Log (experience);
+				int count=0;
+				if(battle.myexp > battle.oldLevel){
+					storedIN.level+=1;
+					Debug.Log(battle.oldLevel);
+
+					storedIN.nextLevelvalue = battle.oldLevel * 1.5f;
+					storedIN.nextLevel = (int)(battle.oldLevel * 1.5f);
+
+					
+					nextLevelvalue = battle.oldLevel * 1.5f;
+					nextLevel = (int)(battle.oldLevel * 1.5f);
+				
+					while(storedIN.nextLevelvalue < battle.myexp){
+						storedIN.nextLevelvalue = storedIN.nextLevelvalue *1.5f;
+						storedIN.nextLevel = (int)(storedIN.nextLevel * 1.5f);
+						
+						nextLevelvalue = nextLevelvalue * 1.5f;
+						nextLevel = (int)(nextLevel * 1.5f);
+						count++;
+					}
+					
+					int cont =0;
+					while(cont <= count){
+						for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
+							storedIN._primaryAttributeValues[cnt] = (int)((float)storedIN._primaryAttributeValues[cnt]*1.2f);
+						}
+						
+						for (int cnt = 0; cnt < Enum.GetValues(typeof(VitalName)).Length; cnt++) {
+							storedIN._vitalValue[cnt] = (int)((float)storedIN._vitalValue[cnt]*1.2f);
+						}
+						
+						for (int cnt = 0; cnt < Enum.GetValues(typeof(AttackName)).Length; cnt++) {
+							storedIN._attackValue[cnt] = (int)((float)storedIN._attackValue[cnt]*1.2f);
+						}
+						
+						for (int cnt = 0; cnt < Enum.GetValues(typeof(ManaName)).Length; cnt++) {
+							storedIN._manaValue[cnt] = (int)((float)storedIN._manaValue[cnt]*1.2f);
+						}
+						
+						for (int cnt = 0; cnt < Enum.GetValues(typeof(DefenceName)).Length; cnt++) {
+							storedIN._defenceValue[cnt] = (int)((float)storedIN._defenceValue[cnt] *1.2f);
+						}
+						cont++;
+					}
+				}
+
+
+
+			}
+
+		}
+		if(/*(enemiesObject.Length>0)*/(Application.loadedLevelName=="Game")&&(checkloop)){
+
+			checkloop=false;
 		}
 	}
 
 	public void CharacterName(string chName){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 		characterName=chName;
-		st.characterName=chName;
+		storedIN.characterName=chName;
 
 		initiliseConstantVariables();
 
 	}
 
 	public void addItems(string chName, string itemPower){
-
-
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
 		StoredInformation stored = objGame.GetComponent<StoredInformation>();
@@ -180,76 +314,88 @@ public class StoredInformation : MonoBehaviour {
 	public void AddEnemyToScene(int fighting){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 
-		st.enemyTypeNumber = fighting;
+		storedIN.enemyTypeNumber = fighting;
 	}
 
 	public void AddPlayerToScene(int fighting){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 		
-		st.playerNumber = fighting;
+		storedIN.playerNumber = fighting;
 	}
 
 	public void AddPlayerPositionAfterBattle(Vector3 playerPositionAfterBattle){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 		
-		st.positionOnScreen = playerPositionAfterBattle;
+		storedIN.positionOnScreen = playerPositionAfterBattle;
 
 	}
 
 	public void AddEnemyNumber(int num){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 		
-		st.enemyRemoval = num;
+		storedIN.enemyRemoval = num;
 	}
-	Vector3 position = new Vector3();
+
 	public void SaveData(){
 		GameObject playerPrefab = GameObject.FindGameObjectWithTag("Player");
 	
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 		
-		PlayerPrefs.SetString ("Player Name",st.characterName);
+		PlayerPrefs.SetString ("Player Name",storedIN.characterName);
 
-		st.positionOnScreen = playerPrefab.transform.position;
+		storedIN.positionOnScreen = playerPrefab.transform.position;
 
-		PlayerPrefs.SetInt("Money",st.moneyTotal);
+		PlayerPrefs.SetInt("Money",storedIN.moneyTotal);
+		PlayerPrefs.SetInt("Level",storedIN.level);
+		PlayerPrefs.SetInt("Experience",storedIN.experience);
+		if(storedIN.nextLevelvalue!=0){
+			PlayerPrefs.SetInt("ExperienceTONextLevel",(int)storedIN.nextLevelvalue);
+		}else{
+			storedIN.nextLevelvalue = storedIN.experience*1.2f;
+			storedIN.nextLevel = (int)(storedIN.experience*1.2f);
+			
+			PlayerPrefs.SetInt("ExperienceTONextLevel",storedIN.nextLevel);
+		}
 
-		PlayerPrefs.SetFloat("Position - x",st.positionOnScreen.x);
-		PlayerPrefs.SetFloat("Position - y",st.positionOnScreen.y);
-		PlayerPrefs.SetFloat("Position - z",st.positionOnScreen.z);
+		PlayerPrefs.SetFloat("Position - x",storedIN.positionOnScreen.x);
+		PlayerPrefs.SetFloat("Position - y",storedIN.positionOnScreen.y);
+		PlayerPrefs.SetFloat("Position - z",storedIN.positionOnScreen.z);
+
+
 
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
-			PlayerPrefs.SetString("Attribute Name - " + cnt, st._primaryAttribute[cnt]);
-			PlayerPrefs.SetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt, st._primaryAttributeValues[cnt] );
+			PlayerPrefs.SetString("Attribute Name - " + cnt, storedIN._primaryAttribute[cnt]);
+			PlayerPrefs.SetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt, storedIN._primaryAttributeValues[cnt] );
 		}
 		
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(VitalName)).Length; cnt++) {
-			PlayerPrefs.SetString("Vital Name - " + cnt, st._vital[cnt]);
-			PlayerPrefs.SetInt (((VitalName)cnt).ToString () + " - Base Value - " + cnt, st._vitalValue[cnt]);
+			PlayerPrefs.SetString("Vital Name - " + cnt, storedIN._vital[cnt]);
+			PlayerPrefs.SetInt (((VitalName)cnt).ToString () + " - Base Value - " + cnt, storedIN._vitalValue[cnt]);
 		}
 		
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttackName)).Length; cnt++) {
-			PlayerPrefs.SetString("Attack Name - " + cnt, st._attack[cnt]);
-			PlayerPrefs.SetInt (((AttackName)cnt).ToString () + " - Base Value - " + cnt, st._attackValue[cnt]);
+			PlayerPrefs.SetString("Attack Name - " + cnt, storedIN._attack[cnt]);
+			PlayerPrefs.SetInt (((AttackName)cnt).ToString () + " - Base Value - " + cnt, storedIN._attackValue[cnt]);
 		}
 		
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(ManaName)).Length; cnt++) {
-			PlayerPrefs.SetString("Mana Name - " + cnt, st._mana[cnt]);
-			PlayerPrefs.SetInt (((ManaName)cnt).ToString () + " - Base Value - " + cnt, st._manaValue[cnt]);
+			PlayerPrefs.SetString("Mana Name - " + cnt, storedIN._mana[cnt]);
+			PlayerPrefs.SetInt (((ManaName)cnt).ToString () + " - Base Value - " + cnt, storedIN._manaValue[cnt]);
 		}
 		
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(DefenceName)).Length; cnt++) {
-			PlayerPrefs.SetString("Defence Name - " + cnt, st._defence[cnt]);
-			PlayerPrefs.SetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt, st._defenceValue[cnt]);
+			PlayerPrefs.SetString("Defence Name - " + cnt, storedIN._defence[cnt]);
+			PlayerPrefs.SetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt, storedIN._defenceValue[cnt]);
 		}
 		string itemFromSave= string.Empty;
 		int itemCounting =0;
@@ -267,10 +413,10 @@ public class StoredInformation : MonoBehaviour {
 		}while(itemFromSave!="");
 
 
-		for (int cnt = 0; cnt < st.items.Length; cnt++) {
-			if(st.items[cnt]!=""){
-				PlayerPrefs.SetString("Items - " + cnt, st.items[cnt]);
-				PlayerPrefs.SetString ("Items Power - " + cnt, st.itemId[cnt]);
+		for (int cnt = 0; cnt < storedIN.items.Length; cnt++) {
+			if(storedIN.items[cnt]!=""){
+				PlayerPrefs.SetString("Items - " + cnt, storedIN.items[cnt]);
+				PlayerPrefs.SetString ("Items Power - " + cnt, storedIN.itemId[cnt]);
 			}
 		}
 
@@ -281,16 +427,42 @@ public class StoredInformation : MonoBehaviour {
 
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 
-		StoredInformation st = objGame.GetComponent<StoredInformation>();
+		StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
 
 		characterName = PlayerPrefs.GetString ("Player Name");
-		st.characterName = PlayerPrefs.GetString ("Player Name");
+		storedIN.characterName = PlayerPrefs.GetString ("Player Name");
 
 		moneyTotal = PlayerPrefs.GetInt("Money");
 
-		st.positionOnScreen.x=PlayerPrefs.GetFloat("Position - x");
-		st.positionOnScreen.y=PlayerPrefs.GetFloat("Position - y");
-		st.positionOnScreen.z=PlayerPrefs.GetFloat("Position - z");
+		level = PlayerPrefs.GetInt("Level");
+		experience = PlayerPrefs.GetInt("Experience");
+
+		storedIN.level = level;
+		storedIN.experience = experience;
+
+
+		if(PlayerPrefs.GetInt("ExperienceTONextLevel")<=1){
+			Debug.Log("here");
+			nextLevelvalue = experience*1.2f;
+			storedIN.nextLevelvalue = experience*1.2f;
+
+			storedIN.nextLevel = (int)(experience*1.2f);
+			nextLevel = (int)(experience*1.2f);
+
+
+		}else{
+			Debug.Log("no here");
+			nextLevelvalue = (float)PlayerPrefs.GetInt("ExperienceTONextLevel");
+			storedIN.nextLevelvalue = (float)PlayerPrefs.GetInt("ExperienceTONextLevel");
+			storedIN.nextLevel = PlayerPrefs.GetInt("ExperienceTONextLevel");
+			nextLevel = PlayerPrefs.GetInt("ExperienceTONextLevel");
+
+		}
+
+
+		storedIN.positionOnScreen.x=PlayerPrefs.GetFloat("Position - x");
+		storedIN.positionOnScreen.y=PlayerPrefs.GetFloat("Position - y");
+		storedIN.positionOnScreen.z=PlayerPrefs.GetFloat("Position - z");
 		if(Application.loadedLevelName!="Game"){
 			PlayerPosition pl;
 
@@ -298,33 +470,33 @@ public class StoredInformation : MonoBehaviour {
 			pl.Awake();
 
 
-			pl.SetPosition(st.positionOnScreen,Application.loadedLevelName);
+			pl.SetPosition(storedIN.positionOnScreen,Application.loadedLevelName);
 		}
 
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
-			st._primaryAttribute[cnt]=PlayerPrefs.GetString("Attribute Name - " + cnt);
-			st._primaryAttributeValues[cnt] = PlayerPrefs.GetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt);
+			storedIN._primaryAttribute[cnt]=PlayerPrefs.GetString("Attribute Name - " + cnt);
+			storedIN._primaryAttributeValues[cnt] = PlayerPrefs.GetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt);
 
 		}
 
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(VitalName)).Length; cnt++) {
-			st._vital[cnt]=PlayerPrefs.GetString("Vital Name - " + cnt);
-			st._vitalValue[cnt] = PlayerPrefs.GetInt (((VitalName)cnt).ToString () + " - Base Value - " + cnt);
+			storedIN._vital[cnt]=PlayerPrefs.GetString("Vital Name - " + cnt);
+			storedIN._vitalValue[cnt] = PlayerPrefs.GetInt (((VitalName)cnt).ToString () + " - Base Value - " + cnt);
 		}
 		
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttackName)).Length; cnt++) {
-			st._attack[cnt]=PlayerPrefs.GetString("Attack Name - " + cnt);
-			st._attackValue[cnt] = PlayerPrefs.GetInt (((AttackName)cnt).ToString () + " - Base Value - " + cnt);
+			storedIN._attack[cnt]=PlayerPrefs.GetString("Attack Name - " + cnt);
+			storedIN._attackValue[cnt] = PlayerPrefs.GetInt (((AttackName)cnt).ToString () + " - Base Value - " + cnt);
 		}
 		
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(ManaName)).Length; cnt++) {
-			st._mana[cnt]=PlayerPrefs.GetString("Mana Name - " + cnt);
-			st._manaValue[cnt] = PlayerPrefs.GetInt (((ManaName)cnt).ToString () + " - Base Value - " + cnt,0);
+			storedIN._mana[cnt]=PlayerPrefs.GetString("Mana Name - " + cnt);
+			storedIN._manaValue[cnt] = PlayerPrefs.GetInt (((ManaName)cnt).ToString () + " - Base Value - " + cnt,0);
 		}
 		
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(DefenceName)).Length; cnt++) {
-			st._defence[cnt]= PlayerPrefs.GetString("Defence Name - " + cnt);
-			st._defenceValue[cnt] = PlayerPrefs.GetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt);
+			storedIN._defence[cnt]= PlayerPrefs.GetString("Defence Name - " + cnt);
+			storedIN._defenceValue[cnt] = PlayerPrefs.GetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt);
 		}
 
 		string itemFromSave= string.Empty;
@@ -337,7 +509,7 @@ public class StoredInformation : MonoBehaviour {
 
 			string ItemPowerFromSave = PlayerPrefs.GetString ("Items Power - " + itemCounting);
 			if(itemFromSave!="")
-				st.addItems(itemFromSave,ItemPowerFromSave);
+				storedIN.addItems(itemFromSave,ItemPowerFromSave);
 			itemCounting++;
 		}while(itemFromSave!="");
 
