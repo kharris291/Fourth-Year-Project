@@ -13,17 +13,23 @@ public class PlayerAttack : MonoBehaviour {
 	Transform myTransform;
 	public int funTimes;
 	string attackType;
-	//public GameObject player;
+	GameObject giggles;
+	public bool magicCheck = false;
+	
+	public GameObject[] particles =new GameObject[3];
 
 	void Awake(){
 		//constVar = GameObject.FindGameObjectsWithTag("Enemy2");
 		//player = GameObject.FindGameObjectWithTag("Player2");
 		myTransform = transform;
 		attempt = false;
+		
+		giggles = new GameObject();
 	}
 
 	// Use this for initialization
 	public void Start () {
+
 
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
 	
@@ -35,13 +41,14 @@ public class PlayerAttack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	
 		enemyObjects = GameObject.FindGameObjectsWithTag("Enemy2");
 
 		if(enemyObjects.Length!=0){
 			GameObject constVar= GameObject.FindGameObjectWithTag("Constant");
 			StoredInformation stored = constVar.GetComponent<StoredInformation>();
 			int counter = stored.BattlePosition;
-			
+
 			PlayerAttack pl;
 			GameObject[] obj = GameObject.FindGameObjectsWithTag("Player2");
 			pl = obj[counter].GetComponent<PlayerAttack>();
@@ -51,12 +58,15 @@ public class PlayerAttack : MonoBehaviour {
 			BattleAttackDisplay bat =  obj[counter].GetComponent<BattleAttackDisplay>();
 			funTimes = bat.EnemyNumber;
 			EnemyTarget = enemyObjects[funTimes];
+
 			if(EnemyTarget==null){
 				EnemyTarget = enemyObjects[funTimes+1];
 			}
+
 			if(myTransform ==null ){
 				myTransform = transform;
 			}
+
 			if(attempt){
 				Quaternion rot;
 				
@@ -76,24 +86,34 @@ public class PlayerAttack : MonoBehaviour {
 
 				EnemyHealth attackEnemy = EnemyTarget.GetComponent<EnemyHealth>();
 				attackType = bat.attackType;
-
-				Debug.Log(attackType);
 				if(attackType == "Attack"){
 					attackEnemy.AddjustCurrentHealth(stored._attackValue[0],"minus");
 				}
 				if(attackType == "FireAttack"){
-					Debug.Log(stored._attackValue[1]);
+
+					giggles = Instantiate(particles[0],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
+					giggles.name = "Fire";
+
 					attackEnemy.AddjustCurrentHealth(stored._attackValue[1],"minus");
 				}
 				if(attackType == "IceAttack"){
 					attackEnemy.AddjustCurrentHealth(stored._attackValue[2],"minus");
+					giggles = Instantiate(particles[1],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
+					giggles.name = "Ice";
+					magicCheck = true;
+					
+
+				//	Destroy(giggles);
 				}
 				if(attackType == "LightningAttack"){
+					giggles = Instantiate(particles[2],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
+					giggles.name = "Lightning";
 					attackEnemy.AddjustCurrentHealth(stored._attackValue[3],"minus");
+
 				}
 
 				pl.attempt = false;
-				
+
 				GameObject[] atemptingChange = GameObject.FindGameObjectsWithTag("PlayerBattle");
 				obj[counter].transform.position = atemptingChange[counter].transform.position;
 				
@@ -103,9 +123,22 @@ public class PlayerAttack : MonoBehaviour {
 				animation.Play("idle");
 
 			}
+			if(magicCheck){
+				float i =0;
+				do{
+					
+					if(i >=99.9f){
+						GameObject ice = GameObject.Find("Ice");
+						Destroy(ice);
+						Debug.Log("lol");
+						magicCheck=false;
+					}
+					i+=0.1f;
+				}while(i <100);
+			}
 		}
 	}
-
+	
 	public void retrieveEnemies(int fight){
 		funTimes = fight;
 	}
