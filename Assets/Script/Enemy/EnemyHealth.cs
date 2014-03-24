@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Enemy health.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
@@ -37,15 +41,10 @@ public class EnemyHealth : MonoBehaviour {
 			curHealth -= adj;
 		}
 
-
 		if (curHealth <= 0){
-			//curHealth = 0;
-			//Destroy(this);
 			Destroy(Enemies[playerStored.EnemyNumber]);
 		}
-		
 		if (curHealth > maxHealth)
 			curHealth = maxHealth;
-
 	}
 }

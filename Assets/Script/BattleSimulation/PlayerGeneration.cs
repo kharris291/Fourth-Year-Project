@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Player generation.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class PlayerGeneration : MonoBehaviour {
@@ -38,11 +42,6 @@ public class PlayerGeneration : MonoBehaviour {
 		if(PlayerBattle.Length==0){
 			Generate();
 		}
-		/*for( int cnt = 0; cnt < Players.Length; cnt ++){
-			if(cnt){
-
-			}
-		}*/
 	}
 
 }

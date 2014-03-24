@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// User interface screen.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class UIScreen : MonoBehaviour {

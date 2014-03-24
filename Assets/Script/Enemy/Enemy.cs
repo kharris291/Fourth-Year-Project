@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Enemy.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
@@ -9,9 +13,7 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		if(Application.loadedLevelName == "Battle Simulation"){
 			enemyNumb = Random.Range(1,3);
-			
 		}
-
 	}
 	
 	// Update is called once per frame
@@ -22,7 +24,6 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter (Collider playerInRange)
 	{
-		
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		GameObject constVar = GameObject.FindGameObjectWithTag("Constant");
 		GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy2");
@@ -65,6 +66,4 @@ public class Enemy : MonoBehaviour {
 
 		}
 	}
-
-
 }

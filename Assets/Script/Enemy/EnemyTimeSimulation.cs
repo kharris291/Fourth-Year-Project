@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Enemy time simulation.cs
+/// Author : Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class EnemyTimeSimulation : MonoBehaviour {

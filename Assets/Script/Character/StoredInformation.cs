@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Stored information.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -23,7 +27,6 @@ public class StoredInformation : MonoBehaviour {
 	GameObject playerPos;
 	int itemAmount;
 	public int enemyTypeNumber,playerNumber;
-	//string[] tempItems,tempItemsId;
 	private ArrayList itemsNameArray,itemsContentArray;
 	public int enemyRemoval;
 	public int BattlePosition,EnemyBattlePosition;
@@ -371,8 +374,6 @@ public class StoredInformation : MonoBehaviour {
 		PlayerPrefs.SetFloat("Position - y",storedIN.positionOnScreen.y);
 		PlayerPrefs.SetFloat("Position - z",storedIN.positionOnScreen.z);
 
-
-
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
 			PlayerPrefs.SetString("Attribute Name - " + cnt, storedIN._primaryAttribute[cnt]);
 			PlayerPrefs.SetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt, storedIN._primaryAttributeValues[cnt] );
@@ -440,7 +441,6 @@ public class StoredInformation : MonoBehaviour {
 		storedIN.level = level;
 		storedIN.experience = experience;
 
-
 		if(PlayerPrefs.GetInt("ExperienceTONextLevel")<=1){
 			Debug.Log("here");
 			nextLevelvalue = experience*1.2f;
@@ -448,7 +448,6 @@ public class StoredInformation : MonoBehaviour {
 
 			storedIN.nextLevel = (int)(experience*1.2f);
 			nextLevel = (int)(experience*1.2f);
-
 
 		}else{
 			Debug.Log("no here");
@@ -459,7 +458,6 @@ public class StoredInformation : MonoBehaviour {
 
 		}
 
-
 		storedIN.positionOnScreen.x=PlayerPrefs.GetFloat("Position - x");
 		storedIN.positionOnScreen.y=PlayerPrefs.GetFloat("Position - y");
 		storedIN.positionOnScreen.z=PlayerPrefs.GetFloat("Position - z");
@@ -469,14 +467,12 @@ public class StoredInformation : MonoBehaviour {
 			pl = new PlayerPosition();
 			pl.Awake();
 
-
 			pl.SetPosition(storedIN.positionOnScreen,Application.loadedLevelName);
 		}
 
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
 			storedIN._primaryAttribute[cnt]=PlayerPrefs.GetString("Attribute Name - " + cnt);
 			storedIN._primaryAttributeValues[cnt] = PlayerPrefs.GetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt);
-
 		}
 
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(VitalName)).Length; cnt++) {
@@ -503,9 +499,7 @@ public class StoredInformation : MonoBehaviour {
 		int itemCounting =0;
 
 		do{
-
 			itemFromSave = PlayerPrefs.GetString("Items - " + itemCounting);
-
 
 			string ItemPowerFromSave = PlayerPrefs.GetString ("Items Power - " + itemCounting);
 			if(itemFromSave!="")
@@ -515,4 +509,3 @@ public class StoredInformation : MonoBehaviour {
 
 	}
 }
-

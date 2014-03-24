@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Enemy generation.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class EnemyGeneration : MonoBehaviour {
@@ -26,7 +30,6 @@ public class EnemyGeneration : MonoBehaviour {
 
 			for( int cnt = 0; cnt < Enmy.Length; cnt ++){
 				enemyNumb = Random.Range(0,3);
-				//if(cnt!= stored.enemyRemoval)
 				if(Vector3.Distance(stored.positionOnScreen,Enmy[cnt].transform.position)>20){
 					Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
 

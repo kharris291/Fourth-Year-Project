@@ -1,3 +1,7 @@
+/// <summary>
+/// Player health.cs
+/// Author: Harris Kevin
+/// </summary>
 using UnityEngine;
 using System.Collections;
 using System;
@@ -15,11 +19,8 @@ public class PlayerHealth : MonoBehaviour
 	GameObject constVar;
 	StoredInformation stored;
 	CharacterInformation playerInfo;
-	// Use this for initialization
 
 	void Awake(){
-	//	playerInfo.Awake();
-		
 		constVar= GameObject.FindGameObjectWithTag("Constant");
 		stored = constVar.GetComponent<StoredInformation>();
 		curHealth = stored._vitalValue[0];
@@ -27,14 +28,12 @@ public class PlayerHealth : MonoBehaviour
 		healthBarLength = new float[stored.playerNumber];
 		for(int cnt =0; cnt > stored.playerNumber; cnt++){
 			healthBarLength[cnt] = (Screen.width / 4) * (curHealth / (float)maxHealth);
-
 		}
 		healthBarLength1 = (Screen.width / 4);
 	}
 
 	void Start ()
 	{   
-		//Debug.Log(playerInfo.GetVitals(0));
 
 	}
 	
@@ -69,13 +68,11 @@ public class PlayerHealth : MonoBehaviour
 				GUI.Label(new Rect(Screen.width/3-70,Screen.height-60,healthBarLength[1],20),stored.characterName,textstyle);
 				GUI.Box(new Rect(Screen.width/2+200,Screen.height-60,healthBarLength[1],20),"");
 				GUI.Box(new Rect(Screen.width/2+200,Screen.height-60,healthBarLength1,20),curHealth+"/"+maxHealth);
-
 			}
 			if(stored.playerNumber>=3){
 				GUI.Label(new Rect(Screen.width/3-70,Screen.height-90,healthBarLength[2],20),stored.characterName,textstyle);
 				GUI.Box(new Rect(Screen.width/2+200,Screen.height-90,healthBarLength[2],20),"");
 				GUI.Box(new Rect(Screen.width/2+200,Screen.height-90,healthBarLength1,20),curHealth+"/"+maxHealth);
-
 			}
 			
 			GUI.Label(new Rect(Screen.width/3-70,Screen.height-starting,healthBarLength[0],20),"Name",textstyle);
@@ -86,10 +83,9 @@ public class PlayerHealth : MonoBehaviour
 	}
 	
 	public void AdjustCurrentHealth (int adj, int counter)
-	{
-		
+	{		
 		curHealth -= adj;
-		
+
 		if (curHealth < 0)
 			curHealth = 0;
 		

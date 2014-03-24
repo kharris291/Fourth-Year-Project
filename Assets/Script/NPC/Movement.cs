@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Movement.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour
@@ -34,24 +38,17 @@ public class Movement : MonoBehaviour
 	void Update ()
 	{
 		animation.Play ("walk");
-		//look at the target
+
 		Quaternion rot;
 		
 		rot = Quaternion.Slerp (myTransform.rotation, Quaternion.LookRotation (target.position - myTransform.position), rotationSpeed * Time.deltaTime);
-		//	rot.y=90.0f;
 		myTransform.rotation = rot;
 		Vector3 tar = new Vector3 (target.position.x, myTransform.position.y, target.position.z);
 		if (Vector3.Distance (target.position, myTransform.position) >= maxDistance) {
-			//more towards target
 			myTransform.position += new Vector3 (myTransform.forward.x * moveSpeed * Time.deltaTime, 0, myTransform.forward.z * moveSpeed * Time.deltaTime);
 			
 		}
-		//Debug.Log (myTransform.transform.position.z);
 		if (Vector3.Distance (target.position, myTransform.position)<= maxDistance) {
-			//if(atWall){
-			/*changeWalkingDirection = 0;
-			counter = Random.Range (0, movementAllowance.Length);*/
-			//Debug.Log(movementAllowance [counter]);
 			counter ++;
 			if(counter >numberOfPointsInMovementAllowance){
 				counter = 0;
@@ -59,9 +56,6 @@ public class Movement : MonoBehaviour
 			target = movementAllowance [counter].transform;
 			
 		}
-		//changeWalkingDirection++;
 	}
 
-
-	
 }
