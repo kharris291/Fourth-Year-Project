@@ -30,10 +30,10 @@ public class BattleTimeScript : MonoBehaviour {
 		check = new bool[stored.playerNumber];
 		//timeToAttack = Random.Range(0,80);
 		for(int cnt =0; cnt > stored.playerNumber; cnt++){
-			attackBarLength[cnt] = (Screen.width / 4) * (timeToAttack / (float)attackTime);
+			attackBarLength[cnt] = (Screen.width / 6) * (timeToAttack / (float)attackTime);
 			
 		}
-		attackBarLength1 = (Screen.width / 4);
+		attackBarLength1 = (Screen.width / 6);
 	}
 
 	void Start () {
@@ -92,7 +92,7 @@ public class BattleTimeScript : MonoBehaviour {
 			attackTime = 1;
 
 		timeToAttack = (int)timeToAttack1;
-		attackBarLength[counter] = (Screen.width / 4) * (timeToAttack / (float)attackTime);
+		attackBarLength[counter] = (Screen.width / 6) * (timeToAttack / (float)attackTime);
 		if((timeToAttack1>99)&&((check[counter]!= true))){
 			check[counter] =true;
 			//stored.actionBeingTaken=true;
@@ -101,6 +101,6 @@ public class BattleTimeScript : MonoBehaviour {
 			check[counter] =false;
 			//stored.actionBeingTaken = false;
 		}
-		attackBarLength1 = (Screen.width / 4);
+		attackBarLength1 = (Screen.width / 6);
 	}
 }

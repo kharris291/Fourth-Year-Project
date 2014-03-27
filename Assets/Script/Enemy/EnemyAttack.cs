@@ -37,7 +37,7 @@ public class EnemyAttack : MonoBehaviour {
 		if(enemyObjects.Length!=0){
 			GameObject constVar= GameObject.FindGameObjectWithTag("Constant");
 			StoredInformation stored = constVar.GetComponent<StoredInformation>();
-			counter = stored.EnemyBattlePosition-1;
+			counter = stored.EnemyBattlePosition;
 			
 			EnemyAttack enAttack;
 			GameObject[] obj = GameObject.FindGameObjectsWithTag("Enemy2");
@@ -55,17 +55,19 @@ public class EnemyAttack : MonoBehaviour {
 				myTransform = transform;
 			}
 			
-			EnemyTimeSimulation enemTimeScript = obj[counter-1].GetComponent<EnemyTimeSimulation>();
+			EnemyTimeSimulation enemTimeScript = obj[counter].GetComponent<EnemyTimeSimulation>();
 			if(enemTimeScript.timeToAttack1>99){
+				this.attempt = true;
+
 				if(attempt){
 					Quaternion rot;
 					
 					rot = Quaternion.Slerp (myTransform.rotation, Quaternion.LookRotation (EnemyTarget.transform.position - myTransform.position), 6 * Time.deltaTime);
 					myTransform.rotation = rot;
 					myTransform = GameObject.FindGameObjectWithTag("Enemy2").transform;
-					myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime, 
+					myTransform.position+= new Vector3 (myTransform.forward.x * 6 * Time.deltaTime, 
 					                                    0, 
-					                                    myTransform.forward.z * 12 * Time.deltaTime);
+					                                    myTransform.forward.z * 6 * Time.deltaTime);
 					if(obj[0].name == "CaveWorm(Clone)"){
 						
 						animation.Play("Walk");
@@ -77,8 +79,9 @@ public class EnemyAttack : MonoBehaviour {
 					}
 					
 				}
-				if((Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<=1)&&(attempt!=false)){
-					
+
+				if((Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<1)&&(attempt!=false)){
+					Debug.Log((Vector3.Distance(myTransform.position,EnemyTarget.transform.position)));
 					EnemyTarget = enemyObjects[funTimes];
 					Transform lo = EnemyTarget.transform;
 					if(obj[0].name == "CaveWorm(Clone)"){
@@ -109,11 +112,13 @@ public class EnemyAttack : MonoBehaviour {
 						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[3]/stored._defenceValue[1]),funTimes);
 					}
 					if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<=1)
-						enAttack.attempt = false;
+						this.attempt = false;
 					if(enAttack.attempt==false){
 						GameObject[] atemptingChange = GameObject.FindGameObjectsWithTag("EnemyBattle");
-						obj[counter-1].transform.position = atemptingChange[counter-1].transform.position;
+						obj[counter].transform.position = atemptingChange[counter].transform.position;
 						enemTimeScript.timeToAttack1=0;
+						this.attempt=false;
+						enemTimeScript.timeToAttack=0;
 						if(obj[0].name == "CaveWorm(Clone)"){
 							animation.Play("Idle");
 						}

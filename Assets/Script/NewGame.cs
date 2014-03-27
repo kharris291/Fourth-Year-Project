@@ -33,8 +33,6 @@ public class NewGame : MonoBehaviour
 		
 		_mainCharacter = new PlayerInformation ();
 		_mainCharacter.Awake ();
-
-
 	}
 	
 	// Update is called once per frame

@@ -82,7 +82,6 @@ public class PlayerAttack : MonoBehaviour {
 			if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<=1){
 				
 				EnemyTarget = enemyObjects[funTimes];
-				Transform lo = EnemyTarget.transform;
 
 				EnemyHealth attackEnemy = EnemyTarget.GetComponent<EnemyHealth>();
 				attackType = bat.attackType;
@@ -100,10 +99,6 @@ public class PlayerAttack : MonoBehaviour {
 					attackEnemy.AddjustCurrentHealth(stored._attackValue[2],"minus");
 					giggles = Instantiate(particles[1],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
 					giggles.name = "Ice";
-					magicCheck = true;
-					
-
-				//	Destroy(giggles);
 				}
 				if(attackType == "LightningAttack"){
 					giggles = Instantiate(particles[2],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
@@ -123,19 +118,7 @@ public class PlayerAttack : MonoBehaviour {
 				animation.Play("idle");
 
 			}
-			if(magicCheck){
-				float i =0;
-				do{
-					
-					if(i >=99.9f){
-						GameObject ice = GameObject.Find("Ice");
-						Destroy(ice);
-						Debug.Log("lol");
-						magicCheck=false;
-					}
-					i+=0.1f;
-				}while(i <100);
-			}
+
 		}
 	}
 	
@@ -149,10 +132,10 @@ public class PlayerAttack : MonoBehaviour {
 		GameObject obj = GameObject.FindGameObjectWithTag("Player2");
 
 		EnemyTarget = enemyObjects[funTimes];
-		Transform lo = EnemyTarget.transform;
+		Transform enemyTransform = EnemyTarget.transform;
 		pl = obj.GetComponent<PlayerAttack>();
 
-		if(Vector3.Distance(myTransform.position,lo.position)>1){
+		if(Vector3.Distance(myTransform.position,enemyTransform.position)>1){
 
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
@@ -189,8 +172,6 @@ public class PlayerAttack : MonoBehaviour {
 		EnemyTarget = enemyObjects[funTimes];
 
 		pl = obj.GetComponent<PlayerAttack>();
-		
-		Debug.Log(myTransform);
 
 		if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)>1){
 			

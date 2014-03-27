@@ -34,11 +34,6 @@ public class Display : MonoBehaviour
 			mainCameraSearch.pixelInset =new Rect(0,0,Screen.width,Screen.height);
 		}
 	}
-
-	void Update ()
-	{
-	
-	}
 	
 	void OnGUI ()
 	{

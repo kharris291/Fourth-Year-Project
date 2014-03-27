@@ -15,7 +15,7 @@ public class EnemyTimeSimulation : MonoBehaviour {
 	private float attackBarLength1;
 	public float timeToAttack1 = 0f;
 	private float[] attackBarLength;
-	public bool[] check;
+	public bool check;
 	
 	// Use this for initialization
 	GameObject constVar;
@@ -35,7 +35,7 @@ public class EnemyTimeSimulation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject[] enemObj = GameObject.FindGameObjectsWithTag("Enemy2");
-		check = new bool[enemObj.Length];
+		check = false;
 	}
 	
 	// Update is called once per frame
@@ -51,19 +51,9 @@ public class EnemyTimeSimulation : MonoBehaviour {
 			if(enemObj.Length>=2)
 				AdjustTimeToFight(Time.deltaTime,2);
 			
-			if((check[0]==true)&&(timeToAttack1 >=100)){
+			if((this.check==true)&&(timeToAttack1 >=100)){
 				EnemyAttack enem = new EnemyAttack();
-				check[1]=check[2]=false;
-			}
-			
-			if((check[1]==true)&&(timeToAttack1 >=100)){
-				EnemyAttack enem = new EnemyAttack();
-				check[0]=check[2]=false;
-			}
-			
-			if((check[2]==true)&&(timeToAttack1 >=100)){
-				EnemyAttack enem = new EnemyAttack();
-				check[1]=check[0]=false;
+
 			}
 		}
 	}
@@ -87,13 +77,13 @@ public class EnemyTimeSimulation : MonoBehaviour {
 		
 		timeToAttack = (int)timeToAttack1;
 		
-		if((timeToAttack1>99)&&((check[counter]!= true))){
-			check[counter] =true;
+		if((timeToAttack1>99)&&((this.check!= true))){
+			this.check =true;
 			stored.EnemyBattlePosition = counter;
 			//stored.actionBeingTaken= true;
 		}
 		else if(timeToAttack1<99){
-			check[counter] =false;
+			this.check =false;
 		//	stored.actionBeingTaken = false;
 		}
 		

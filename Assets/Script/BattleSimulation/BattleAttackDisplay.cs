@@ -21,7 +21,9 @@ public class BattleAttackDisplay : MonoBehaviour {
 	GameObject constVar;
 	bool secondCheck=false;
 	PlayerAttack attacking;
-	public float waitingPeriod;
+	
+	MagicAttack attackingWithMagic;
+	public float waitingPeriod=0;
 	int attackDisplay =0;
 	public int EnemyNumber=0;
 	public string attackType;
@@ -40,6 +42,7 @@ public class BattleAttackDisplay : MonoBehaviour {
 		constVar  =GameObject.FindGameObjectWithTag("Constant");
 		stored = constVar.GetComponent<StoredInformation>();
 		attacking = new PlayerAttack();
+		attackingWithMagic = new MagicAttack();
 	}
 
 	int counter =0;
@@ -254,18 +257,7 @@ public class BattleAttackDisplay : MonoBehaviour {
 							EnemyNumber =game.Length-1;
 						}
 					}
-					if(Input.GetKeyUp("joystick button 0")){
-
-					}
-					if/*(Input.GetKeyUp("joystick button 2"))*/
-					(Input.GetKeyUp("joystick button 1")){
-
-					}
-					if(Input.GetKeyUp("joystick button 2"))/*(Input.GetKeyUp("joystick button 3")){*/{
-					{
-						
-					}
-					if(Input.GetKeyUp("joystick button 3"))/*(Input.GetKeyUp("joystick button 1")){*/
+					if(Input.GetKeyUp("joystick button 3")){/*(Input.GetKeyUp("joystick button 1")){*/
 						flag =0;
 						optionsToSelect[0] = "Attack";
 						optionsToSelect[1] = "Magic";
@@ -274,6 +266,117 @@ public class BattleAttackDisplay : MonoBehaviour {
 						attackDisplay=0;
 						flagCheck=false;
 					}
+					/*if(Input.GetKeyUp("joystick button 0")){
+
+					}
+					if/*(Input.GetKeyUp("joystick button 2"))*/
+					/*(Input.GetKeyUp("joystick button 1")){
+
+					}
+					if(Input.GetKeyUp("joystick button 2"))/*(Input.GetKeyUp("joystick button 3")){*/
+					/*{
+						
+					}*/
+
+					if((Input.GetKeyUp("joystick button 0"))&&(secondCheck==true)){
+						waitingPeriod+=0.3f;
+						Debug.Log(waitingPeriod);
+						if(waitingPeriod>0.7f){
+							if(optionsToSelect[0]=="Fire"){
+								attackingWithMagic = new MagicAttack();
+								attackType = optionsToSelect[0];
+								attackingWithMagic.Start();
+								attackingWithMagic.retrieveEnemies(EnemyNumber);
+								attackingWithMagic.FireAttackEnemy();
+								secondCheck = false;
+							//	flag =0;
+								waitingPeriod=0;
+							}
+							if(optionsToSelect[0] =="Water"){
+								attackingWithMagic = new MagicAttack();
+								attackType = optionsToSelect[0];
+								attackingWithMagic.Start();
+								attackingWithMagic.retrieveEnemies(EnemyNumber);
+								attackingWithMagic.FireAttackEnemy();
+								secondCheck = false;
+								//flag =0;
+								waitingPeriod=0;
+							}
+							
+						}
+					}
+					
+					if/*(Input.GetKeyUp("joystick button 2"))*/
+					((Input.GetKeyUp("joystick button 1"))&&(secondCheck)){
+						waitingPeriod+=0.3f;
+						
+						Debug.Log(waitingPeriod);
+						if(waitingPeriod>0.7f){
+							if(optionsToSelect[1] =="Wind"){
+								attackingWithMagic = new MagicAttack();
+								attackType = "Wind";
+								attackingWithMagic.Start();
+								attackingWithMagic.retrieveEnemies(EnemyNumber);
+								attackingWithMagic.FireAttackEnemy();
+								secondCheck = false;
+								//flag =0;
+								waitingPeriod=0;
+							}
+							if(optionsToSelect[1] =="Ice"){
+								attackingWithMagic = new MagicAttack();
+								attackType = "Ice";
+								attackingWithMagic.Start();
+								attackingWithMagic.retrieveEnemies(EnemyNumber);
+								attackingWithMagic.IceAttackEnemy();
+								secondCheck = false;
+								//flag =0;
+								waitingPeriod=0;
+							}
+							
+						}
+					}
+					if(Input.GetKeyUp("joystick button 2"))/*(Input.GetKeyUp("joystick button 3")){*/
+					{
+						waitingPeriod+=0.3f;
+						Debug.Log(waitingPeriod);
+						if(waitingPeriod>0.7f){
+
+							if(optionsToSelect[2] =="Water"){
+								attackingWithMagic = new MagicAttack();
+								attackType = "Water";
+								attackingWithMagic.Start();
+								attackingWithMagic.retrieveEnemies(EnemyNumber);
+								attackingWithMagic.FireAttackEnemy();
+								secondCheck = false;
+								//flag =0;
+								waitingPeriod=0;
+							}
+							if(optionsToSelect[2] =="Lightning"){
+								attackingWithMagic = new MagicAttack();
+								attackType = "Lightning";
+								attackingWithMagic.Start();
+								attackingWithMagic.retrieveEnemies(EnemyNumber);
+								attackingWithMagic.LightningAttackEnemy();
+								secondCheck = false;
+								//flag =0;
+								waitingPeriod=0;
+							}
+							
+						}
+					}
+					if(Input.GetKeyUp("joystick button 3"))/*(Input.GetKeyUp("joystick button 1")){*/{
+						
+					}
+					if((flag==2)&&
+					   (((Input.GetKeyUp("joystick button 0")))||
+					 ((Input.GetKeyUp("joystick button 1")))||
+					 ((Input.GetKeyUp("joystick button 2")))
+					 )&&(secondCheck==false)){
+						secondCheck=true;
+						waitingPeriod+=0.1f;
+					}
+					
+
 				}
 				if(flag==3){
 	//				Items();
