@@ -1,7 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\BattleSimulation\BattleTimeScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\NPC\PlayerInteraction.cs">
     <Files>
+      <File FileName="FYP.sln" Line="1" Column="1" />
+      <File FileName="Assets\Script\BattleSimulation\MagicAttack.cs" Line="13" Column="32" />
       <File FileName="Assets\Script\BattleSimulation\PlayerAttack.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\Character\Stats\Attack.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\BattleSimulation\PlayerHealth.cs" Line="1" Column="1" />
@@ -9,10 +11,11 @@
       <File FileName="Assets\Script\Display.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\NewGame.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\BattleSimulation\BattleAttackDisplay.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\BattleSimulation\MagicAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\BattleSimulation\MagicAttack.cs" Line="13" Column="32" />
       <File FileName="Assets\Script\BattleSimulation\BattleTimeScript.cs" Line="21" Column="27" />
-      <File FileName="Assets\Script\Enemy\EnemyTimeSimulation.cs" Line="92" Column="1" />
+      <File FileName="Assets\Script\Enemy\EnemyTimeSimulation.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\Enemy\EnemyAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\NPC\PlayerInteraction.cs" Line="127" Column="48" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

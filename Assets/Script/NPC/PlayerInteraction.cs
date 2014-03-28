@@ -110,7 +110,7 @@ public class PlayerInteraction : MonoBehaviour {
 
 
 		if(paused){
-			if((!greetingCheck)&&(counter<=5)&&(playWalk)){
+			if((!greetingCheck)&&(counter<=6)&&(playWalk)){
 				counter+=0.1f;
 				Debug.Log(counter);
 				greet = "Hello there. How are you?";
@@ -124,7 +124,7 @@ public class PlayerInteraction : MonoBehaviour {
 			}
 			clearView.alignment = TextAnchor.MiddleLeft;
 			clearView.fontSize = 24;
-			if((playWalk)&&(greetingCheck)&&(counter>=5)){
+			if((playWalk)&&(greetingCheck)&&(counter>=10)){
 				buttonGroupWidth = 650;
 				buttonGroupHeight = 300;
 				//animation.Play("idle");
