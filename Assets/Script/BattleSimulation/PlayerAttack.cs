@@ -9,9 +9,9 @@ public class PlayerAttack : MonoBehaviour {
 	StoredInformation stored;
 	public GameObject[] enemyObjects;
 	public GameObject EnemyTarget;
-	public bool attempt;
+	public bool attemptAttack;
 	Transform myTransform;
-	public int funTimes;
+	public int fighterNumber;
 	string attackType;
 	GameObject giggles;
 	public bool magicCheck = false;
@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour {
 		//constVar = GameObject.FindGameObjectsWithTag("Enemy2");
 		//player = GameObject.FindGameObjectWithTag("Player2");
 		myTransform = transform;
-		attempt = false;
+		attemptAttack = false;
 		
 		giggles = new GameObject();
 	}
@@ -49,25 +49,25 @@ public class PlayerAttack : MonoBehaviour {
 			StoredInformation stored = constVar.GetComponent<StoredInformation>();
 			int counter = stored.BattlePosition;
 
-			PlayerAttack pl;
+			PlayerAttack playerAttack;
 			GameObject[] obj = GameObject.FindGameObjectsWithTag("Player2");
-			pl = obj[counter].GetComponent<PlayerAttack>();
+			playerAttack = obj[counter].GetComponent<PlayerAttack>();
 			
 			enemyObjects = GameObject.FindGameObjectsWithTag("Enemy2");
 			
 			BattleAttackDisplay bat =  obj[counter].GetComponent<BattleAttackDisplay>();
-			funTimes = bat.EnemyNumber;
-			EnemyTarget = enemyObjects[funTimes];
+			fighterNumber = bat.EnemyNumber;
+			EnemyTarget = enemyObjects[fighterNumber];
 
 			if(EnemyTarget==null){
-				EnemyTarget = enemyObjects[funTimes+1];
+				EnemyTarget = enemyObjects[fighterNumber+1];
 			}
 
 			if(myTransform ==null ){
 				myTransform = transform;
 			}
 
-			if(attempt){
+			if(attemptAttack){
 				Quaternion rot;
 				
 				rot = Quaternion.Slerp (myTransform.rotation, Quaternion.LookRotation (EnemyTarget.transform.position - myTransform.position), 6 * Time.deltaTime);
@@ -81,7 +81,7 @@ public class PlayerAttack : MonoBehaviour {
 			}
 			if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<=1){
 				
-				EnemyTarget = enemyObjects[funTimes];
+				EnemyTarget = enemyObjects[fighterNumber];
 
 				EnemyHealth attackEnemy = EnemyTarget.GetComponent<EnemyHealth>();
 				attackType = bat.attackType;
@@ -107,7 +107,7 @@ public class PlayerAttack : MonoBehaviour {
 
 				}
 
-				pl.attempt = false;
+				playerAttack.attemptAttack = false;
 
 				GameObject[] atemptingChange = GameObject.FindGameObjectsWithTag("PlayerBattle");
 				obj[counter].transform.position = atemptingChange[counter].transform.position;
@@ -123,81 +123,81 @@ public class PlayerAttack : MonoBehaviour {
 	}
 	
 	public void retrieveEnemies(int fight){
-		funTimes = fight;
+		fighterNumber = fight;
 	}
 
 	public void AttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
-		PlayerAttack pl;
+		PlayerAttack playerAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Player2");
 
-		EnemyTarget = enemyObjects[funTimes];
+		EnemyTarget = enemyObjects[fighterNumber];
 		Transform enemyTransform = EnemyTarget.transform;
-		pl = obj.GetComponent<PlayerAttack>();
+		playerAttack = obj.GetComponent<PlayerAttack>();
 
 		if(Vector3.Distance(myTransform.position,enemyTransform.position)>1){
 
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			pl.attempt =true;
+			playerAttack.attemptAttack =true;
 
 		}
 	}
 
 	public void FireAttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
-		PlayerAttack pl;
+		PlayerAttack playerAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Player2");
 		
-		EnemyTarget = enemyObjects[funTimes];
+		EnemyTarget = enemyObjects[fighterNumber];
 
-		pl = obj.GetComponent<PlayerAttack>();
+		playerAttack = obj.GetComponent<PlayerAttack>();
 
 		if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)>1){
 			
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			pl.attempt =true;
+			playerAttack.attemptAttack =true;
 			
 		}
 	}
 
 	public void IceAttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
-		PlayerAttack pl;
+		PlayerAttack playerAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Player2");
 		
-		EnemyTarget = enemyObjects[funTimes];
+		EnemyTarget = enemyObjects[fighterNumber];
 
-		pl = obj.GetComponent<PlayerAttack>();
+		playerAttack = obj.GetComponent<PlayerAttack>();
 
 		if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)>1){
 			
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime, 
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			pl.attempt =true;
+			playerAttack.attemptAttack =true;
 			
 		}
 	}
 
 	public void LightningAttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
-		PlayerAttack pl;
+		PlayerAttack playerAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Player2");
 		
-		EnemyTarget = enemyObjects[funTimes];
+		EnemyTarget = enemyObjects[fighterNumber];
 		
-		pl = obj.GetComponent<PlayerAttack>();
+		playerAttack = obj.GetComponent<PlayerAttack>();
 
 		if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)>1){
 			
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			pl.attempt =true;
+			playerAttack.attemptAttack =true;
 			
 		}
 	}

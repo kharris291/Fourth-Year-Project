@@ -205,37 +205,29 @@ public class StoredInformation : MonoBehaviour {
 		
 
 		if(Application.loadedLevelName=="Battle Simulation"){
-			GameObject[] google = GameObject.FindGameObjectsWithTag("Player2");
-			BattleEnding battle = google[0].GetComponent<BattleEnding>();
+			GameObject[] player2Tag = GameObject.FindGameObjectsWithTag("Player2");
+			BattleEnding battle = player2Tag[0].GetComponent<BattleEnding>();
 			if(check <battle.myexp){
 				check = battle.myexp;
 				checkloop=false;
-					
-					Debug.Log(check);
 			}
-			if(//(battle.myexp > battle.oldLevel)&&
-			   //(battle.myexp < storedIN.nextLevel)&&
-			   (enemiesObject.Length==0)
+			if((enemiesObject.Length==0)
 			   &&(!checkloop)
 			   &&(!battle.addFlag)){
 
 				checkloop=true;
-				//level+=1;
 				experience = battle.myexp;
 				storedIN.experience = battle.myexp;
 				if(experience ==0){
 					experience = check;
 				}
-				Debug.Log (experience);
 				int count=0;
 				if(battle.myexp > battle.oldLevel){
 					storedIN.level+=1;
-					Debug.Log(battle.oldLevel);
 
 					storedIN.nextLevelvalue = battle.oldLevel * 1.5f;
 					storedIN.nextLevel = (int)(battle.oldLevel * 1.5f);
 
-					
 					nextLevelvalue = battle.oldLevel * 1.5f;
 					nextLevel = (int)(battle.oldLevel * 1.5f);
 				
@@ -373,7 +365,13 @@ public class StoredInformation : MonoBehaviour {
 		PlayerPrefs.SetFloat("Position - x",storedIN.positionOnScreen.x);
 		PlayerPrefs.SetFloat("Position - y",storedIN.positionOnScreen.y);
 		PlayerPrefs.SetFloat("Position - z",storedIN.positionOnScreen.z);
-
+		#region - region of modified code
+		///<summary>
+		/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+		/// Author: Laliberte P. 
+		/// Date: 2013 October 24. 
+		/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+		/// </summary>
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
 			PlayerPrefs.SetString("Attribute Name - " + cnt, storedIN._primaryAttribute[cnt]);
 			PlayerPrefs.SetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt, storedIN._primaryAttributeValues[cnt] );
@@ -398,6 +396,7 @@ public class StoredInformation : MonoBehaviour {
 			PlayerPrefs.SetString("Defence Name - " + cnt, storedIN._defence[cnt]);
 			PlayerPrefs.SetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt, storedIN._defenceValue[cnt]);
 		}
+		#endregion
 		string itemFromSave= string.Empty;
 		int itemCounting =0;
 
@@ -442,7 +441,6 @@ public class StoredInformation : MonoBehaviour {
 		storedIN.experience = experience;
 
 		if(PlayerPrefs.GetInt("ExperienceTONextLevel")<=1){
-			Debug.Log("here");
 			nextLevelvalue = experience*1.2f;
 			storedIN.nextLevelvalue = experience*1.2f;
 
@@ -450,7 +448,6 @@ public class StoredInformation : MonoBehaviour {
 			nextLevel = (int)(experience*1.2f);
 
 		}else{
-			Debug.Log("no here");
 			nextLevelvalue = (float)PlayerPrefs.GetInt("ExperienceTONextLevel");
 			storedIN.nextLevelvalue = (float)PlayerPrefs.GetInt("ExperienceTONextLevel");
 			storedIN.nextLevel = PlayerPrefs.GetInt("ExperienceTONextLevel");
@@ -469,7 +466,13 @@ public class StoredInformation : MonoBehaviour {
 
 			pl.SetPosition(storedIN.positionOnScreen,Application.loadedLevelName);
 		}
-
+		#region - modified code region
+		///<summary>
+		/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+		/// Author: Laliberte P. 
+		/// Date: 2013 October 24. 
+		/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+		/// </summary>
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++) {
 			storedIN._primaryAttribute[cnt]=PlayerPrefs.GetString("Attribute Name - " + cnt);
 			storedIN._primaryAttributeValues[cnt] = PlayerPrefs.GetInt (((AttributeName)cnt).ToString () + " - Base Value - " + cnt);
@@ -494,7 +497,7 @@ public class StoredInformation : MonoBehaviour {
 			storedIN._defence[cnt]= PlayerPrefs.GetString("Defence Name - " + cnt);
 			storedIN._defenceValue[cnt] = PlayerPrefs.GetInt (((DefenceName)cnt).ToString () + " - Base Value - " + cnt);
 		}
-
+		#endregion
 		string itemFromSave= string.Empty;
 		int itemCounting =0;
 

@@ -84,6 +84,15 @@ public class PlayerHealth : MonoBehaviour
 	
 	public void AdjustCurrentHealth (int adj, int counter)
 	{		
+		
+		/// <summary>
+		/// Addjusts the current health.
+		/// Title: SkyboxBlended - Unify Community Wiki. [Online].
+		/// Author: Pranckevicius A. 
+		/// date: 2013 October 4. 
+		/// Available from: http://wiki.unity3d.com/index.php?title=SkyboxBlended
+		/// inspired idea from tutorial but modified for my own use
+		/// </summary>
 		curHealth -= adj;
 
 		if (curHealth < 0)

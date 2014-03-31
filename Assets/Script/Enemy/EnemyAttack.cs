@@ -11,7 +11,7 @@ public class EnemyAttack : MonoBehaviour {
 	public GameObject EnemyTarget;
 	public bool attempt;
 	Transform myTransform;
-	public int funTimes;
+	public int fighterNumber;
 	int attackType;
 	public int counter;
 	
@@ -46,10 +46,10 @@ public class EnemyAttack : MonoBehaviour {
 			enemyObjects = GameObject.FindGameObjectsWithTag("Player2");
 			
 
-			funTimes = Random.Range(0,enemyObjects.Length);
-			EnemyTarget = enemyObjects[funTimes];
+			fighterNumber = Random.Range(0,enemyObjects.Length);
+			EnemyTarget = enemyObjects[fighterNumber];
 			if(EnemyTarget==null){
-				EnemyTarget = enemyObjects[funTimes+1];
+				EnemyTarget = enemyObjects[fighterNumber+1];
 			}
 			if(myTransform ==null ){
 				myTransform = transform;
@@ -81,9 +81,8 @@ public class EnemyAttack : MonoBehaviour {
 				}
 
 				if((Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<1)&&(attempt!=false)){
-					Debug.Log((Vector3.Distance(myTransform.position,EnemyTarget.transform.position)));
-					EnemyTarget = enemyObjects[funTimes];
-					Transform lo = EnemyTarget.transform;
+					EnemyTarget = enemyObjects[fighterNumber];
+					Transform enemyTransform = EnemyTarget.transform;
 					if(obj[0].name == "CaveWorm(Clone)"){
 						animation.Play("Attack");	
 					}
@@ -100,16 +99,16 @@ public class EnemyAttack : MonoBehaviour {
 
 					attackType = Random.Range(0,5);
 					if(attackType == 1){
-						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[0]/stored._defenceValue[0]),funTimes);
+						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[0]/stored._defenceValue[0]),fighterNumber);
 					}
 					if(attackType == 2){
-						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[1]/stored._defenceValue[1]),funTimes);
+						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[1]/stored._defenceValue[1]),fighterNumber);
 					}
 					if(attackType == 3){
-						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[2]/stored._defenceValue[1]),funTimes);
+						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[2]/stored._defenceValue[1]),fighterNumber);
 					}
 					if(attackType == 4){
-						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[3]/stored._defenceValue[1]),funTimes);
+						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[3]/stored._defenceValue[1]),fighterNumber);
 					}
 					if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<=1)
 						this.attempt = false;
@@ -132,7 +131,7 @@ public class EnemyAttack : MonoBehaviour {
 	}
 	
 	public void retrieveEnemies(int fight){
-		funTimes = fight;
+		fighterNumber = fight;
 	}
 	
 	public void AttackEnemy(){
@@ -140,11 +139,11 @@ public class EnemyAttack : MonoBehaviour {
 		EnemyAttack enAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Enemy2");
 		
-		EnemyTarget = enemyObjects[funTimes];
-		Transform lo = EnemyTarget.transform;
+		EnemyTarget = enemyObjects[fighterNumber];
+		Transform enemyTransform = EnemyTarget.transform;
 		enAttack = obj.GetComponent<EnemyAttack>();
 		
-		if(Vector3.Distance(myTransform.position,lo.position)>1){
+		if(Vector3.Distance(myTransform.position,enemyTransform.position)>1){
 			
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
@@ -159,7 +158,7 @@ public class EnemyAttack : MonoBehaviour {
 		EnemyAttack enAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Enemy2");
 		
-		EnemyTarget = enemyObjects[funTimes];
+		EnemyTarget = enemyObjects[fighterNumber];
 		
 		enAttack = obj.GetComponent<EnemyAttack>();
 		
@@ -178,7 +177,7 @@ public class EnemyAttack : MonoBehaviour {
 		EnemyAttack enAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Enemy2");
 		
-		EnemyTarget = enemyObjects[funTimes];
+		EnemyTarget = enemyObjects[fighterNumber];
 		
 		enAttack = obj.GetComponent<EnemyAttack>();
 
@@ -197,7 +196,7 @@ public class EnemyAttack : MonoBehaviour {
 		EnemyAttack enAttack;
 		GameObject obj = GameObject.FindGameObjectWithTag("Enemy2");
 		
-		EnemyTarget = enemyObjects[funTimes];
+		EnemyTarget = enemyObjects[fighterNumber];
 		
 		enAttack = obj.GetComponent<EnemyAttack>();
 		

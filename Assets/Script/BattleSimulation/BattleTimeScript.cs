@@ -73,9 +73,9 @@ public class BattleTimeScript : MonoBehaviour {
 		}
 	}
 
-	public void AdjustTimeToFight (float adj, int counter)
+	public void AdjustTimeToFight (float timeAdjustment, int counter)
 	{
-		timeToAttack1 += adj;
+		timeToAttack1 += timeAdjustment;
 		
 		if (timeToAttack < 0)
 			timeToAttack = 0;

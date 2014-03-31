@@ -48,8 +48,8 @@ public class MagicAttack : MonoBehaviour {
 			
 			enemyObjects = GameObject.FindGameObjectsWithTag("Enemy2");
 			
-			BattleAttackDisplay bat =  obj[counter].GetComponent<BattleAttackDisplay>();
-			funTimes = bat.EnemyNumber;
+			BattleAttackDisplay battleAttack =  obj[counter].GetComponent<BattleAttackDisplay>();
+			funTimes = battleAttack.EnemyNumber;
 			EnemyTarget = enemyObjects[funTimes];
 			
 			if(EnemyTarget==null){
@@ -61,7 +61,7 @@ public class MagicAttack : MonoBehaviour {
 				EnemyTarget = enemyObjects[funTimes];
 				
 				EnemyHealth attackEnemy = EnemyTarget.GetComponent<EnemyHealth>();
-				attackType = bat.attackType;
+				attackType = battleAttack.attackType;
 				if(attackType == "Fire"){
 
 					initialiseParticles = Instantiate(particles[0],EnemyTarget.transform.position, Quaternion.identity) as GameObject;

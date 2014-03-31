@@ -5,6 +5,8 @@
 /// Author: Laliberte P. 
 /// Date: 2013 October 24. 
 /// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+/// 
+/// taken mainly from the tutorial but modified for my own use
 /// </summary>
 using UnityEngine;
 using System.Collections;
