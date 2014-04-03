@@ -96,13 +96,14 @@ public class ShopWorker : MonoBehaviour {
 		}
 	}
 	bool shopOpen = false, shopPurchase = false;
-	public GUIStyle moneySize;
+	public GUIStyle moneySize,open;
 	string boughtOrNOt="";
 	GameObject[] ga;
 	void OnGUI(){
 		if(ShopMenu){
+			open.fontSize = Screen.width/23;
 			shopStatus= "Press O to open";
-			GUI.Label(new Rect(0,0, 300,30),shopStatus);
+			GUI.Label(new Rect(0,0, 300,30),shopStatus,open);
 			shopOpen=true;
 
 		}
@@ -169,7 +170,7 @@ public class ShopWorker : MonoBehaviour {
 								}else{
 									GUI.Label(new Rect(((Screen.width/2)-(groupWidth/2)),
 									          ((Screen.height/2)-(groupHeight/2))-100,
-									          Screen.width, Screen.height), " Not enough monry to buy");
+									          Screen.width, Screen.height), " Not enough money  to buy");
 									shopPurchase = true;
 								}
 							}

@@ -72,8 +72,7 @@ public class BattleEnding : MonoBehaviour {
 
 	}
 
-	public GUIStyle place,labels;
-	GUIStyle sty;
+	public GUIStyle place,labels, sty;
 	void OnGUI(){
 		GameObject constantStorage = GameObject.FindGameObjectWithTag("Constant");
 		StoredInformation obj = constantStorage.GetComponent<StoredInformation>();

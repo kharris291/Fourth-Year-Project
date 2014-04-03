@@ -14,7 +14,9 @@ public class EnemyAttack : MonoBehaviour {
 	public int fighterNumber;
 	int attackType;
 	public int counter;
+	GameObject initialiseParticles;
 	
+	public GameObject[] particles =new GameObject[3];
 	void Awake(){
 	
 		myTransform = transform;
@@ -26,6 +28,7 @@ public class EnemyAttack : MonoBehaviour {
 		
 		myTransform = GameObject.FindGameObjectWithTag("Enemy2").transform;
 		
+		initialiseParticles = new GameObject();
 		enemyObjects = GameObject.FindGameObjectsWithTag("Player2");
 	}
 	
@@ -103,12 +106,18 @@ public class EnemyAttack : MonoBehaviour {
 					}
 					if(attackType == 2){
 						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[1]/stored._defenceValue[1]),fighterNumber);
+						initialiseParticles = Instantiate(particles[0],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
+						initialiseParticles.name = "Fire";
 					}
 					if(attackType == 3){
 						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[2]/stored._defenceValue[1]),fighterNumber);
+						initialiseParticles = Instantiate(particles[1],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
+						initialiseParticles.name = "Ice";
 					}
 					if(attackType == 4){
 						attackEnemy.AdjustCurrentHealth((int)(stored._attackValue[3]/stored._defenceValue[1]),fighterNumber);
+						initialiseParticles = Instantiate(particles[2],EnemyTarget.transform.position, Quaternion.identity) as GameObject;
+						initialiseParticles.name = "Lightning";
 					}
 					if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<=1)
 						this.attempt = false;

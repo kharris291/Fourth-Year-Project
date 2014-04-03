@@ -25,11 +25,9 @@ public class Movement : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
 		movementAllowance = GameObject.FindGameObjectsWithTag (tagName);
 		numberOfPointsInMovementAllowance = movementAllowance.Length - 1;
 		target = movementAllowance [counter].transform;
-		
 		maxDistance = 4;
 	}
 	
@@ -41,11 +39,15 @@ public class Movement : MonoBehaviour
 
 		Quaternion rot;
 		
-		rot = Quaternion.Slerp (myTransform.rotation, Quaternion.LookRotation (target.position - myTransform.position), rotationSpeed * Time.deltaTime);
+		rot = Quaternion.Slerp (myTransform.rotation,
+		                        Quaternion.LookRotation (target.position - myTransform.position), 
+		                        rotationSpeed * Time.deltaTime);
 		myTransform.rotation = rot;
 		Vector3 tar = new Vector3 (target.position.x, myTransform.position.y, target.position.z);
 		if (Vector3.Distance (target.position, myTransform.position) >= maxDistance) {
-			myTransform.position += new Vector3 (myTransform.forward.x * moveSpeed * Time.deltaTime, 0, myTransform.forward.z * moveSpeed * Time.deltaTime);
+			myTransform.position += new Vector3 (myTransform.forward.x * moveSpeed * Time.deltaTime,
+			                                     0, 
+			                                     myTransform.forward.z * moveSpeed * Time.deltaTime);
 			
 		}
 		if (Vector3.Distance (target.position, myTransform.position)<= maxDistance) {

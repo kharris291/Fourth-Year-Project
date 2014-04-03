@@ -1,15 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Character\CharacterInformation.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\BattleSimulation\BattleAttackDisplay.cs">
     <Files>
-      <File FileName="Assets\Script\Enemy\EnemyAttack.cs" Line="135" Column="2" />
+      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Menus\PauseMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\BattleSimulation\BattleTimeScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\BattleSimulation\PlayerAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\NewGame.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Display.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\NPC\Movement.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\NPC\PlayerInteraction.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\BattleSimulation\BattleTimeScript.cs" Line="107" Column="1" />
-      <File FileName="Assets\Script\Enemy\EnemyGeneration.cs" Line="39" Column="5" />
-      <File FileName="Assets\Script\Enemy\EnemyHealth.cs" Line="35" Column="3" />
-      <File FileName="Assets\Script\BattleSimulation\PlayerAttack.cs" Line="134" Column="43" />
-      <File FileName="Assets\Script\Character\StoredInformation.cs" Line="25" Column="24" />
-      <File FileName="Assets\Script\Character\CharacterInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\Operations\OpenDoor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\BattleSimulation\BattleAttackDisplay.cs" Line="386" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

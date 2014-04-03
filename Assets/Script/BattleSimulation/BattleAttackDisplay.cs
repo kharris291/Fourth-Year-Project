@@ -266,17 +266,6 @@ public class BattleAttackDisplay : MonoBehaviour {
 						attackDisplay=0;
 						flagCheck=false;
 					}
-					/*if(Input.GetKeyUp("joystick button 0")){
-
-					}
-					if/*(Input.GetKeyUp("joystick button 2"))*/
-					/*(Input.GetKeyUp("joystick button 1")){
-
-					}
-					if(Input.GetKeyUp("joystick button 2"))/*(Input.GetKeyUp("joystick button 3")){*/
-					/*{
-						
-					}*/
 
 					if((Input.GetKeyUp("joystick button 0"))&&(secondCheck==true)){
 						waitingPeriod+=0.3f;
@@ -381,14 +370,17 @@ public class BattleAttackDisplay : MonoBehaviour {
 				if(flag==3){
 	//				Items();
 					for(int cnt =0; cnt < optionsToSelect.Length; cnt ++){
-						if((attackDisplay+cnt)>stored.items.Length){
+						/*if((attackDisplay+cnt)>stored.items.Length){
 							attackDisplay--;
-						}
-						if(((attackDisplay+cnt)<stored.items.Length)&&(stored.items[cnt]!="")&&((stored.items.Length)>(cnt-1+attackDisplay))){
+						}*/
+
+						if(((attackDisplay+cnt)<stored.items.Length)
+						   &&(cnt < stored.items.Length)){
 							optionsToSelect[cnt] = stored.items[cnt+attackDisplay];
 						}else{
 							optionsToSelect[cnt] = "";
 						}
+
 						if(Input.GetKeyUp("joystick button 8")){
 							attackDisplay--;
 							if(attackDisplay < 0)

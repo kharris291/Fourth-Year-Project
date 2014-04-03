@@ -45,15 +45,17 @@ public class OpenDoor : MonoBehaviour
 		}
 		
 	}
-	
+
+	public GUIStyle open;
 	void OnGUI(){
 		if(rangeCheck==1){
+			open.fontSize = Screen.width/23;
 			if(opendoor==true){
-				GUI.Label(new Rect(0,0, 200,30),"Press O to open");
+				GUI.Label(new Rect(0,0, 200,30),"Press O to open",open);
 			}
 			
 			if(opendoor==false){
-				GUI.Label(new Rect(0,0, 200,30),"Press O to close");
+				GUI.Label(new Rect(0,0, 200,30),"Press O to close",open);
 			}
 		}else{
 			GUI.Label(new Rect(0,0, 20,10),"");

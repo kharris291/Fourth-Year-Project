@@ -39,11 +39,11 @@ public class EnemyHealth : MonoBehaviour {
 		playerStored = player[constantStored.playerNumber-1].GetComponent<BattleAttackDisplay>();
 		
 		/// <summary>
-		/// Addjusts the current health.
-		/// Title: SkyboxBlended - Unify Community Wiki. [Online].
-		/// Author: Pranckevicius A. 
-		/// date: 2013 October 4. 
-		/// Available from: http://wiki.unity3d.com/index.php?title=SkyboxBlended
+		/// Player information.cs
+		/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+		/// Author: Laliberte P. 
+		/// Date: 2013 October 24. 
+		/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
 		/// inspired idea from tutorial but modified for my own use
 		/// </summary>	
 		if(type=="plus"){

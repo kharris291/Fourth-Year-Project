@@ -78,7 +78,7 @@ public class PlayerInteraction : MonoBehaviour {
 			}
 			if(optionChosen >0){
 				optionCounter+=0.1f;
-				if(optionCounter >=4){
+				if(optionCounter >=10){
 					Debug.Log(optionChosen);
 					if((optionChosen==3)||(optionChosen==10)){
 						paused = false;
@@ -110,7 +110,7 @@ public class PlayerInteraction : MonoBehaviour {
 
 
 		if(paused){
-			if((!greetingCheck)&&(counter<=6)&&(playWalk)){
+			if((!greetingCheck)&&(counter<=10)&&(playWalk)){
 				counter+=0.1f;
 				Debug.Log(counter);
 				greet = "Hello there. How are you?";
@@ -119,7 +119,7 @@ public class PlayerInteraction : MonoBehaviour {
 				GUI.Label(new Rect(((Screen.width/2)-(buttonGroupWidth/2)),
 				                   ((Screen.height/2)-(buttonGroupHeight/2)),
 				                   buttonGroupWidth, buttonGroupHeight),greet,clearView);
-				if(counter>=5)
+				if(counter>=10)
 					greetingCheck=true;
 			}
 			clearView.alignment = TextAnchor.MiddleLeft;

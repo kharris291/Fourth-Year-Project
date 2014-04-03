@@ -44,8 +44,7 @@ public class CharacterGen : MonoBehaviour {
 		
 		_playerInformation = new PlayerInformation();
 		_playerInformation.Awake();
-		
-		
+
 		for (int i = 0; i < Enum.GetValues(typeof(AttributeName)).Length; i++) {
 			_playerInformation.GetPrimaryAttribute (i).BaseValue = STARTING_VALUE;
 		}	

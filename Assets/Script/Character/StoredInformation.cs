@@ -84,7 +84,7 @@ public class StoredInformation : MonoBehaviour {
 	public void initiliseConstantVariables(){
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++){
 			_primaryAttribute [cnt] = ((AttributeName)cnt).ToString ();
-				_primaryAttributeValues[cnt] = info.GetPrimaryAttribute(cnt).AdjustedBaseValue;
+			_primaryAttributeValues[cnt] = info.GetPrimaryAttribute(cnt).AdjustedBaseValue;
 		}
 
 		for (int i = 0; i < Enum.GetValues(typeof(VitalName)).Length; i++){
