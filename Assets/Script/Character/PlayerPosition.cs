@@ -18,6 +18,9 @@ public class PlayerPosition : MonoBehaviour {
 	string current;
 
 	public string previos;
+	/// <summary>
+	/// looks for the level was loaded event.
+	/// </summary>
 	void OnLevelWasLoaded(){
 
 		if(Application.loadedLevelName == "NewGame"){
@@ -48,14 +51,20 @@ public class PlayerPosition : MonoBehaviour {
 			SetCharacterPosition();
 		}
 	}
-
+	/// <summary>
+	/// Sets the position.
+	/// </summary>
+	/// <param name="playerPosition">Player position.</param>
+	/// <param name="prev">Previous.</param>
 	public void SetPosition(Vector3 playerPosition,string prev){
 		previos = prev;
 		position.x = playerPosition.x;
 		position.y = playerPosition.y;
 		position.z = playerPosition.z;
 	}
-
+	/// <summary>
+	/// Sets the character position.
+	/// </summary>
 	void SetCharacterPosition(){
 		
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Player");

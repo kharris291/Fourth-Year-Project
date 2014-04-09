@@ -1,7 +1,6 @@
 ﻿/// <summary>
 /// Shop worker.cs
 /// Author: Harris Kevin
-/// Date: 2013 October 24. 
 /// script is used to read in and display information for the main character to buy and sell items.
 /// it also incorporates the money script and the script for reading a file.
 /// </summary>
@@ -39,7 +38,6 @@ public class ShopWorker : MonoBehaviour {
 	bool filereadingCheck = false;
 	// Use this for initialization
 	void Start () {
-		Screen.lockCursor = true;
 		Time.timeScale=1;
 
 		item = GameObject.FindGameObjectsWithTag("Item");
@@ -92,7 +90,7 @@ public class ShopWorker : MonoBehaviour {
 			}
 
 
-			paused = TooglePausedScreen();
+			paused = enableDisablePauseScreen();
 		}
 	}
 	bool shopOpen = false, shopPurchase = false;
@@ -218,14 +216,12 @@ public class ShopWorker : MonoBehaviour {
 
 	}
 
-	bool TooglePausedScreen(){
+	bool enableDisablePauseScreen(){
 		if(Time.timeScale ==0){
-			Screen.lockCursor = true;
 			Time.timeScale=1;
 			filereadingCheck = false;
 			return false;
 		}else{
-			Screen.lockCursor = false;
 			Time.timeScale = 0;
 			return true;
 		}

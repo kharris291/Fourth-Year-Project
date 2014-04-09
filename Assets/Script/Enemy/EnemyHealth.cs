@@ -1,13 +1,14 @@
 ﻿/// <summary>
 /// Enemy health.cs
 /// Author: Harris Kevin
+/// displays and adjusts the players health
 /// </summary>
 using UnityEngine;
 using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
 
-	public float maxHealth = 100,curHealth = 100;
+	public float maxHealth = 100,curHealth = 0;
 	GameObject[] player;
 	GameObject constant;
 	BattleAttackDisplay playerStored;
@@ -19,14 +20,19 @@ public class EnemyHealth : MonoBehaviour {
 		constantStored = constant.GetComponent<StoredInformation>();
 
 		maxHealth = constantStored._vitalValue[0]/1.5f;
-		curHealth = constantStored._vitalValue[0]/1.5f;
+		//curHealth = constantStored._vitalValue[0]/1.5f;
+		curHealth =0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
+	/// <summary>
+	/// Addjusts the current health.
+	/// </summary>
+	/// <param name="adj">Adj.</param>
+	/// <param name="type">Type.</param>
 	public void AddjustCurrentHealth (int adj, string type)
 	{
 

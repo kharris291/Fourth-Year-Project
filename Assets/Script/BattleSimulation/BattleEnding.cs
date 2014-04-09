@@ -1,6 +1,9 @@
 ﻿/// <summary>
 /// Battle ending.cs
 /// Author: Harris Kevin
+/// iunstantiated when a battle has been won
+/// this is used to display the amount of money and exp you've won
+/// also keeps a record for double checking money and stats have been updated
 /// </summary>
 using UnityEngine;
 using System.Collections;

@@ -10,8 +10,6 @@ public class UIScreen : MonoBehaviour {
 	PlayerHealth playerH;
 	public int maxHealth = 100;
 	public int curHealth = 100;
-	private Texture3D bgImage;
-	private Texture3D fgImage;
 	private float healthBarLength,healthBarLength1;
 	CharacterInformation playerInfo;
 

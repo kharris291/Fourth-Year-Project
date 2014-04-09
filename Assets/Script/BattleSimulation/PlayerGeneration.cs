@@ -1,6 +1,8 @@
 ﻿/// <summary>
 /// Player generation.cs
 /// Author: Harris Kevin
+/// 
+/// generates the number of characters onto the battle field in correct position.
 /// </summary>
 using UnityEngine;
 using System.Collections;

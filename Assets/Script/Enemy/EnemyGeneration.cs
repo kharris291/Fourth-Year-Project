@@ -1,6 +1,9 @@
 ﻿/// <summary>
 /// Enemy generation.cs
 /// Author: Harris Kevin
+/// generates correct enemy and the number of them onto the battle field and into the main game
+/// also makes sure that if a character is loaded back into the game scence that enemies aren't 
+/// to close for a looping battle simulation to occurr
 /// </summary>
 using UnityEngine;
 using System.Collections;

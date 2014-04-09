@@ -1,6 +1,7 @@
 ﻿/// <summary>
 /// Player interaction.cs
 /// Author: Harris Kevin
+/// player and npc interaction
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -55,7 +56,7 @@ public class PlayerInteraction : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if ((Input.GetKeyUp("joystick button 0"))&&(playWalk==true)&&(!paused)){
-			paused = TooglePausedScreen();
+			paused = enableDisablePauseScreen();
 		}
 		if(paused){
 			if(Input.GetKeyUp("joystick button 8")){
@@ -79,11 +80,9 @@ public class PlayerInteraction : MonoBehaviour {
 			if(optionChosen >0){
 				optionCounter+=0.1f;
 				if(optionCounter >=10){
-					Debug.Log(optionChosen);
 					if((optionChosen==3)||(optionChosen==10)){
 						paused = false;
 						counter=0;
-						Screen.lockCursor = false;
 						Time.timeScale = 1;
 						playWalk=false;
 						greetingCheck=false;
@@ -94,7 +93,10 @@ public class PlayerInteraction : MonoBehaviour {
 			}
 		}
 	}
-	
+	/// <summary>
+	/// Raises the GU event.
+	/// deals with displaying the interactions for the character to deal with
+	/// </summary>
 	void OnGUI(){
 		string greet;
 		if(playWalk){
@@ -112,7 +114,6 @@ public class PlayerInteraction : MonoBehaviour {
 		if(paused){
 			if((!greetingCheck)&&(counter<=10)&&(playWalk)){
 				counter+=0.1f;
-				Debug.Log(counter);
 				greet = "Hello there. How are you?";
 				
 				GUI.enabled = false;
@@ -164,27 +165,34 @@ public class PlayerInteraction : MonoBehaviour {
 			}
 		}
 	}
-	
-	bool TooglePausedScreen(){
+	/// <summary>
+	/// Enables the disable pause screen.
+	/// </summary>
+	/// <returns><c>true</c>, if disable pause screen was enabled, <c>false</c> otherwise.</returns>
+	bool enableDisablePauseScreen(){
 		if(Time.timeScale ==0){
-			Screen.lockCursor = true;
 			Time.timeScale=1;
 			return false;
 		}else{
-			Screen.lockCursor = false;
 			Time.timeScale = 0;
 			return true;
 		}
 	}
 	
-	
+	/// <summary>
+	/// Raises the trigger enter event.
+	/// </summary>
+	/// <param name="playerInRange">Player in range.</param>
 	void OnTriggerEnter (Collider playerInRange)
 	{	
 		if(playerInRange ==true){
 			playWalk =true;
 		}
 	}
-	
+	/// <summary>
+	/// Raises the trigger exit event.
+	/// </summary>
+	/// <param name="playerNotInRange">Player not in range.</param>
 	void OnTriggerExit (Collider playerNotInRange)
 	{
 		if(playerNotInRange !=true){

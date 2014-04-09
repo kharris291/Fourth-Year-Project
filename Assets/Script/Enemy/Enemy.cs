@@ -21,7 +21,11 @@ public class Enemy : MonoBehaviour {
 	
 	}
 
-
+	/// <summary>
+	/// Raises the trigger enter event.
+	/// brings on about the battle simulations while telling the program the correct enemy to send into battle
+	/// </summary>
+	/// <param name="playerInRange">Player in range.</param>
 	void OnTriggerEnter (Collider playerInRange)
 	{
 		GameObject player = GameObject.FindGameObjectWithTag("Player");

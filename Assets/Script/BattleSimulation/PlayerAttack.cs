@@ -1,6 +1,12 @@
 ﻿/// <summary>
 /// Player attack.cs
 /// Author: Harris Kevin
+/// physical attacks get instantiated here
+/// 
+/// the file makes the character move towards the enemy selected
+/// once the attack is done the player is placed back where they started at
+/// the amount of damage is taken from the enmies health
+/// attack decision is done in the battleattackdisplay script
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -16,7 +22,7 @@ public class PlayerAttack : MonoBehaviour {
 	GameObject initialiseParticles;
 	public bool magicCheck = false;
 	
-	public GameObject[] particles =new GameObject[3];
+	public GameObject[] particles =new GameObject[5];
 
 	void Awake(){
 		//constVar = GameObject.FindGameObjectsWithTag("Enemy2");
@@ -78,7 +84,7 @@ public class PlayerAttack : MonoBehaviour {
 				                                0, 
 				                                characterTransform.forward.z * 8 * Time.deltaTime);
 				characterTransform.position+= charPosition;
-				animation.Play("run");
+				animation.Play("Run");
 
 			}
 			if(Vector3.Distance(characterTransform.position,EnemyTarget.transform.position)<=1){

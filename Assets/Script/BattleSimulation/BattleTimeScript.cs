@@ -1,6 +1,8 @@
 ﻿/// <summary>
 /// Battle time script.cs
 /// Author: Harris Kevin
+/// this is the time gauge for in between moves
+/// gathers the time and displays it in boxes on the screen
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -9,8 +11,6 @@ public class BattleTimeScript : MonoBehaviour {
 
 	public int timeToAttack = 0;
 	public int attackTime = 100;
-	private Texture3D bgImage;
-	private Texture3D fgImage;
 	private float attackBarLength1;
 	public float timeToAttack1 = 0f;
 	private float[] attackBarLength;
@@ -22,7 +22,6 @@ public class BattleTimeScript : MonoBehaviour {
 	CharacterInformation playerInfo;
 	
 	void Awake(){
-		//	playerInfo.Awake();
 		
 		constVar= GameObject.FindGameObjectWithTag("Constant");
 		stored = constVar.GetComponent<StoredInformation>();

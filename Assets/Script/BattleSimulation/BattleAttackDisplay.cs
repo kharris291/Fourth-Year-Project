@@ -1,6 +1,8 @@
 /// <summary>
 /// Battle attack display.cs
 /// Author: Harris Kevin
+/// 
+/// this handles the attack display for when a character has a turn to take
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -35,7 +37,9 @@ public class BattleAttackDisplay : MonoBehaviour {
 		optionsToSelect[3] = "Run";
 		buttonPressedCheck =0;
 	}
-
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
 	void Start(){
 		desiredPlayer  =GameObject.FindGameObjectsWithTag("Player2");
 		battle = desiredPlayer[0].GetComponent<BattleTimeScript>();
@@ -49,6 +53,11 @@ public class BattleAttackDisplay : MonoBehaviour {
 	int flag =0;
 	bool flagCheck = false;
 	// Update is called once per frame
+	/// <summary>
+	/// Update this instance.
+	/// this handles taking the inputs and sending the correct repsone to the attack script
+	/// this is done by button presses to determine the correct response that are depicted by different screens
+	/// </summary>
 	void Update () {
 		GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy2");
 		if(enemyObjects.Length!=0){

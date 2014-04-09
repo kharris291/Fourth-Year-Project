@@ -1,6 +1,10 @@
 ﻿/// <summary>
 /// Movement.cs
 /// Author: Harris Kevin
+/// 
+/// moves npc arund the village
+/// reads in the correct points in the correct village
+/// changes targets once the point is close to the character
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -27,6 +31,12 @@ public class Movement : MonoBehaviour
 	{
 		movementAllowance = GameObject.FindGameObjectsWithTag (tagName);
 		numberOfPointsInMovementAllowance = movementAllowance.Length - 1;
+		for(int i = 0; i <= numberOfPointsInMovementAllowance; i++){
+			if(movementAllowance[i].name == "MovementAllowance - "+ counter)
+				target = movementAllowance [i].transform;
+			if(movementAllowance[i].name == "MovementAllowance")
+				target = movementAllowance [i].transform;
+		}
 		target = movementAllowance [counter].transform;
 		maxDistance = 4;
 	}
@@ -55,7 +65,14 @@ public class Movement : MonoBehaviour
 			if(counter >numberOfPointsInMovementAllowance){
 				counter = 0;
 			}
-			target = movementAllowance [counter].transform;
+			for(int i = numberOfPointsInMovementAllowance; i >=0 ; i--){
+				if(movementAllowance[i].name == "MovementAllowance - "+ counter)
+					target = movementAllowance [i].transform;
+				if(movementAllowance[i].name == "MovementAllowance")
+					target = movementAllowance [i].transform;
+			}
+
+
 			
 		}
 	}

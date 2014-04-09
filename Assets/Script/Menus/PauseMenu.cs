@@ -1,6 +1,8 @@
 ﻿/// <summary>
 /// Pause menu.cs
 /// Author: Harris Kevin
+/// pause menu for the game
+/// buttons have functionality that corrosponds to the name given
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -17,7 +19,6 @@ public class PauseMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		info = new StoredInformation();
-		Screen.lockCursor = true;
 		Time.timeScale=1;
 	}
 
@@ -31,7 +32,7 @@ public class PauseMenu : MonoBehaviour {
 			                         buttonGroupWidth, buttonGroupHeight));
 			
 			if(GUI.Button(new Rect(0,0,widthOfButton,heightOfButton),"Resume")){
-				paused = TooglePausedScreen();
+				paused = enableDisablePauseScreen();
 			}
 			
 			if(GUI.Button(new Rect(0,60,widthOfButton,heightOfButton),"Main Menu")){
@@ -63,17 +64,15 @@ public class PauseMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyUp("joystick button 2")){
-			paused = TooglePausedScreen();
+			paused = enableDisablePauseScreen();
 		}
 	}
 
-	bool TooglePausedScreen(){
+	bool enableDisablePauseScreen(){
 		if(Time.timeScale ==0){
-			Screen.lockCursor = true;
 			Time.timeScale=1;
 			return false;
 		}else{
-			Screen.lockCursor = false;
 			Time.timeScale = 0;
 			return true;
 		}

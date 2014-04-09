@@ -1,6 +1,7 @@
 /// <summary>
 /// Player health.cs
 /// Author: Harris Kevin
+/// displays and adjusts the players health
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -10,8 +11,6 @@ public class PlayerHealth : MonoBehaviour
 {
 	public int maxHealth = 100;
 	public int curHealth = 100;
-	private Texture3D bgImage;
-	private Texture3D fgImage;
 	private float healthBarLength1;
 	private float[] healthBarLength;
 	int starting;
@@ -81,7 +80,11 @@ public class PlayerHealth : MonoBehaviour
 		}
 		
 	}
-	
+	/// <summary>
+	/// Adjusts the current health.
+	/// </summary>
+	/// <param name="adj">Adj.</param>
+	/// <param name="counter">Counter.</param>
 	public void AdjustCurrentHealth (int adj, int counter)
 	{		
 		/// <summary>

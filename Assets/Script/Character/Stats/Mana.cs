@@ -2,6 +2,7 @@
 /// Mana.
 /// a list of available magic powers
 /// 
+/// general idea taken from different file stats in the tutorial series below
 /// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
 /// Author: Laliberte P. 
 /// Date: 2013 October 24. 

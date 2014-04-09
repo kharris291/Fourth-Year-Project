@@ -34,6 +34,7 @@ public class NewGame : MonoBehaviour
 		_screenHSize = Screen.height;
 		_screenWsize = Screen.width;
 		_center.Set ( _screenWsize/ 2, _screenHSize / 2, 0);
+		#region
 		/// <summary>
 		/// NewGame.cs
 		/// 
@@ -51,6 +52,7 @@ public class NewGame : MonoBehaviour
 		
 		_mainCharacter = new PlayerInformation ();
 		_mainCharacter.Awake ();
+		#endregion
 	}
 	
 	// Update is called once per frame

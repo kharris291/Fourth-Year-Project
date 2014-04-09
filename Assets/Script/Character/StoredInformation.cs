@@ -80,7 +80,9 @@ public class StoredInformation : MonoBehaviour {
 			LoadData();
 		}
 	}
-
+	/// <summary>
+	/// Initilises the variables.
+	/// </summary>
 	public void initiliseConstantVariables(){
 		for (int cnt = 0; cnt < Enum.GetValues(typeof(AttributeName)).Length; cnt++){
 			_primaryAttribute [cnt] = ((AttributeName)cnt).ToString ();
@@ -170,6 +172,13 @@ public class StoredInformation : MonoBehaviour {
 	}
 	public int check =0;
 	// Update is called once per frame
+	/// <summary>
+	/// Update this instance.
+	/// updates the position, money and stats if new game
+	/// deals with checking the expereience and also changes the stats and level on battle end
+	 /// if the level is increased
+	/// 
+	/// </summary>
 	void Update () {
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
@@ -275,7 +284,10 @@ public class StoredInformation : MonoBehaviour {
 			checkloop=false;
 		}
 	}
-
+	/// <summary>
+	/// Characters name.
+	/// </summary>
+	/// <param name="chName">Ch name.</param>
 	public void CharacterName(string chName){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
@@ -286,7 +298,11 @@ public class StoredInformation : MonoBehaviour {
 		initiliseConstantVariables();
 
 	}
-
+	/// <summary>
+	/// Adds the items.
+	/// </summary>
+	/// <param name="chName">Ch name.</param>
+	/// <param name="itemPower">Item power.</param>
 	public void addItems(string chName, string itemPower){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
@@ -305,7 +321,10 @@ public class StoredInformation : MonoBehaviour {
 		stored.itemId = new string[stored.itemsContentArray.Count];
 		stored.itemsContentArray.CopyTo(stored.itemId);
 	}
-
+	/// <summary>
+	/// Adds the enemy to scene.
+	/// </summary>
+	/// <param name="fighting">Fighting.</param>
 	public void AddEnemyToScene(int fighting){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
@@ -313,7 +332,10 @@ public class StoredInformation : MonoBehaviour {
 
 		storedIN.enemyTypeNumber = fighting;
 	}
-
+	/// <summary>
+	/// Adds the player to scene.
+	/// </summary>
+	/// <param name="fighting">Fighting.</param>
 	public void AddPlayerToScene(int fighting){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
@@ -321,7 +343,10 @@ public class StoredInformation : MonoBehaviour {
 		
 		storedIN.playerNumber = fighting;
 	}
-
+	/// <summary>
+	/// Adds the player position after battle.
+	/// </summary>
+	/// <param name="playerPositionAfterBattle">Player position after battle.</param>
 	public void AddPlayerPositionAfterBattle(Vector3 playerPositionAfterBattle){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
@@ -330,7 +355,10 @@ public class StoredInformation : MonoBehaviour {
 		storedIN.positionOnScreen = playerPositionAfterBattle;
 
 	}
-
+	/// <summary>
+	/// Adds the enemy number.
+	/// </summary>
+	/// <param name="num">Number.</param>
 	public void AddEnemyNumber(int num){
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 		
@@ -338,7 +366,9 @@ public class StoredInformation : MonoBehaviour {
 		
 		storedIN.enemyRemoval = num;
 	}
-
+/// <summary>
+/// Saves the data.
+/// </summary>
 	public void SaveData(){
 		GameObject playerPrefab = GameObject.FindGameObjectWithTag("Player");
 	
@@ -422,7 +452,9 @@ public class StoredInformation : MonoBehaviour {
 
 		PlayerPrefs.Save();
 	}
-
+	/// <summary>
+	/// Loads the data.
+	/// </summary>
 	public void LoadData(){
 
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");

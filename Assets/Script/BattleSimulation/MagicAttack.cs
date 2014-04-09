@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Magic attack.cs
+/// is used to instaantiate the attacks for magic
+/// retrieves information from the stored information class to attack enemies health points
+/// Author: Kevin Harris
+/// </summary>
 public class MagicAttack : MonoBehaviour {
 
 	StoredInformation stored;
@@ -111,7 +116,9 @@ public class MagicAttack : MonoBehaviour {
 	public void retrieveEnemies(int fight){
 		funTimes = fight;
 	}
-
+	/// <summary>
+	/// Fires the attack enemy.
+	/// </summary>
 	public void FireAttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
 		MagicAttack pl;
@@ -125,7 +132,9 @@ public class MagicAttack : MonoBehaviour {
 			pl.attempt =true;		
 		}
 	}
-	
+	/// <summary>
+	/// Ices the attack enemy.
+	/// </summary>
 	public void IceAttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
 		MagicAttack pl;
@@ -139,7 +148,9 @@ public class MagicAttack : MonoBehaviour {
 			pl.attempt =true;		
 		}
 	}
-	
+	/// <summary>
+	/// Lightnings the attack enemy.
+	/// </summary>
 	public void LightningAttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
 		MagicAttack pl;
@@ -153,7 +164,9 @@ public class MagicAttack : MonoBehaviour {
 			pl.attempt =true;		
 		}
 	}
-
+	/// <summary>
+	/// Waters the attack enemy.
+	/// </summary>
 	public void WaterAttackEnemy(){
 		myTransform = GameObject.FindGameObjectWithTag("Player2").transform;
 		MagicAttack pl;
