@@ -1,12 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Enemy\EnemyHealth.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\College files\4th year\Games 2\labs\assignment\Assets\movement.cs">
     <Files>
-      <File FileName="FYP.sln" Line="70" Column="1" />
-      <File FileName="Assets\Script\NPC\Movement.cs" Line="24" Column="16" />
-      <File FileName="Assets\Script\NPC\PlayerInteraction.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\NPC\Movement.cs" Line="24" Column="16" />
-      <File FileName="Assets\Script\Enemy\EnemyHealth.cs" Line="11" Column="44" />
+      <File FileName="..\College files\4th year\Games 2\labs\assignment\Assets\movement.cs" Line="22" Column="29" />
+      <File FileName="..\College files\4th year\Games 2\labs\assignment\Assets\Code\OriMovement.cs" Line="38" Column="3" />
+      <File FileName="..\College files\4th year\Games 2\labs\assignment\Assets\OriPath1.cs" Line="4" Column="22" />
+      <File FileName="..\College files\4th year\Games 2\labs\assignment\Assets\OriPath2.cs" Line="4" Column="22" />
+      <File FileName="..\College files\4th year\Games 2\labs\assignment\Assets\OriPath3.cs" Line="9" Column="3" />
+      <File FileName="..\College files\4th year\Games 2\labs\assignment\Assets\OriPath4.cs" Line="4" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

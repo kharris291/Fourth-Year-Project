@@ -20,7 +20,6 @@ public class EnemyAttack : MonoBehaviour {
 	int attackType;
 	public int counter;
 	GameObject initialiseParticles;
-	bool playWalk = false;
 	
 	public GameObject[] particles =new GameObject[3];
 	void Awake(){
@@ -89,7 +88,7 @@ public class EnemyAttack : MonoBehaviour {
 					
 				}
 
-				if(((Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<1)||(playWalk))&&(attempt!=false)){
+				if((Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<1)&&(attempt!=false)){
 					initialiseParticles = new GameObject();
 					EnemyTarget = enemyObjects[fighterNumber];
 					Transform enemyTransform = EnemyTarget.transform;
@@ -127,9 +126,8 @@ public class EnemyAttack : MonoBehaviour {
 						initialiseParticles.name = "Lightning";
 					}
 					if(Vector3.Distance(myTransform.position,EnemyTarget.transform.position)<=1)
-						//enAttack.attempt = false;
-						attempt = false;
-					if(attempt==false){
+						this.attempt = false;
+					if(enAttack.attempt==false){
 						GameObject[] atemptingChange = GameObject.FindGameObjectsWithTag("EnemyBattle");
 						obj[counter].transform.position = atemptingChange[counter].transform.position;
 						enemTimeScript.timeToAttack1=0;
@@ -158,15 +156,14 @@ public class EnemyAttack : MonoBehaviour {
 		
 		EnemyTarget = enemyObjects[fighterNumber];
 		Transform enemyTransform = EnemyTarget.transform;
-		//enAttack = obj.GetComponent<EnemyAttack>();
+		enAttack = obj.GetComponent<EnemyAttack>();
 		
 		if(Vector3.Distance(myTransform.position,enemyTransform.position)>1){
 			
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			//enAttack.attempt =true;
-			attempt = true;
+			enAttack.attempt =true;
 			
 		}
 	}
@@ -185,8 +182,7 @@ public class EnemyAttack : MonoBehaviour {
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			//enAttack.
-			attempt =true;
+			enAttack.attempt =true;
 			
 		}
 	}
@@ -205,8 +201,8 @@ public class EnemyAttack : MonoBehaviour {
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime, 
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			//enAttack.
-			attempt =true;
+			enAttack.attempt =true;
+			
 		}
 	}
 	
@@ -224,26 +220,8 @@ public class EnemyAttack : MonoBehaviour {
 			myTransform.position+= new Vector3 (myTransform.forward.x * 12 * Time.deltaTime,
 			                                    0,
 			                                    myTransform.forward.z * 12 * Time.deltaTime);
-			//enAttack.
-			attempt =true;
-		}
-	}
-
-	void OnTriggerEnter (Collider playerInRange)
-	{	
-		if(playerInRange ==true){
-			playWalk =true;
-		}
-	}
-	/// <summary>
-	/// Raises the trigger exit event.
-	/// </summary>
-	/// <param name="playerNotInRange">Player not in range.</param>
-	void OnTriggerExit (Collider playerNotInRange)
-	{
-		Debug.Log(playerNotInRange);
-		if(playerNotInRange !=true){
-			playWalk =false;
+			enAttack.attempt =true;
+			
 		}
 	}
 

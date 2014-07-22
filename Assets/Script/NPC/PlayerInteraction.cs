@@ -195,7 +195,7 @@ public class PlayerInteraction : MonoBehaviour {
 	/// <param name="playerNotInRange">Player not in range.</param>
 	void OnTriggerExit (Collider playerNotInRange)
 	{
-		if(playerNotInRange !=true){
+		if(playWalk ==true){
 			playWalk =false;
 		}
 	}
