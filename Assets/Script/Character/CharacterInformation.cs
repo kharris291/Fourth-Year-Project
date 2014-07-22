@@ -1,10 +1,12 @@
 /// <summary>
-/// General information.
+/// Character information.cs
 /// 
 /// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
 /// Author: Laliberte P. 
 /// Date: 2013 October 24. 
 /// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+/// 
+/// taken mainly from the tutorial but modified for my own use
 /// </summary>
 using UnityEngine;
 using System.Collections;
@@ -148,31 +150,31 @@ public class CharacterInformation : MonoBehaviour
 	public void SetupVitalsModifiers ()
 	{
 		//health
-		GetVitals ((int)VitalName.Health).AddModifier (new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Constitution), .5f));
+		GetVitals ((int)VitalName.Health).AddModifier (new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Constitution), 10.5f));
 		
 		//energy
-		GetVitals ((int)VitalName.Energy).AddModifier (new ModifyingAttribute (GetPrimaryAttribute ((int)AttributeName.Constitution), 1));
+		GetVitals ((int)VitalName.Energy).AddModifier (new ModifyingAttribute (GetPrimaryAttribute ((int)AttributeName.Constitution), 1.5f));
 		
 		//mana
-		GetVitals ((int)VitalName.Mana).AddModifier (new ModifyingAttribute (GetPrimaryAttribute ((int)AttributeName.ManaPower), 1));
+		GetVitals ((int)VitalName.Mana).AddModifier (new ModifyingAttribute (GetPrimaryAttribute ((int)AttributeName.ManaPower), 2.5f));
 		
 	}
 	
 	public void SetupAttackModifier ()
 	{
 		//	Attack,
-		GetAttack((int)AttackName.Attack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), .5f));
+		GetAttack((int)AttackName.Attack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), 1.5f*((int)AttributeName.Constitution)));
 		//FireAttack,
-		GetAttack((int)AttackName.FireAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), .5f));
-		GetAttack((int)AttackName.FireAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower), .5f));
+		GetAttack((int)AttackName.FireAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), 1*((int)AttributeName.Constitution)));
+		GetAttack((int)AttackName.FireAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower), 1*((int)AttributeName.Constitution)));
 		//IceAttack,
 		
-		GetAttack((int)AttackName.IceAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), .5f));
-		GetAttack((int)AttackName.IceAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower), .5f));
+		GetAttack((int)AttackName.IceAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), 1*((int)AttributeName.Constitution)));
+		GetAttack((int)AttackName.IceAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower), 1f*((int)AttributeName.Constitution)));
 		//LightningAttack
 		
-		GetAttack((int)AttackName.LightningAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), .5f));
-		GetAttack((int)AttackName.LightningAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower), .5f));
+		GetAttack((int)AttackName.LightningAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength), 1.5f*((int)AttributeName.Constitution)));
+		GetAttack((int)AttackName.LightningAttack).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower), 1.5f*((int)AttributeName.Constitution)));
 		
 	}
 
@@ -184,31 +186,31 @@ public class CharacterInformation : MonoBehaviour
 	
 	public void SetupManaModifier ()
 	{
-		GetMana((int)ManaName.Fire).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f));
-		GetMana((int)ManaName.Fire).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f));
+		GetMana((int)ManaName.Fire).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f*(int)AttributeName.ManaPower));
+		GetMana((int)ManaName.Fire).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f*(int)AttributeName.ManaPower));
 		
 		
-		GetMana((int)ManaName.Ice).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f));
-		GetMana((int)ManaName.Ice).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f));
+		GetMana((int)ManaName.Ice).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f*(int)AttributeName.ManaPower));
+		GetMana((int)ManaName.Ice).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f*(int)AttributeName.ManaPower));
 		
-		GetMana((int)ManaName.Lightning).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f));
-		GetMana((int)ManaName.Lightning).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f));
+		GetMana((int)ManaName.Lightning).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f*(int)AttributeName.ManaPower));
+			GetMana((int)ManaName.Lightning).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f*(int)AttributeName.ManaPower));
 		
-		GetMana((int)ManaName.Water).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f));
-		GetMana((int)ManaName.Water).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f));
+		GetMana((int)ManaName.Water).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f*(int)AttributeName.ManaPower));
+		GetMana((int)ManaName.Water).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f*(int)AttributeName.ManaPower));
 		
-		GetMana((int)ManaName.Wind).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f));
-		GetMana((int)ManaName.Wind).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f));
+		GetMana((int)ManaName.Wind).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f*(int)AttributeName.ManaPower));
+		GetMana((int)ManaName.Wind).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaForce),.33f*(int)AttributeName.ManaPower));
 		
 	}
 	
 	public void SetupDefenceModifier ()
 	{
-		GetDefence((int)DefenceName.AttackDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength),.33f));
-		GetDefence((int)DefenceName.AttackDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Concentration),.33f));
+		GetDefence((int)DefenceName.AttackDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Strength),.33f*(int)VitalName.Energy));
+		GetDefence((int)DefenceName.AttackDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Concentration),.33f*(int)VitalName.Energy));
 		
-		GetDefence((int)DefenceName.ManaDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f));
-		GetDefence((int)DefenceName.ManaDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Concentration),.33f));
+		GetDefence((int)DefenceName.ManaDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.ManaPower),.33f*(int)VitalName.Energy));
+		GetDefence((int)DefenceName.ManaDefence).AddModifier(new ModifyingAttribute (GetPrimaryAttribute((int)AttributeName.Concentration),.33f*(int)VitalName.Energy));
 	}
 	
 	public void StatUpdate ()

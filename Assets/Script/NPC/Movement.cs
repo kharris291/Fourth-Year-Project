@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Movement.cs
+/// Author: Harris Kevin
+/// 
+/// moves npc arund the village
+/// reads in the correct points in the correct village
+/// changes targets once the point is close to the character
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour
@@ -10,7 +18,6 @@ public class Movement : MonoBehaviour
 	public int counter = 0;
 	public string tagName;
 	
-	bool playWalk = false;
 	void Awake ()
 	{
 		myTransform = transform;	
@@ -22,11 +29,15 @@ public class Movement : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
 		movementAllowance = GameObject.FindGameObjectsWithTag (tagName);
 		numberOfPointsInMovementAllowance = movementAllowance.Length - 1;
+		for(int i = 0; i <= numberOfPointsInMovementAllowance; i++){
+			if(movementAllowance[i].name == "MovementAllowance - "+ counter)
+				target = movementAllowance [i].transform;
+			if(movementAllowance[i].name == "MovementAllowance")
+				target = movementAllowance [i].transform;
+		}
 		target = movementAllowance [counter].transform;
-		
 		maxDistance = 4;
 	}
 	
@@ -35,48 +46,35 @@ public class Movement : MonoBehaviour
 	void Update ()
 	{
 		animation.Play ("walk");
-		//look at the target
+
 		Quaternion rot;
 		
-		rot = Quaternion.Slerp (myTransform.rotation, Quaternion.LookRotation (target.position - myTransform.position), rotationSpeed * Time.deltaTime);
-		//	rot.y=90.0f;
+		rot = Quaternion.Slerp (myTransform.rotation,
+		                        Quaternion.LookRotation (target.position - myTransform.position), 
+		                        rotationSpeed * Time.deltaTime);
 		myTransform.rotation = rot;
 		Vector3 tar = new Vector3 (target.position.x, myTransform.position.y, target.position.z);
 		if (Vector3.Distance (target.position, myTransform.position) >= maxDistance) {
-			//more towards target
-			myTransform.position += new Vector3 (myTransform.forward.x * moveSpeed * Time.deltaTime, 0, myTransform.forward.z * moveSpeed * Time.deltaTime);
+			myTransform.position += new Vector3 (myTransform.forward.x * moveSpeed * Time.deltaTime,
+			                                     0, 
+			                                     myTransform.forward.z * moveSpeed * Time.deltaTime);
 			
 		}
-		//Debug.Log (myTransform.transform.position.z);
 		if (Vector3.Distance (target.position, myTransform.position)<= maxDistance) {
-			//if(atWall){
-			/*changeWalkingDirection = 0;
-			counter = Random.Range (0, movementAllowance.Length);*/
-			//Debug.Log(movementAllowance [counter]);
 			counter ++;
 			if(counter >numberOfPointsInMovementAllowance){
 				counter = 0;
 			}
-			target = movementAllowance [counter].transform;
+			for(int i = numberOfPointsInMovementAllowance; i >=0 ; i--){
+				if(movementAllowance[i].name == "MovementAllowance - "+ counter)
+					target = movementAllowance [i].transform;
+				if(movementAllowance[i].name == "MovementAllowance")
+					target = movementAllowance [i].transform;
+			}
+
+
 			
 		}
-		//changeWalkingDirection++;
 	}
 
-	void OnTriggerEnter (Collider playerInRange)
-	{
-
-		if(playerInRange ==true){
-			playWalk =true;
-		}
-		Debug.Log(playWalk);
-	}
-	
-	void OnTriggerExit (Collider playerNotInRange)
-	{
-		if(playerNotInRange !=true){
-			playWalk =false;
-		}
-	}
-	
 }

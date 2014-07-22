@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Shop worker.cs
+/// Author: Harris Kevin
+/// script is used to read in and display information for the main character to buy and sell items.
+/// it also incorporates the money script and the script for reading a file.
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class ShopWorker : MonoBehaviour {
@@ -8,7 +14,7 @@ public class ShopWorker : MonoBehaviour {
 	public GameObject player;
 	ReadAFile fileReading;
 
-	private int buttonWidth=200,
+	private int widthOfButton=200,
 	buttonHeight = 50,
 	groupWidth = 600,
 	groupHeight = 230;
@@ -32,7 +38,6 @@ public class ShopWorker : MonoBehaviour {
 	bool filereadingCheck = false;
 	// Use this for initialization
 	void Start () {
-		Screen.lockCursor = true;
 		Time.timeScale=1;
 
 		item = GameObject.FindGameObjectsWithTag("Item");
@@ -85,39 +90,45 @@ public class ShopWorker : MonoBehaviour {
 			}
 
 
-			paused = TooglePausedScreen();
+			paused = enableDisablePauseScreen();
 		}
 	}
-	bool shopOpen = false;
-	
+	bool shopOpen = false, shopPurchase = false;
+	public GUIStyle moneySize,open;
+	string boughtOrNOt="";
 	GameObject[] ga;
 	void OnGUI(){
 		if(ShopMenu){
+			open.fontSize = Screen.width/23;
 			shopStatus= "Press O to open";
-			GUI.Label(new Rect(0,0, 300,30),shopStatus);
+			GUI.Label(new Rect(0,0, 300,30),shopStatus,open);
 			shopOpen=true;
 
 		}
 		if(paused){
 			shopStatus="";
-			//if(GUI.Button(new Rect(0,0,buttonWidth,buttonHeight),"Buy")){
 			if(shopAssistantType =="buy"){
-//				buying=true;
 				buyingStuff();
-				/*GUI.BeginGroup(new Rect(((Screen.width/3)-(groupWidth/2)),
-				                        ((Screen.height/3)-(groupHeight/2)),
-				                        Screen.width, Screen.height));
-				if(GUI.Button(new Rect(buttonWidth+10,0,buttonWidth,buttonHeight),"Buying")){
-					//buyingStuff(shopType);
-					
-					
+
+				moneySize.fontSize = (int)(Screen.height/30);
+				GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
+				StoredInformation storedIN = objGame.GetComponent<StoredInformation>();
+				GUI.Label(new Rect((((Screen.width/2)-(groupWidth/2))),
+				                   (((Screen.height/2)-(groupHeight/2))-(Screen.height/23)),
+				                   Screen.width, Screen.height),"Total Money : " +storedIN.moneyTotal, moneySize);
+				if((!money.test)&&(shopPurchase)){
+					boughtOrNOt = "Not enough money to buy";
+				}else{
+					boughtOrNOt="";
 				}
-				if(GUI.Button(new Rect(buttonWidth+10,60,buttonWidth,buttonHeight),"Sell")){
-					
+				if((money.test)&&(shopPurchase)){
+					boughtOrNOt = "Item Bought";
+				}else{
+					boughtOrNOt = "";
 				}
-				
-				GUI.EndGroup();
-*/
+				GUI.Label(new Rect((Screen.width/2),
+				                   (((Screen.height/2)-(groupHeight/2))-(Screen.height/23)),
+				                   Screen.width, Screen.height),boughtOrNOt, moneySize);
 
 				GUI.BeginGroup(new Rect(((Screen.width/2)-(groupWidth/2)),
 				                        ((Screen.height/2)-(groupHeight/2)),
@@ -140,32 +151,30 @@ public class ShopWorker : MonoBehaviour {
 						if(shopType=="Item"){
 							details = "Recovers";
 						}
-						if(GUI.Button(new Rect(startingPosLeft,StartingPosTop,buttonWidth,buttonHeight),
+						if(GUI.Button(new Rect(startingPosLeft,StartingPosTop,widthOfButton,buttonHeight),
 						              "Name : "+ ga[counter].GetComponent<ReadAFile>()._name[cnt] +
 						              "\r\n "+ details +" : " + ga[counter].GetComponent<ReadAFile>()._id[cnt] +
 						              "\r\n Price : " + ga[counter].GetComponent<ReadAFile>()._price[cnt])){
 							itemPrice = int.Parse(ga[counter].GetComponent<ReadAFile>()._price[cnt]);
-							//buyingAttempt=money.money("minus",itemPrice);
-						
-							GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
-							StoredInformation st = objGame.GetComponent<StoredInformation>();
-							if((st.moneyTotal-itemPrice)>-1){
+ 						
+							if((storedIN.moneyTotal-itemPrice)>-1){
 								money.processMoney("minus",itemPrice);
 
-							
 								if(money.test){
-									
-									st.moneyTotal -= itemPrice;
+									storedIN.moneyTotal -= itemPrice;
 									info.addItems(ga[counter].GetComponent<ReadAFile>()._name[cnt],ga[counter].GetComponent<ReadAFile>()._id[cnt]);
+									boughtOrNOt = "Item Purchased";
+									shopPurchase = true;
 								}else{
 									GUI.Label(new Rect(((Screen.width/2)-(groupWidth/2)),
 									          ((Screen.height/2)-(groupHeight/2))-100,
-									          Screen.width, Screen.height), " Not enough monry to buy");
+									          Screen.width, Screen.height), " Not enough money  to buy");
+									shopPurchase = true;
 								}
 							}
 						}
 					}
-					startingPosLeft+=buttonWidth;
+					startingPosLeft+=widthOfButton;
 					if(startingPosLeft >= groupWidth){
 						startingPosLeft=0;
 						StartingPosTop+=buttonHeight+20;
@@ -173,15 +182,13 @@ public class ShopWorker : MonoBehaviour {
 				}
 				GUI.EndGroup();
 			}
-			//if(GUI.Button(new Rect(0,60,buttonWidth,buttonHeight),"Sell")){
 			if(shopAssistantType =="sell"){
 				sellBits();
 			}
 		}
 	}
+
 	void buyingStuff(){
-
-
 		if(shopType =="Item"){
 			if(!filereadingCheck){
 				fileReading = new ReadAFile();
@@ -203,21 +210,18 @@ public class ShopWorker : MonoBehaviour {
 				filereadingCheck = true;
 			}
 		}
-
 	}
 
 	void sellBits(){
 
 	}
 
-	bool TooglePausedScreen(){
+	bool enableDisablePauseScreen(){
 		if(Time.timeScale ==0){
-			Screen.lockCursor = true;
 			Time.timeScale=1;
 			filereadingCheck = false;
 			return false;
 		}else{
-			Screen.lockCursor = false;
 			Time.timeScale = 0;
 			return true;
 		}

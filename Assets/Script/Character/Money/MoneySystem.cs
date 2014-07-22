@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Money system.cd
+/// Author: Kevin Harris
+/// 
+/// handles money
+/// 
+/// process money either adds or subtracts money for the user depending on if pus or minus is added
+/// </summary>
 public class MoneySystem : MonoBehaviour {
 
 	public int StartingMoney = 200;

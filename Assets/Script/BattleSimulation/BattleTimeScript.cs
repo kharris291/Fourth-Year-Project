@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Battle time script.cs
+/// Author: Harris Kevin
+/// this is the time gauge for in between moves
+/// gathers the time and displays it in boxes on the screen
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class BattleTimeScript : MonoBehaviour {
 
 	public int timeToAttack = 0;
 	public int attackTime = 100;
-	private Texture3D bgImage;
-	private Texture3D fgImage;
 	private float attackBarLength1;
 	public float timeToAttack1 = 0f;
 	private float[] attackBarLength;
@@ -16,10 +20,8 @@ public class BattleTimeScript : MonoBehaviour {
 	GameObject constVar;
 	StoredInformation stored;
 	CharacterInformation playerInfo;
-	// Use this for initialization
 	
 	void Awake(){
-		//	playerInfo.Awake();
 		
 		constVar= GameObject.FindGameObjectWithTag("Constant");
 		stored = constVar.GetComponent<StoredInformation>();
@@ -27,10 +29,10 @@ public class BattleTimeScript : MonoBehaviour {
 		check = new bool[stored.playerNumber];
 		//timeToAttack = Random.Range(0,80);
 		for(int cnt =0; cnt > stored.playerNumber; cnt++){
-			attackBarLength[cnt] = (Screen.width / 4) * (timeToAttack / (float)attackTime);
+			attackBarLength[cnt] = (Screen.width / 6) * (timeToAttack / (float)attackTime);
 			
 		}
-		attackBarLength1 = (Screen.width / 4);
+		attackBarLength1 = (Screen.width / 6);
 	}
 
 	void Start () {
@@ -39,44 +41,49 @@ public class BattleTimeScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		AdjustTimeToFight(Time.deltaTime*3,0);
-		/*if(stored.playerNumber>=2){
-			AdjustTimeToFight(Time.deltaTime*3,1);
-		}
-		if(stored.playerNumber >=3){
-			AdjustTimeToFight(Time.deltaTime*3,2);
+		//if(stored.actionBeingTaken==false){
+			AdjustTimeToFight(Time.deltaTime*10,0);
+		/*	if(stored.playerNumber>=2){
+				AdjustTimeToFight(Time.deltaTime*3,1);
+			}
+			if(stored.playerNumber >=3){
+				AdjustTimeToFight(Time.deltaTime*3,2);
+			}
 		}*/
-
 	}
 
 	public void OnGUI ()
 	{
 //		int len = attackBarLength * (attackTime / (float)timeToAttack);
-
-		if(stored.playerNumber>=1){
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-70,attackBarLength1,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-70,attackBarLength[0],20),"");
-		}
-		if(stored.playerNumber>=2){
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-100,attackBarLength1,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-100,attackBarLength[1],20),"");
-		}
-		if(stored.playerNumber>=3){
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-130,attackBarLength1,20),"");
-			GUI.Box(new Rect(Screen.width/2-50,Screen.height-130,attackBarLength[2],20),attackTime+"/"+timeToAttack);
+		GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy2");
+		if(enemyObjects.Length!=0){
+			if(stored.playerNumber>=1){
+				GUI.Box(new Rect(Screen.width/2-50,Screen.height-30,attackBarLength1,20),"");
+				GUI.Box(new Rect(Screen.width/2-50,Screen.height-30,attackBarLength[0],20),"");
+			}
+			if(stored.playerNumber>=2){
+				GUI.Box(new Rect(Screen.width/2-50,Screen.height-60,attackBarLength1,20),"");
+				GUI.Box(new Rect(Screen.width/2-50,Screen.height-60,attackBarLength[1],20),"");
+			}
+			if(stored.playerNumber>=3){
+				GUI.Box(new Rect(Screen.width/2-50,Screen.height-90,attackBarLength1,20),"");
+				GUI.Box(new Rect(Screen.width/2-50,Screen.height-90,attackBarLength[2],20),"");
+			}
 		}
 	}
 
-	public void AdjustTimeToFight (float adj, int counter)
+	public void AdjustTimeToFight (float timeAdjustment, int counter)
 	{
-		timeToAttack1 += adj;
+		timeToAttack1 += timeAdjustment;
 		
 		if (timeToAttack < 0)
 			timeToAttack = 0;
 		
-		if (timeToAttack1 > attackTime)
+		if (timeToAttack1 > attackTime){
 			timeToAttack1 = (float)attackTime;
-		
+			stored.BattlePosition = counter;
+		}
+
 		//if (timeToAttack1 < timeToAttack)
 		//	timeToAttack1 = (float)timeToAttack;
 
@@ -84,14 +91,15 @@ public class BattleTimeScript : MonoBehaviour {
 			attackTime = 1;
 
 		timeToAttack = (int)timeToAttack1;
-		attackBarLength[counter] = (Screen.width / 4) * (timeToAttack / (float)attackTime);
+		attackBarLength[counter] = (Screen.width / 6) * (timeToAttack / (float)attackTime);
 		if((timeToAttack1>99)&&((check[counter]!= true))){
 			check[counter] =true;
-			Debug.Log ("yup");
+			//stored.actionBeingTaken=true;
 		}
 		else if(timeToAttack1<99){
 			check[counter] =false;
+			//stored.actionBeingTaken = false;
 		}
-		attackBarLength1 = (Screen.width / 4);
+		attackBarLength1 = (Screen.width / 6);
 	}
 }

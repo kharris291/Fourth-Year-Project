@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Player position.cs
+/// Author: Harris Kevin
+/// checks for the characters position and for changes in it between continuing and a new game
+/// also sets the position after coming out of a battle
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class PlayerPosition : MonoBehaviour {
@@ -9,8 +15,12 @@ public class PlayerPosition : MonoBehaviour {
 	public void Awake(){
 		DontDestroyOnLoad(this);
 	}
-	string current,previos;
+	string current;
 
+	public string previos;
+	/// <summary>
+	/// looks for the level was loaded event.
+	/// </summary>
 	void OnLevelWasLoaded(){
 
 		if(Application.loadedLevelName == "NewGame"){
@@ -20,32 +30,41 @@ public class PlayerPosition : MonoBehaviour {
 		if(Application.loadedLevelName=="Game"){
 			GameObject objGame = GameObject.FindGameObjectWithTag ("Constant");
 
-			StoredInformation st = objGame.GetComponent<StoredInformation>();
-			if(previos=="NewGame"){
+			StoredInformation storedIn = objGame.GetComponent<StoredInformation>();
+			if((Application.loadedLevelName=="NewGame")||(previos=="NewGame")){
 				position.x=1133.947f;
 				position.y=377.0055f;
 				position.z=3224.786f;
+				storedIn.positionOnScreen= position;
 			}
-			else if((st.positionOnScreen.x!=0)
-			   &&(st.positionOnScreen.y!=0)
-			   &&(st.positionOnScreen.z!=0)){
-				position = st.positionOnScreen;
+			else if((storedIn.positionOnScreen.x!=0)
+			   &&(storedIn.positionOnScreen.y!=0)
+			   &&(storedIn.positionOnScreen.z!=0)){
+				position = storedIn.positionOnScreen;
 			}
 			else{
 				position.x=1133.947f;
 				position.y=377.0055f;
 				position.z=3224.786f;
+				storedIn.positionOnScreen = position;
 			}
 			SetCharacterPosition();
 		}
 	}
-
-	public void SetPosition(Vector3 lol){
-		position.x = lol.x;
-		position.y = lol.y;
-		position.z = lol.z;
+	/// <summary>
+	/// Sets the position.
+	/// </summary>
+	/// <param name="playerPosition">Player position.</param>
+	/// <param name="prev">Previous.</param>
+	public void SetPosition(Vector3 playerPosition,string prev){
+		previos = prev;
+		position.x = playerPosition.x;
+		position.y = playerPosition.y;
+		position.z = playerPosition.z;
 	}
-
+	/// <summary>
+	/// Sets the character position.
+	/// </summary>
 	void SetCharacterPosition(){
 		
 		GameObject objGame = GameObject.FindGameObjectWithTag ("Player");

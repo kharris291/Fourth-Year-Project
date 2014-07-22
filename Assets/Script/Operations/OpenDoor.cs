@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Open door.cs
+/// Author: Harris Kevin
+/// Date: 2013 October 24. 
+/// Opens the Gate to the village.
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class OpenDoor : MonoBehaviour
@@ -9,7 +15,6 @@ public class OpenDoor : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
 		this.startingPos = Vector3.zero;
 		this.rotationAngle = new Vector3 (startingPos.x, startingPos.y + 90, startingPos.z);
 		this.doorOpenCheck = 0;
@@ -40,15 +45,17 @@ public class OpenDoor : MonoBehaviour
 		}
 		
 	}
-	
+
+	public GUIStyle open;
 	void OnGUI(){
 		if(rangeCheck==1){
+			open.fontSize = Screen.width/23;
 			if(opendoor==true){
-				GUI.Label(new Rect(0,0, 200,30),"Press O to open");
+				GUI.Label(new Rect(0,0, 200,30),"Press O to open",open);
 			}
 			
 			if(opendoor==false){
-				GUI.Label(new Rect(0,0, 200,30),"Press O to close");
+				GUI.Label(new Rect(0,0, 200,30),"Press O to close",open);
 			}
 		}else{
 			GUI.Label(new Rect(0,0, 20,10),"");

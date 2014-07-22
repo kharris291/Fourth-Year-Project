@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Display.cs
+/// 
+/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+/// Author: Laliberte P. 
+/// Date: 2013 October 24. 
+/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+/// 
+/// code was modified but mainly inspired by this video
+/// </summary>
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -24,6 +34,15 @@ public class NewGame : MonoBehaviour
 		_screenHSize = Screen.height;
 		_screenWsize = Screen.width;
 		_center.Set ( _screenWsize/ 2, _screenHSize / 2, 0);
+		#region
+		/// <summary>
+		/// NewGame.cs
+		/// 
+		/// Title: Hack & Slash RPG - A Unity3D Game Engine Tutorial | BurgZerg Arcade. [Online].;
+		/// Author: Laliberte P. 
+		/// Date: 2013 October 24. 
+		/// Available from: http://www.burgzergarcade.com/hack-slash-rpg-unity3d-game-engine-tutorial
+		/// </summary>
 		GUITexture MainCamera = FindObjectOfType (typeof(GUITexture)) as GUITexture;
 		if (MainCamera.name == "GameSettings") {
 			MainCamera.transform.position = Vector3.zero;
@@ -33,8 +52,7 @@ public class NewGame : MonoBehaviour
 		
 		_mainCharacter = new PlayerInformation ();
 		_mainCharacter.Awake ();
-
-
+		#endregion
 	}
 	
 	// Update is called once per frame
@@ -50,13 +68,14 @@ public class NewGame : MonoBehaviour
 
 		GUI.Label (new Rect (_center.x, 40, Screen.height/23, Screen.width/20), welcome, fontStyling);
 		GUI.Label (new Rect (_center.x, 100, 200, Screen.width/20), Name, fontStyling);
-		
+
+		_mainCharacter.Name = GUI.TextField (new Rect (_center.x, 200, 200, 30), _mainCharacter.Name);
 		if (_mainCharacter.Name == "") {
 			checkNameFilled ("Enter a Name Please");
 		} else{
 			checkNameFilled ("Continue");
 		}
-		_mainCharacter.Name = GUI.TextField (new Rect (_center.x, 200, 200, 30), _mainCharacter.Name);
+
 		
 	}
 

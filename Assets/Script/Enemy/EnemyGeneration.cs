@@ -1,10 +1,20 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Enemy generation.cs
+/// Author: Harris Kevin
+/// generates correct enemy and the number of them onto the battle field and into the main game
+/// also makes sure that if a character is loaded back into the game scence that enemies aren't 
+/// to close for a looping battle simulation to occurr
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class EnemyGeneration : MonoBehaviour {
 
 	GameObject[] Enmy;
 	public GameObject[] enemylisting;
+	GameObject[] positions;
+	GameObject ObjPlacement;
+
 	// Use this for initialization
 	void Start () {
 		if(Application.loadedLevelName=="Game")
@@ -13,16 +23,22 @@ public class EnemyGeneration : MonoBehaviour {
 			Enmy = GameObject.FindGameObjectsWithTag("EnemyBattle");
 		Generate();
 	}
-	GameObject[] positions;
-	GameObject ObjPlacement;
+
 	void Generate(){
 		positions = new GameObject[Enmy.Length];
 		int enemyNumb;
 		if(Application.loadedLevelName=="Game"){
-			for( int cnt = 0; cnt < Enmy.Length; cnt ++){
-				enemyNumb = Random.Range(0,2);
+			GameObject constVar = GameObject.FindGameObjectWithTag("Constant");
+			StoredInformation stored = constVar.GetComponent<StoredInformation>();
 
-				Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
+			for( int cnt = 0; cnt < Enmy.Length; cnt ++){
+				enemyNumb = Random.Range(0,3);
+				if(Vector3.Distance(stored.positionOnScreen,Enmy[cnt].transform.position)>20){
+					Enmy[cnt] = Instantiate(enemylisting[enemyNumb],Enmy[cnt].transform.position, Quaternion.identity) as GameObject;
+
+				}else{
+					Destroy(Enmy[cnt]);
+				}
 			}
 		}
 		if(Application.loadedLevelName=="Battle Simulation"){

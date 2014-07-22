@@ -13,8 +13,6 @@ public class CharacterGen : MonoBehaviour {
 	private float _screenHSize, _screenWsize;
 	private PlayerInformation _playerInformation;
 	public GUIStyle fontCharGenStyling;
-	
-
 
 	public int STARTING_VALUE = 10;
 
@@ -46,8 +44,7 @@ public class CharacterGen : MonoBehaviour {
 		
 		_playerInformation = new PlayerInformation();
 		_playerInformation.Awake();
-		
-		
+
 		for (int i = 0; i < Enum.GetValues(typeof(AttributeName)).Length; i++) {
 			_playerInformation.GetPrimaryAttribute (i).BaseValue = STARTING_VALUE;
 		}	

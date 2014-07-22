@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/// <summary>
+/// Enemy.cs
+/// Author: Harris Kevin
+/// </summary>
+using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
@@ -9,9 +13,7 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		if(Application.loadedLevelName == "Battle Simulation"){
 			enemyNumb = Random.Range(1,3);
-			
 		}
-
 	}
 	
 	// Update is called once per frame
@@ -19,10 +21,13 @@ public class Enemy : MonoBehaviour {
 	
 	}
 
-
+	/// <summary>
+	/// Raises the trigger enter event.
+	/// brings on about the battle simulations while telling the program the correct enemy to send into battle
+	/// </summary>
+	/// <param name="playerInRange">Player in range.</param>
 	void OnTriggerEnter (Collider playerInRange)
 	{
-		
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		GameObject constVar = GameObject.FindGameObjectWithTag("Constant");
 		GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy2");
@@ -51,6 +56,8 @@ public class Enemy : MonoBehaviour {
 		StoredInformation stored = constVar.GetComponent<StoredInformation>();
 		if (playerInRange.gameObject.tag == "Player") {
 			stored.AddEnemyToScene(enemyfight);
+			stored.AddPlayerPositionAfterBattle(player.transform.position);
+			stored.AddEnemyNumber(num);
 			Application.LoadLevel("Battle Simulation");
 
 			Destroy(player);
@@ -63,6 +70,4 @@ public class Enemy : MonoBehaviour {
 
 		}
 	}
-
-
 }
